@@ -29,6 +29,10 @@ Route::group(['middleware' => ['web','auth']], function(){
 	Route::resource('doctors', 'DoctorController');
 	Route::resource('services', 'ServiceController');
 
+	Route::post('get_patdata', 'InvoiceController@get_pat_date')->name('get_patdata');
+
+	Route::post('get_service_data', 'InvoiceController@get_service_data')->name('get_service_data');
+	
 	Route::group(['middleware' => ['super']], function(){
 
 	});

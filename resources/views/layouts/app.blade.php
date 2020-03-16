@@ -30,11 +30,15 @@
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/components.css')}}">
     <!-- END: Theme CSS-->
 
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/forms/selects/select2.min.css')}}">
+
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/core/menu/menu-types/vertical-menu-modern.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/core/colors/palette-gradient.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/pages/page-users.css')}}">
     <!-- END: Page CSS-->
+
+
 
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
@@ -84,6 +88,10 @@
     <!-- BEGIN: Page JS-->
     <script src="{{asset('app-assets/js/scripts/pages/account-setting.js')}} "></script>
     <!-- END: Page JS-->
+
+    <script src="{{asset('app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
+
+    <script src="{{asset('app-assets/js/scripts/forms/select/form-select2.js')}} "></script>
 
 
 

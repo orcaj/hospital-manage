@@ -49,6 +49,8 @@
                                                     <th>Price</th>
                                                     <th>Department</th>
                                                     <th>Doctor</th>
+                                                    <th>Status</th>
+                                                    <th>Publish Date</th>
                                                     <th style="width: 20%">Action</th>
                                                 </tr>
                                             </thead>
@@ -60,6 +62,8 @@
                                                     <td> {{$service->price}} </td>
                                                     <td> {{$service->getDepartment->name}} </td>
                                                     <td> {{$service->getDoctor->name}} </td>
+                                                    <td> {{$service->status}} </td>
+                                                    <td> {{$service->publish_date}} </td>
                                                     <td class="space-center"> 
                                                       <a href="{{route('services.edit', $service->id )}}"
                                                      class="btn btn-warning btn-min-width mr-1 mb-1">Edit

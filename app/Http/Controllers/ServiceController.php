@@ -43,6 +43,8 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $service=new Service($request->all());
+        $service->status="publish";
+        $service->publish_date=date('yy-m-d');
         $service->save();
         return redirect()->route('services.index')->with('status', 'Successfully created');
     }
