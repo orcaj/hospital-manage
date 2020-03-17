@@ -62,7 +62,14 @@
                                                     <td> {{$service->price}} </td>
                                                     <td> {{$service->getDepartment->name}} </td>
                                                     <td> {{$service->getDoctor->name}} </td>
-                                                    <td> {{$service->status}} </td>
+                                                    <td>
+                                                        @if($service->status == "publish")
+                                                            <span class="badge badge-primary">{{$service->status}}</span>
+                                                         
+                                                        @else
+                                                        <span class="badge badge-danger">{{$service->status}}</span>
+                                                        @endif
+                                                     </td>
                                                     <td> {{$service->publish_date}} </td>
                                                     <td class="text-center"> 
                                                         <a href="{{route('services.edit', $service->id )}}" class="primary edit mr-1">
