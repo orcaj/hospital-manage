@@ -64,10 +64,10 @@
                                                     <td> {{$service->getDoctor->name}} </td>
                                                     <td>
                                                         @if($service->status == "publish")
-                                                            <span class="badge badge-primary">{{$service->status}}</span>
+                                                            <span class="badge badge-primary">Published</span>
                                                          
                                                         @else
-                                                        <span class="badge badge-danger">{{$service->status}}</span>
+                                                        <span class="badge badge-danger">Unpublished</span>
                                                         @endif
                                                      </td>
                                                     <td> {{$service->publish_date}} </td>
