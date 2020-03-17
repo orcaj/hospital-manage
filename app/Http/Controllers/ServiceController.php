@@ -103,4 +103,11 @@ class ServiceController extends Controller
         Service::destroy($id);
         return redirect()->back()->with('status','Successfully deleted.');
     }
+
+    public function publishChange($service_id, $status){
+        $service=Service::Find($service_id);
+        $service->status=$status;
+        $service->save();
+        return redirect()->back()->with('status', 'Successfully changed!');
+    }
 }

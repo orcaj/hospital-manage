@@ -60,16 +60,18 @@
                                                     <td> {{$doctor->email}} </td>
                                                     <td> {{$doctor->getDepartment->name}} </td>
                                                     <td> {{$doctor->tel}} </td>
-                                                    <td class="space-center"> 
-                                                      <a href="{{route('doctors.edit', $doctor->id )}}"
-                                                     class="btn btn-warning btn-min-width mr-1 mb-1">Edit
-                                                    </a> 
-                                                      <form action="{{route('doctors.destroy',  $doctor->id  )}}" method="post">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button type="submit"  class="btn btn-danger btn-min-width mr-1 mb-1">Delete</button>
-                                                      </form>
+                                                    <td class="text-center"> 
+                                                        <a href="{{route('doctors.edit', $doctor->id )}}" class="primary edit mr-1">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </a>
+                                                        <a href="{{route('home')}}" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"
+                                                         class="danger delete mr-1"><i class="fa fa-trash-o"></i></a>
+                                                        <form id="delete-form" action="{{route('doctors.destroy',  $doctor->id  )}}" method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                        </form>
                                                     </td>
+                                                    
                                                 </tr>
                                                 @endforeach
                                                 

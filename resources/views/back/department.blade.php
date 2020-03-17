@@ -54,15 +54,16 @@
                                                 <tr>
                                                     <td>{{$key+1}}</td>
                                                     <td> {{$department->name}} </td>
-                                                    <td class="space-center"> 
-                                                      <a href="{{route('department.edit', $department->id )}}"
-                                                     class="btn btn-warning btn-min-width mr-1 mb-1">Edit
-                                                    </a> 
-                                                      <form action="{{route('department.destroy',  $department->id  )}}" method="post">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button type="submit"  class="btn btn-danger btn-min-width mr-1 mb-1">Delete</button>
-                                                      </form>
+                                                    <td class="text-center"> 
+                                                        <a href="{{route('department.edit', $department->id )}}" class="primary edit mr-1">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </a>
+                                                        <a href="{{route('home')}}" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"
+                                                         class="danger delete mr-1"><i class="fa fa-trash-o"></i></a>
+                                                        <form id="delete-form" action="{{route('department.destroy',  $department->id  )}}" method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                        </form>
                                                     </td>
                                                 </tr>
                                                 @endforeach

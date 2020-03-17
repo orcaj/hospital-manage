@@ -64,15 +64,16 @@
                                                     <td> {{$invoice->getService->getDepartment->name}} </td>
                                                     <td> {{$invoice->getService->getDoctor->name}} </td>
                                                     <td> {{$invoice->getService->price}} </td>
-                                                    <td class="space-center"> 
-                                                      <a href="{{route('invoice.edit', $invoice->id )}}"
-                                                     class="btn btn-warning btn-min-width mr-1 mb-1">Edit
-                                                    </a> 
-                                                      <form action="{{route('invoice.destroy',  $invoice->id  )}}" method="post">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button type="submit"  class="btn btn-danger btn-min-width mr-1 mb-1">Delete</button>
-                                                      </form>
+                                                    <td class="text-center"> 
+                                                        <a href="{{route('invoice.edit', $invoice->id )}}" class="primary edit mr-1">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </a>
+                                                        <a href="{{route('home')}}" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"
+                                                         class="danger delete mr-1"><i class="fa fa-trash-o"></i></a>
+                                                        <form id="delete-form" action="{{route('invoice.destroy',  $invoice->id  )}}" method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                        </form>
                                                     </td>
                                                 </tr>
                                                 @endforeach

@@ -48,7 +48,8 @@
 	                                            	<div class="form-group">
 	                                                    <div class="controls">
 	                                                        <label>Price</label>
-	                                                        <input type="number" class="form-control" placeholder="Price" value="{{$service->price}}" name="price" required data-validation-required-message="This price field is required">
+	                                                        <input type="number" class="form-control" placeholder="Price" value="{{$service->price}}" name="price" required 
+                                                            step="0.01" data-validation-required-message="This price field is required">
 	                                                    </div>
 	                                                </div>
 
@@ -115,7 +116,7 @@
                                             	<div class="form-group">
                                                     <div class="controls">
                                                         <label>Price</label>
-                                                        <input type="number" class="form-control" placeholder="Price" value="" name="price" required data-validation-required-message="This price field is required">
+                                                        <input type="number" class="form-control" placeholder="Price" value="" step="0.01" name="price" required data-validation-required-message="This price field is required">
                                                     </div>
                                                 </div>
 

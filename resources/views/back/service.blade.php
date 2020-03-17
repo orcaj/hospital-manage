@@ -64,15 +64,29 @@
                                                     <td> {{$service->getDoctor->name}} </td>
                                                     <td> {{$service->status}} </td>
                                                     <td> {{$service->publish_date}} </td>
-                                                    <td class="space-center"> 
-                                                      <a href="{{route('services.edit', $service->id )}}"
-                                                     class="btn btn-warning btn-min-width mr-1 mb-1">Edit
-                                                    </a> 
-                                                      <form action="{{route('services.destroy',  $service->id  )}}" method="post">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button type="submit"  class="btn btn-danger btn-min-width mr-1 mb-1">Delete</button>
-                                                      </form>
+                                                    <td class="text-center"> 
+                                                        <a href="{{route('services.edit', $service->id )}}" class="primary edit mr-1">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </a>
+                                                        @if($service->status == "publish")
+                                                        <a href="{{route('services.publish-change',
+                                                        ['service_id' => $service->id, 'status' => 'unpublish'])}}" class="info edit mr-1">
+                                                            <i class="feather icon-slash"></i>
+                                                        </a>
+                                                        @else
+                                                        <a href="{{route('services.publish-change',
+                                                        ['service_id' => $service->id, 'status' => 'publish'])}}" class="info edit mr-1">
+                                                            <i class="feather icon-check-square"></i>
+                                                        </a>
+                                                        @endif
+                                                        <a href="{{route('home')}}" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"
+                                                         class="danger delete mr-1"><i class="fa fa-trash-o"></i></a>
+                                                        <form id="delete-form" action="{{route('services.destroy',  $service->id  )}}" method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                        </form>
+
+                                                        
                                                     </td>
                                                 </tr>
                                                 @endforeach
