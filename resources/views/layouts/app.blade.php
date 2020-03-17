@@ -86,7 +86,7 @@
     <!-- END: Page JS-->
 
     <!-- BEGIN: Page JS-->
-    <script src="{{asset('app-assets/js/scripts/pages/account-setting.js')}} "></script>
+    <!-- <script src="{{asset('app-assets/js/scripts/pages/account-setting.js')}} "></script> -->
     <!-- END: Page JS-->
 
     <script src="{{asset('app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
