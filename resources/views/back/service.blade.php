@@ -78,12 +78,12 @@
                                                         @if($service->status == "publish")
                                                         <a href="{{route('services.publish-change',
                                                         ['service_id' => $service->id, 'status' => 'unpublish'])}}" class="info edit mr-1">
-                                                            <i class="feather icon-slash"></i>
+                                                            <span class="badge badge-danger">Unpublish</span>
                                                         </a>
                                                         @else
                                                         <a href="{{route('services.publish-change',
                                                         ['service_id' => $service->id, 'status' => 'publish'])}}" class="info edit mr-1">
-                                                            <i class="feather icon-check-square"></i>
+                                                            <span class="badge badge-primary">Publish</span>
                                                         </a>
                                                         @endif
                                                         <a href="{{route('home')}}" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"
