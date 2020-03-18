@@ -10,11 +10,11 @@
 $(document).ready(function () {
 
     // initializing a Date Picker
-    if ($('.pick-a-date').length) {
-        $('.pick-a-date').pickadate({
-            format: 'mm/dd/yyyy'
-        });
-    }
+    // if ($('.pick-a-date').length) {
+    //     // $('.pick-a-date').pickadate({
+    //     //     format: 'mm/dd/yyyy'
+    //     // });
+    // }
 
     // datatable initalized
     if ($('#app-invoice-table').length) {

@@ -41,7 +41,7 @@
 
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/style.css')}}">
     <!-- END: Custom CSS-->
 
  
@@ -97,7 +97,7 @@
     <!-- END: Page JS-->
 
     <!-- BEGIN: Page JS-->
-    <script src="{{asset('app-assets/js/scripts/pages/account-setting.js')}} "></script>
+    <!-- <script src="{{asset('app-assets/js/scripts/pages/account-setting.js')}} "></script> -->
     <!-- END: Page JS-->
 
     <script src="{{asset('app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>

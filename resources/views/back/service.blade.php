@@ -40,7 +40,7 @@
                                 <div class="card-body">
                                     <!-- datatable start -->
                                     <div class="table-responsive">
-                                        <table id="users-list-datatable" class="table">
+                                        <table id="users-list-datatable" class="table center-table">
                                             <thead>
                                             	  
                                                 <tr>
@@ -62,7 +62,14 @@
                                                     <td> {{$service->price}} </td>
                                                     <td> {{$service->getDepartment->name}} </td>
                                                     <td> {{$service->getDoctor->name}} </td>
-                                                    <td> {{$service->status}} </td>
+                                                    <td>
+                                                        @if($service->status == "publish")
+                                                            <span class="badge badge-primary">Published</span>
+                                                         
+                                                        @else
+                                                        <span class="badge badge-danger">Unpublished</span>
+                                                        @endif
+                                                     </td>
                                                     <td> {{$service->publish_date}} </td>
                                                     <td class="text-center"> 
                                                         <a href="{{route('services.edit', $service->id )}}" class="primary edit mr-1">
@@ -71,12 +78,12 @@
                                                         @if($service->status == "publish")
                                                         <a href="{{route('services.publish-change',
                                                         ['service_id' => $service->id, 'status' => 'unpublish'])}}" class="info edit mr-1">
-                                                            <i class="feather icon-slash"></i>
+                                                            <span class="badge badge-danger">Unpublish</span>
                                                         </a>
                                                         @else
                                                         <a href="{{route('services.publish-change',
                                                         ['service_id' => $service->id, 'status' => 'publish'])}}" class="info edit mr-1">
-                                                            <i class="feather icon-check-square"></i>
+                                                            <span class="badge badge-primary">Publish</span>
                                                         </a>
                                                         @endif
                                                         <a href="{{route('home')}}" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"

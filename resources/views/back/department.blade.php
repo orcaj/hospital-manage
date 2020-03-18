@@ -40,7 +40,7 @@
                                 <div class="card-body">
                                     <!-- datatable start -->
                                     <div class="table-responsive">
-                                        <table id="users-list-datatable" class="table">
+                                        <table id="users-list-datatable" class="table center-table">
                                             <thead>
                                             	  
                                                 <tr>
