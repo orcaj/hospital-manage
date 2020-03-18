@@ -8,6 +8,12 @@ use App\Model\Department;
 
 class DepartmentController extends Controller
 {
+    private $star;
+    
+    public function __construct(){
+        $star="department";
+        $this->star=$star;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +22,8 @@ class DepartmentController extends Controller
     public function index()
     {
         $departments=Department::all();
-        return view('back.department', compact('departments'));
+        $star=$this->star;
+        return view('back.department', compact('departments','star'));
     }
 
     /**
@@ -26,7 +33,8 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        return view('back.department-manage');
+        $star=$this->star;
+        return view('back.department-manage',compact('star'));
     }
 
     /**
@@ -62,7 +70,8 @@ class DepartmentController extends Controller
     public function edit($id)
     {
         $department=Department::FindOrFail($id);
-        return view('back.department-manage', compact('department'));
+        $star=$this->star;
+        return view('back.department-manage', compact('department','star'));
     }
 
     /**

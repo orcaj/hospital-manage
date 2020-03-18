@@ -65,6 +65,17 @@
 
     @include('layouts.components.foot')
 
+
+    <!-- side bar select function -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <input type="hidden" id="star" value="{{$star}}">
+    <script type="text/javascript">
+        $(function(){
+            star=$("#star").val();
+            $("."+star).addClass('active');
+        })
+    </script>
+
    <!-- BEGIN: Vendor JS-->
     <script src="{{asset('app-assets/vendors/js/vendors.min.js')}}"></script>
     <script src="{{asset('app-assets/vendors/js/forms/validation/jqBootstrapValidation.js')}}"></script>
@@ -92,6 +103,9 @@
     <script src="{{asset('app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 
     <script src="{{asset('app-assets/js/scripts/forms/select/form-select2.js')}} "></script>
+
+
+
 
 
 

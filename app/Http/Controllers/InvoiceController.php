@@ -13,6 +13,11 @@ use App\Model\Department;
 
 class InvoiceController extends Controller
 {
+    private $star;
+
+    public function __construct(){
+        $this->star='invoice';
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +26,8 @@ class InvoiceController extends Controller
     public function index()
     {
         $invoices=Invoice::all();
-        return view('back.invoice', compact('invoices'));
+        $star=$this->star;
+        return view('back.invoice', compact('invoices','star'));
     }
 
     /**
@@ -33,7 +39,8 @@ class InvoiceController extends Controller
     {
         $patients=Patient::all();
         $services=Service::all();
-        return view('back.invoice-manage', compact('patients','services'));
+        $star=$this->star;
+        return view('back.invoice-manage', compact('patients','services','star'));
     }
 
     /**
@@ -71,7 +78,8 @@ class InvoiceController extends Controller
         $invoice=Invoice::Find($id);
         $patients=Patient::all();
         $services=Service::all();
-        return view('back.invoice-manage', compact('invoice','patients','services'));
+        $star=$this->star;
+        return view('back.invoice-manage', compact('invoice','patients','services','star'));
 
     }
 

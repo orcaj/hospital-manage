@@ -9,6 +9,12 @@ use App\Model\Doctor;
 
 class DoctorController extends Controller
 {
+    private $star;
+    
+    public function __construct(){
+        $star="doctor";
+        $this->star=$star;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +23,8 @@ class DoctorController extends Controller
     public function index()
     {
         $doctors=Doctor::all();
-        return view('back.doctor', compact('doctors'));
+        $star=$this->star;
+        return view('back.doctor', compact('doctors','star'));
     }
 
     /**
@@ -28,7 +35,8 @@ class DoctorController extends Controller
     public function create()
     {
         $departments=Department::all();
-        return view('back.doctor-manage', compact('departments'));
+        $star=$this->star;
+        return view('back.doctor-manage', compact('departments','star'));
     }
 
     /**
@@ -65,7 +73,8 @@ class DoctorController extends Controller
     {
         $doctor=Doctor::FindOrFail($id);
         $departments=Department::all();
-        return view('back.doctor-manage', compact('doctor','departments'));
+        $star=$this->star;
+        return view('back.doctor-manage', compact('doctor','departments','star'));
     }
 
     /**

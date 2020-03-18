@@ -10,6 +10,11 @@ use App\Model\Service;
 
 class ServiceController extends Controller
 {
+    private $star;
+
+    public function __construct(){
+        $this->star='service';
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +24,8 @@ class ServiceController extends Controller
     {
        
         $services=Service::all();
-        return view('back.service', compact('services'));
+        $star=$this->star;
+        return view('back.service', compact('services','star'));
     }
 
     /**
@@ -31,7 +37,8 @@ class ServiceController extends Controller
     {
         $departments=Department::all();
         $doctors=Doctor::all();
-        return view('back.service-manage', compact('departments','doctors'));
+        $star=$this->star;
+        return view('back.service-manage', compact('departments','doctors','star'));
     }
 
     /**
@@ -71,7 +78,8 @@ class ServiceController extends Controller
         $service=Service::FindOrFail($id);
         $departments=Department::all();
         $doctors=Doctor::all();
-        return view('back.service-manage', compact('service','departments','doctors'));
+        $star=$this->star;
+        return view('back.service-manage', compact('service','departments','doctors','star'));
     }
 
     /**

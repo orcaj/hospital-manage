@@ -10,6 +10,11 @@ use App\User;
 
 class StaffController extends Controller
 {
+    private $star;
+
+    public function __construct(){
+        $this->star='staff';
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +23,8 @@ class StaffController extends Controller
     public function index()
     {
         $staffs=User::where('type','staff')->get();
-        return view('back.staff', compact('staffs'));
+        $star=$this->star;
+        return view('back.staff', compact('staffs', 'star'));
     }
 
     /**
@@ -28,7 +34,8 @@ class StaffController extends Controller
      */
     public function create()
     {
-        return view('back.staff-manage');
+        $star=$this->star;
+        return view('back.staff-manage', compact('star'));
     }
 
     /**
@@ -67,7 +74,8 @@ class StaffController extends Controller
     public function edit($id)
     {
         $staff=User::FindOrFail($id);
-        return view('back.staff-manage', compact('staff'));
+        $star=$this->star;
+        return view('back.staff-manage', compact('staff', 'star'));
     }
 
     /**

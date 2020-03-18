@@ -7,6 +7,11 @@ use App\Model\Patient;
 
 class PatientController extends Controller
 {
+    private $star;
+
+    public function __construct(){
+        $this->star='patient';
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +20,8 @@ class PatientController extends Controller
     public function index()
     {
         $patients=Patient::all();
-        return view('back.patient', compact('patients'));
+        $star=$this->star;
+        return view('back.patient', compact('patients','star'));
     }
 
     /**
@@ -25,7 +31,8 @@ class PatientController extends Controller
      */
     public function create()
     {
-        return view('back.patient-manage');
+        $star=$this->star;
+        return view('back.patient-manage', compact('star'));
     }
 
     /**
@@ -61,7 +68,8 @@ class PatientController extends Controller
     public function edit($id)
     {
         $patient=Patient::Find($id);
-        return view('back.patient-manage', compact('patient'));
+        $star=$this->star;
+        return view('back.patient-manage', compact('patient','star'));
     }
 
     /**
