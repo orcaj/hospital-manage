@@ -131,7 +131,7 @@ class InvoiceController extends Controller
 
     }
 
-    public view_add_invoice() {
+    public function view_add_invoice() {
         return view('back.invoice-add');
     }
 }
