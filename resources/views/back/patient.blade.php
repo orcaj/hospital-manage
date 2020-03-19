@@ -268,45 +268,6 @@
 
 
 
-        // function total_sel(){
-        //     sel=$("#total-sel").is(":checked");
-
-        //     var items=$(".switchery");
-
-        //     if(sel){
-        //         $("#multi-del").css('display', 'block');
-        //         $(".switchery").attr('checked', 'checked');
-
-        //     }else{
-        //         $("#multi-del").css('display', 'none');
-        //         $(".switchery:checked").removeAttr('checked');
-        //         var items=$(".switchery:checked");
-        //         console.log("length", items.length)
-        //     }   
-
-        // }
-
-
-
-        // function mul_show(){
-        //    var check_items=$(".switchery:checked");
-        //    var total_items=$(".switchery");
-        //    console.log("total",total_items.length, 'check_count',check_items.length )
-
-        //     if(check_items.length == total_items.length){
-        //         console.log("total-check")
-        //          $("#total-sel").attr('checked', true);
-        //     }else{
-        //         console.log("total-uncheck")
-        //         $("#total-sel").attr('checked', false);
-        //     }
-
-            // if (check_items.length > 0) {
-            //     $("#multi-del").css('display', 'block');
-            // }else{
-            //     $("#multi-del").css('display', 'none');
-            // }
-        // } 
         function del_btn(){
              sel_item=$("input[type=checkbox]:checked");
             sel_count=sel_item.length;
@@ -339,31 +300,6 @@
                 }
                 del_btn();
             });
-
-            $(".status-change").click(function(){
-              id=$(this).data('id');
-              part=$(this).data('part');
-              status=$(this).data('status');
-              $("#status-part").val(part);
-              $("#status-id").val(id);
-              $("#status-status").val(status);
-              Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes",
-                confirmButtonClass: "btn btn-primary",
-                cancelButtonClass: "btn btn-danger ml-1",
-                buttonsStyling: false
-              }).then(function(result) {
-                if (result.value) {
-                  $("#status-form").submit();
-                }
-              });
-            })
 
         })
     </script>

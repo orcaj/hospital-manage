@@ -182,25 +182,19 @@
         function confirm_update(){
 
             Swal.fire({
-              title: "Are you sure?",
-              text: "You won't be able to revert this!",
+              title: "Update",
+              text: "Are you sure you want to update?",
               type: "warning",
               showCancelButton: true,
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",
-              confirmButtonText: "Yes, update it!",
+              confirmButtonText: "Yes",
               confirmButtonClass: "btn btn-primary",
               cancelButtonClass: "btn btn-danger ml-1",
               buttonsStyling: false,
             }).then(function(result) {
               if (result.value) {
                 $("#update-form").submit();
-                // Swal.fire({
-                //   type: "success",
-                //   title: "Updated!",
-                //   text: "Your file has been updated."
-                //   // confirmButtonClass: "btn btn-success"
-                // });
               }
             });
         }
