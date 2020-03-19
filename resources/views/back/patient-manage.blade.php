@@ -22,11 +22,17 @@
 	                                    	@csrf
 	                                    	@method('PUT')
 	                                        <div class="row">
+                                              <div class="col-12 col-sm-6">
+                                                <div class="form-group pb-1">
+                                                    <input type="checkbox" id="switchery1" class="switchery" />
+                                                    <label for="switchery1" class="font-medium-2 text-bold-600 ml-1">Switchery Unchecked</label>
+                                                </div>
+                                              </div>
 	                                            <div class="col-12 col-sm-6">
 	                                                <div class="form-group">
 	                                                    <div class="controls">
-	                                                        <label>Username</label>
-	                                                        <input type="text" class="form-control" placeholder="Username" name="name" value="{{$patient->name}}" required data-validation-required-message="This username field is required">
+	                                                        <label>Patient Name</label>
+	                                                        <input type="text" class="form-control" placeholder="Patient name" name="name" value="{{$patient->name}}" required data-validation-required-message="This patient name field is required">
 	                                                    </div>
 	                                                </div>
 	                                                <div class="form-group">
