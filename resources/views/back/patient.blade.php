@@ -35,8 +35,8 @@
                                         <div class="form-group" style="display: flex;">
                                             <select class="form-control"  onchange="multi_status()" id="status_sel">
                                                 <option value="">--Select Action--</option>
-                                                <option value="publish" class="text-primary">Publish</option>
-                                                <option value="unpublish" class="text-danger">Unpublish</option>
+                                                <option value="Publish" class="text-primary">Publish</option>
+                                                <option value="Unpublish" class="text-danger">Unpublish</option>
                                             </select>
                                         </div>
 
@@ -105,18 +105,10 @@
                                                         <a href="{{route('patients.edit', $patient->id )}}" class="primary edit mr-1">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
-
-
                                                         <a class="danger delete mr-1" 
                                                         onclick="confirm_delete({{$patient->id}})"><i class="fa fa-trash-o"></i></a>
 
-
-
-                                                 <!--        <a href="{{route('home')}}" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"
-                                                         class="danger delete mr-1"><i class="fa fa-trash-o"></i></a>
-
-                                                          -->
-                                                        <form id="delete-form{{$patient->id}}" action="{{route('patients.destroy',  $patient->id  )}}" method="post">
+                                                        <form id="delete-form{{$patient->id}}" action="{{route('patients.destroy',  $patient->id)}}" method="post">
                                                             @csrf
                                                             @method('delete')
                                                         </form>
@@ -160,7 +152,7 @@
         var action = "<?php echo session('action') ?>";
         var msg = "<?php echo session('msg') ?>";
         console.log("sadf", msg);
-        toastr.success(action, msg);
+        toastr.success(msg, action, {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
        })
      </script>
       
@@ -174,7 +166,7 @@
             Swal.fire({
             
               title: "Delete",
-              text: "Are you sure that you want to delete these records?",
+              text: "Are you sure that you want to delete this record?",
               type: "warning",
               showCancelButton: true,
               confirmButtonColor: "#3085d6",
@@ -209,13 +201,13 @@
             $("#del_ids").val(sel_ids);
 
             Swal.fire({
-              title: "Are you sure?",
-              text: "You won't be able to revert this!",
+              title: "Delete",
+              text: "Are you sure that you want to delete these records?",
               type: "warning",
               showCancelButton: true,
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",
-              confirmButtonText: "Yes, delete it!",
+              confirmButtonText: "Ok",
               confirmButtonClass: "btn btn-primary",
               cancelButtonClass: "btn btn-danger ml-1",
               buttonsStyling: false
@@ -228,16 +220,21 @@
 
         function multi_status(){
             var items=$(".switchery:checked");
+            var msg = '';
             status=$("#status_sel").val();
+            if (status == 'Publish')
+              msg = 'Are you sure you want to publish these records?';
+            else msg = 'Are you sure you want to unpublish these records?';
             if(status != ""){
                 if(items.length == 0){
                     Swal.fire({
-                      title: "Error!",
-                      text: " Please check!",
+                      title: "warning",
+                      text: "Please select record(s).",
                       type: "error",
                       confirmButtonClass: "btn btn-danger",
                       buttonsStyling: false
                     });
+                    $("#status_sel").val("");
                 }else{
                     sel_ids=[];
                     for (var i = items.length - 1; i >= 0; i--) {
@@ -246,8 +243,8 @@
                     }
                     $("#status_ids").val(sel_ids);
                         Swal.fire({
-                          title: "Are you sure?",
-                          text: "You won't be able to revert this!",
+                          title: status,
+                          text: msg,
                           type: "warning",
                           showCancelButton: true,
                           confirmButtonColor: "#3085d6",

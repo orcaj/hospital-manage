@@ -46,7 +46,7 @@ class PatientController extends Controller
         $patient=new Patient($request->all());
         $patient->save();
         // $request->session()->flash('status','Successfully created.');
-        return redirect()->route('patients.index')->with(['action' => 'create', 'msg'=>"Successfully created."]);
+        return redirect()->route('patients.index')->with(['action' => 'Create', 'msg'=>"Patient successfully created."]);
     }
 
     /**
@@ -89,7 +89,7 @@ class PatientController extends Controller
         $patient->civil_id=$request->civil_id;
         $patient->address=$request->address;
         $patient->save();
-        return redirect()->route('patients.index')->with(['action' => 'create', 'msg'=>"Successfully created."]);
+        return redirect()->route('patients.index')->with(['action' => 'Update', 'msg'=>"Patient detail successfully updated."]);
 
     }
 
@@ -110,7 +110,7 @@ class PatientController extends Controller
         $del_ids=$request->sel_ids;
         $ids=explode(',', $del_ids);
         Patient::destroy($ids);
-        return redirect()->back()->with(['action' => 'create', 'msg'=>"Successfully created."]);
+        return redirect()->back()->with(['action' => 'Delete', 'msg'=>"Patient detail successfully deleted."]);
     }
 
     public function multi_status(Request $request){
@@ -122,6 +122,6 @@ class PatientController extends Controller
             $patient->status=$status;
             $patient->save();
         }
-        return redirect()->back()->with(['action' => 'create', 'msg'=>"Successfully created."]);
+        return redirect()->back()->with(['action' => $status, 'msg'=>"Patients successfully".$status."."]);
     }
 }

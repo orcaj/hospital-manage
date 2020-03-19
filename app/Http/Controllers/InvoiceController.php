@@ -130,4 +130,8 @@ class InvoiceController extends Controller
         return json_encode($service);
 
     }
+
+    public function view_add_invoice(Request $request) {
+        return view('back.invoice-add');
+    }
 }
