@@ -6,6 +6,7 @@
       .switchery {
         background-color: red !important;
       }
+      
     </style>
     <div class="app-content content">
         <div class="content-overlay"></div>

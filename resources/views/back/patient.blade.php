@@ -10,6 +10,11 @@
       .space-center{
         display: flex;
       }
+      .pime-grid-button{
+        float:left;
+
+      }
+      .pime-grid-filter{float:left;margin-left:10px}
     </style>
     <!-- BEGIN: Content-->
     <div class="app-content content">
@@ -25,7 +30,7 @@
                         <div class="card">
                             <div class="card-content">
                               <div class="card-header space-bet">
-                                <h3 class="card-title" id="emailCompose">Patients List</h3>
+                                <h3 class="card-title" id="emailCompose">Patients List111</h3>
 
                                 <a href="{{route('patients.create')}}" class="btn btn-primary btn-min-width mr-1 mb-1"><i class="feather icon-user-plus"></i>&nbspCreate</a>
                             </div>
@@ -51,7 +56,7 @@
                                               @foreach($patients as $key => $patient)
                                                 <tr>
                                                     <td class="text-center">
-                                                        <input type="checkbox" unikey="{{$patient->id}}" id="test-{{$key}}" name="test-{{$key}}" data-size="sm">
+                                                        <input type="checkbox" class="check_item" unikey="{{$patient->id}}" id="test-{{$key}}" name="test-{{$key}}" data-size="sm">
                                                     </td>
                                                     <td>{{$key+1}}</td>
                                                     <td> {{$patient->name}} </td>
@@ -162,7 +167,7 @@
 
 
         function multi_delete(){
-            var items=$(".switchery:checked");
+            var items=$(".check_item:checked");
             sel_ids=[];
             for (var i = items.length - 1; i >= 0; i--) {
                 del_id=$(items[i]).attr('unikey');
@@ -177,7 +182,7 @@
               showCancelButton: true,
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",
-              confirmButtonText: "Ok",
+              confirmButtonText: "Yes",
               confirmButtonClass: "btn btn-primary",
               cancelButtonClass: "btn btn-danger ml-1",
               buttonsStyling: false
@@ -189,7 +194,7 @@
         }
 
         function multi_status(){
-            var items=$(".switchery:checked");
+            var items=$(".check_item:checked");
             var msg = '';
             status=$("#status_sel").val();
             if (status == 'Publish')
@@ -237,7 +242,7 @@
 
 
         function del_btn(){
-             sel_item=$("input[type=checkbox]:checked");
+            sel_item=$("input[type=checkbox]:checked");
             sel_count=sel_item.length;
 
             if(sel_count > 0){
@@ -248,7 +253,7 @@
                 $("#multi-del").css('visibility', 'hidden');
             }
 
-            total_count=$(".switchery").length;
+            total_count=$(".check_item").length;
             if(total_count == sel_count){
                 $("#selectAll").prop("checked", true);
             }
@@ -259,7 +264,8 @@
             
 
             $("#selectAll").click(function() {
-                $("input[type=checkbox]").prop("checked", $(this).prop("checked"));
+                console.log($(this).prop("checked"))
+                $(".check_item").prop("checked", $(this).prop("checked"));
             });
 
             $("input[type=checkbox]").click(function() {
