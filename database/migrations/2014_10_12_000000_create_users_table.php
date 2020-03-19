@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('status')->default('publish');
-            $table->date('status_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->date('status_date')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

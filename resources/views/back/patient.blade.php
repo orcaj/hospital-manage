@@ -14,13 +14,9 @@
     <!-- BEGIN: Content-->
     <div class="app-content content">
 
-    	<!-- alert section -->
+      <!-- alert section -->
 
-    	@if(session('status'))
-    	<div class="alert alert-success alert-dismissible mb-2" role="alert">
-            {{session('status')}}
-        </div>
-        @endif
+     
         <!-- alert section end -->
         
         <div class="content-overlay"></div>
@@ -49,13 +45,13 @@
                                             </select>
                                         </div>
 
-                                        <button onclick="multi_delete()" class="btn btn-danger btn-min-width mr-1 mb-1" style="display: none;" id="multi-del" style="margin-left: 5px">Delete</button>
+                                        <button onclick="multi_delete()" class="btn btn-danger btn-min-width mr-1 mb-1" style="visibility: hidden;" id="multi-del" style="margin-left: 5px">Delete</button>
 
                                     </div>
                                     <div class="table-responsive">
                                         <table id="users-list-datatable" class="table center-table">
                                             <thead>
-                                            	  
+                                                
                                                 <tr>
                                                     <th class="text-center"><input type="checkbox" id="selectAll" data-size="sm" ></th>
                                                     <th>No</th>
@@ -143,16 +139,26 @@
     </form>
     <!-- end form -->
 
+     @if(session('status'))
+     <script type="text/javascript">
+       $(function(){
+        toastr.success('Have fun storming the castle!', 'Miracle Max Says');
+       })
+     </script>
+      
+      @endif
+
     <script type="text/javascript">
+
         function confirm_delete(id){
             Swal.fire({
-              title: "Are you sure?",
-              text: "You won't be able to revert this!",
+              title: "Delete",
+              text: "Are you sure that you want to delete these records?",
               type: "warning",
               showCancelButton: true,
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",
-              confirmButtonText: "Yes, delete it!",
+              confirmButtonText: "Ok",
               confirmButtonClass: "btn btn-primary",
               cancelButtonClass: "btn btn-danger ml-1",
               buttonsStyling: false
@@ -285,9 +291,9 @@
             sel_count=sel_item.length;
 
             if(sel_count > 0){
-                $("#multi-del").css('display', 'block');
+                $("#multi-del").css('visibility', 'visible');
             }else{
-                $("#multi-del").css('display', 'none');
+                $("#multi-del").css('visibility', 'hidden');
             }
 
             total_count=$(".switchery").length;

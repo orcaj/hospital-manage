@@ -20,7 +20,7 @@ class CreateServicesTable extends Migration
             $table->integer('department_id');
             $table->integer('doctor_id');
             $table->string('status')->default('publish');
-            $table->date('status_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->date('status_date')->nullable();
             $table->timestamps();
         });
     }

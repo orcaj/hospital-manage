@@ -18,7 +18,7 @@ class CreateInvoicesTable extends Migration
             $table->string('civil_id');
             $table->integer('service_id');
             $table->string('status')->default('publish');
-            $table->date('status_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->date('status_date')->nullable();
             $table->timestamps();
         });
     }

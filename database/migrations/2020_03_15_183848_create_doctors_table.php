@@ -21,7 +21,7 @@ class CreateDoctorsTable extends Migration
             $table->integer('department_id');
             $table->string('tel');
             $table->string('status')->default('publish');
-            $table->date('status_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->date('status_date')->nullable();
             $table->timestamps();
         });
     }

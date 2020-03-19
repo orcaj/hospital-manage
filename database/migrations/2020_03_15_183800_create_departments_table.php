@@ -17,7 +17,7 @@ class CreateDepartmentsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('status')->default('publish');
-            $table->date('status_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->date('status_date')->nullable();
             $table->timestamps();
         });
     }
