@@ -26,10 +26,11 @@
                                   		<form method="POST" action="{{route('patients.update', $patient->id)}}" id="update-form">
 	                                    	@csrf
 	                                    	@method('PUT')
+                                        <input type="hidden" name="status" id="status_val">
                                           <div class="row">
                                             <div class="col-12 col-sm-6">
                                               <div class="form-group pb-1">
-                                                    @if($patient->status == 'publish')
+                                                    @if($patient->status == 'published')
                                                     <input type="checkbox" checked="checked" id="switchery1" class="switchery" />
                                                     @else
                                                     <input type="checkbox" id="switchery1" class="switchery" />
@@ -202,6 +203,22 @@
               }
             });
         }
+
+
+        function set_status(){
+            star=$("#switchery1").prop('checked');
+            if(star){
+                $("#status_val").val('published');
+            }else{
+                $("#status_val").val('unpublished');
+            }
+        }
+        $(function(){
+            set_status();
+            $("#switchery1").change(function(){
+                set_status();
+            })
+        })
     </script>
 
 
