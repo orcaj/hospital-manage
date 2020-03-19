@@ -31,7 +31,7 @@
                             </div>
                                 <div class="card-body">
                                     <!-- datatable start -->
-                                    <div class="row" style="justify-content: center;">
+                                    <!-- <div class="row" style="justify-content: center;">
                                         <div class="form-group" style="display: flex;">
                                             <select class="form-control"  onchange="multi_status()" id="status_sel">
                                                 <option value="">--Select Action--</option>
@@ -43,7 +43,7 @@
                               
                                         <button onclick="multi_delete()" class="btn btn-danger btn-min-width mr-1 mb-1" style="visibility: hidden;" id="multi-del" style="margin-left: 5px">Delete</button>
 
-                                    </div>
+                                    </div> -->
                                     <div class="table-responsive">
                                         <table id="users-list-datatable" class="table center-table">
                                             <thead>
@@ -83,14 +83,13 @@
                                                      </td>
                                                     <td>{{ date('j F, Y', strtotime($patient->status_date)) }} </td>
                                                     <td class="text-center"> 
-                                                      <form id="status-form" method="post" style="display: none" action="{{route('status-change')}}">
+                                                      <!-- <form id="status-form" method="post" style="display: none" action="{{route('status-change')}}">
                                                         @csrf
                                                         <input type="hidden" name="part" id="status-part">
                                                         <input type="hidden" name="service_id" id="status-id">
                                                         <input type="hidden" name="status" id="status-status">
-                                                      </form>
-
-                                                        @if($patient->status == "Publish")
+                                                      </form> -->
+                                                       <!--  @if($patient->status == "Publish")
                                                         <a data-part="patient" data-id="{{$patient->id}}" data-status="unpublish" 
                                                           class="info edit mr-1 status-change">
                                                             <span class="badge badge-danger">Unpublish</span>
@@ -101,7 +100,7 @@
                                                             <span class="badge badge-primary">Publish</span>
                                                         </a>
 
-                                                        @endif
+                                                        @endif -->
                                                         <a href="{{route('patients.edit', $patient->id )}}" class="primary edit mr-1">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
@@ -145,6 +144,9 @@
         <input type="hidden" name="status" id="status">
     </form>
     <!-- end form -->
+
+
+
 
      @if(session('action'))
      <script type="text/javascript">
@@ -323,11 +325,9 @@
             }
         }
 
-        $(function(){
-            var row = $("#users-list-datatable_wrapper").children().first();
 
-            var html = '<div class="row"><div class="col-sm-12 col-md-4"><div class="dataTables_length" id="users-list-datatable_length"><label>Show <select name="users-list-datatable_length" aria-controls="users-list-datatable" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div class="col-md-4" style="justify-content: center; display: flex"><div class="form-group" style="display: flex;"><select class="custom-select custom-select-sm form-control form-control-sm"  onchange="multi_status()" id="status_sel"><option value="">--Select Action--</option><option value="Publish" class="text-primary">Publish</option><option value="Unpublish" class="text-danger">Unpublish</option></select></div><button onclick="multi_delete()" class="btn btn-sm btn-danger btn-min-width mr-1 mb-1" id="multi-del" style="margin-left: 5px">Delete</button></div></div><div class="col-sm-12 col-md-4"><div id="users-list-datatable_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="users-list-datatable"></label></div></div></div>'
-            $(row).html(html)
+        $(function(){
+            
 
             $("#selectAll").click(function() {
                 $("input[type=checkbox]").prop("checked", $(this).prop("checked"));

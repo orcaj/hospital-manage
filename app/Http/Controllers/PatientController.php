@@ -88,6 +88,7 @@ class PatientController extends Controller
         $patient->phone=$request->phone;
         $patient->civil_id=$request->civil_id;
         $patient->address=$request->address;
+        $patient->status=$request->status;
         $patient->save();
         return redirect()->route('patients.index')->with(['action' => 'Update', 'msg'=>"Patient detail successfully updated."]);
 
