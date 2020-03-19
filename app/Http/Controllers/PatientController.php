@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 use App\Model\Patient;
 
 class PatientController extends Controller
@@ -43,6 +45,10 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
+        $unique=Patient::where('civil_id', $request->civil_id)->count();
+        if($unique>0){
+            return redirect()->back()->with(['action'=>'Error','msg' => 'Civil ID already exist.']);
+        }
         $patient=new Patient($request->all());
         $patient->save();
         // $request->session()->flash('status','Successfully created.');
@@ -82,6 +88,10 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $unique=Patient::where('civil_id', $request->civil_id)->count();
+        if($unique>0){
+            return redirect()->back()->with(['action'=>'Error','msg' => 'Civil ID already exist.']);
+        }
         $patient=Patient::FindOrFail($id);
         $patient->name=$request->name;
         $patient->email=$request->email;

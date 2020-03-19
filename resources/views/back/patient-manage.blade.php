@@ -154,6 +154,17 @@
     </script>
     @endisset
 
+    @if(session('action'))
+     <script type="text/javascript">
+       $(function(){
+        var action = "<?php echo session('action') ?>";
+        var msg = "<?php echo session('msg') ?>";
+        console.log("sadf", msg);
+        toastr.error(msg, action, {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
+       })
+     </script>
+    @endif
+
 
     <script type="text/javascript">
         // function confirm_create(){
