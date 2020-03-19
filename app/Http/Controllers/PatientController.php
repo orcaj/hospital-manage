@@ -45,7 +45,8 @@ class PatientController extends Controller
     {
         $patient=new Patient($request->all());
         $patient->save();
-        return redirect()->route('patients.index')->with('status','Successfully created.');
+        $request->session()->flash('status','Successfully created.');
+        return redirect()->route('patients.index');
     }
 
     /**
