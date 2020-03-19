@@ -27,7 +27,7 @@
                         </li>
                         <li><a class="menu-item" href="invoice-edit.html" data-i18n="Invoice Edit">invoice Edit</a>
                         </li>
-                        <li class="active"><a class="menu-item" href="invoice-add.html" data-i18n="Invoice Add">invoice Add</a>
+                        <li class="active"><a class="menu-item" href="{{route('invoice.view_add_invoice')}}" data-i18n="Invoice Add">invoice Add</a>
                         </li>
                     </ul>
                 </li>
