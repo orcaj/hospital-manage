@@ -49,7 +49,7 @@
                                             </select>
                                         </div>
 
-                                        <button onclick="multi_delete()" class="btn btn-danger btn-min-width mr-1 mb-1" disabled="" id="multi-del" style="margin-left: 5px">Delete</button>
+                                        <button onclick="multi_delete()" class="btn btn-danger btn-min-width mr-1 mb-1" style="display: none;" id="multi-del" style="margin-left: 5px">Delete</button>
 
                                     </div>
                                     <div class="table-responsive">
