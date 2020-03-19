@@ -324,6 +324,11 @@
         }
 
         $(function(){
+            var row = $("#users-list-datatable_wrapper").children().first();
+
+            var html = '<div class="row"><div class="col-sm-12 col-md-4"><div class="dataTables_length" id="users-list-datatable_length"><label>Show <select name="users-list-datatable_length" aria-controls="users-list-datatable" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div class="col-md-4" style="justify-content: center; display: flex"><div class="form-group" style="display: flex;"><select class="custom-select custom-select-sm form-control form-control-sm"  onchange="multi_status()" id="status_sel"><option value="">--Select Action--</option><option value="Publish" class="text-primary">Publish</option><option value="Unpublish" class="text-danger">Unpublish</option></select></div><button onclick="multi_delete()" class="btn btn-sm btn-danger btn-min-width mr-1 mb-1" id="multi-del" style="margin-left: 5px">Delete</button></div></div><div class="col-sm-12 col-md-4"><div id="users-list-datatable_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="users-list-datatable"></label></div></div></div>'
+            $(row).html(html)
+
             $("#selectAll").click(function() {
                 $("input[type=checkbox]").prop("checked", $(this).prop("checked"));
             });
