@@ -89,7 +89,7 @@
                                                         <span class="badge badge-danger">Unpublished</span>
                                                         @endif
                                                      </td>
-                                                    <td> {{$patient->status_date}} </td>
+                                                    <td>{{ date('j F, Y', strtotime($patient->status_date)) }} </td>
                                                     <td class="text-center"> 
                                                         <a href="{{route('patients.edit', $patient->id )}}" class="primary edit mr-1">
                                                             <i class="fa fa-pencil"></i>
