@@ -135,10 +135,13 @@
     </form>
     <!-- end form -->
 
-     @if(session('status'))
+     @if(session('action'))
      <script type="text/javascript">
        $(function(){
-        toastr.success('Have fun storming the castle!', 'Miracle Max Says');
+        var action = "<?php echo session('action') ?>";
+        var msg = "<?php echo session('msg') ?>";
+        console.log("sadf", msg);
+        toastr.success(action, msg);
        })
      </script>
       
