@@ -41,17 +41,11 @@
 	                                                        <label>E-mail</label>
 	                                                        <input type="email" class="form-control" placeholder="Email" value="{{$patient->email}}" name="email" required data-validation-required-message="This email field is required">
 	                                                    </div>
-	                                                </div>
-
+	                                                </div> 
                                                     <div class="form-group">
-                                                        <label>Status</label>
-                                                        <select class="form-control" name="status" required id='status'>
-                                                            <option value="Publish">Publish</option>
-                                                            <option value="Unpublish">Unpublish</option>
-                                                        </select>
+                                                        <label>Address</label>
+                                                        <input type="text" name="address" class="form-control" placeholder="Address" value="{{$patient->address}}">
                                                     </div>
-	                                                
-	                                                
 	                                            </div>
 	                                            <div class="col-12 col-sm-6">
 
@@ -66,12 +60,6 @@
 	                                                    <label>Contact Phone</label>
 	                                                    <input type="text" name="phone" class="form-control" placeholder="Contact Phone" value="{{$patient->phone}}" required data-validation-required-message="This name field is required">
 	                                                </div>
-
-                                                    <div class="form-group">
-                                                        <label>Address</label>
-                                                        <input type="text" name="address" class="form-control" placeholder="Address" value="{{$patient->address}}">
-                                                    </div>
-
 	                                            </div>
 	                                           
 	                                            <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
