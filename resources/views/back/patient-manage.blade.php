@@ -78,7 +78,7 @@
                                             <div class="col-12 col-sm-6">
                                                 <div class="form-group">
                                                     <div class="controls">
-                                                        <label>Username</label>
+                                                        <label>Name</label>
                                                         <input type="text" class="form-control" placeholder="Username" name="name" value="" required data-validation-required-message="This username field is required">
                                                     </div>
                                                 </div>
@@ -95,7 +95,7 @@
 
                                                 <div class="form-group">
                                                 	<div class="controls">
-                                                        <label>Civil ID</label>
+                                                        <label>Civil Id</label>
                                                         <input type="text" name="civil_id" class="form-control" placeholder="Civil ID" value="" required data-validation-required-message="This name field is required">
                                                     </div>
                                                     

@@ -40,16 +40,16 @@
                             </div>
                                 <div class="card-body">
                                     <!-- datatable start -->
-                                    <div class="row" style="justify-content: space-around;">
+                                    <div class="row" style="justify-content: center;">
                                         <div class="form-group" style="display: flex;">
                                             <select class="form-control"  onchange="multi_status()" id="status_sel">
-                                                <option value="">--Select Status--</option>
+                                                <option value="">--Select Action--</option>
                                                 <option value="publish" class="text-primary">Publish</option>
                                                 <option value="unpublish" class="text-danger">Unpublish</option>
                                             </select>
                                         </div>
 
-                                        <button onclick="multi_delete()" class="btn btn-danger btn-min-width mr-1 mb-1" style="display: none" id="multi-del">Delete</button>
+                                        <button onclick="multi_delete()" class="btn btn-danger btn-min-width mr-1 mb-1" disabled="" id="multi-del" style="margin-left: 5px">Delete</button>
 
                                     </div>
                                     <div class="table-responsive">
