@@ -21,13 +21,15 @@
                                   		<form method="POST" action="{{route('patients.update', $patient->id)}}" id="update-form">
 	                                    	@csrf
 	                                    	@method('PUT')
-	                                        <div class="row">
-                                              <div class="col-12 col-sm-6">
-                                                <div class="form-group pb-1">
-                                                    <input type="checkbox" id="switchery1" class="switchery" />
-                                                    <label for="switchery1" class="font-medium-2 text-bold-600 ml-1">Switchery Unchecked</label>
-                                                </div>
+                                          <div class="row">
+                                            <div class="col-12 col-sm-6">
+                                              <div class="form-group pb-1">
+                                                  <input type="checkbox" id="switchery1" class="switchery" />
+                                                  <label for="switchery1" class="font-medium-2 text-bold-600 ml-1">Switchery Unchecked</label>
                                               </div>
+                                            </div>
+                                          </div>
+	                                        <div class="row">
 	                                            <div class="col-12 col-sm-6">
 	                                                <div class="form-group">
 	                                                    <div class="controls">
