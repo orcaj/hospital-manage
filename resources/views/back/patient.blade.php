@@ -83,20 +83,16 @@
                                                      </td>
                                                     <td>{{ date('j F, Y', strtotime($patient->status_date)) }} </td>
                                                     <td class="text-center"> 
+                                                        <select class="primary" id="change_status">
+                                                          <option value="Publish" class="text-primary">Publish</option>
+                                                          <option value="Unpublish" class="text-danger">Unpublish</option>
+                                                        </select>
                                                         <a href="{{route('patients.edit', $patient->id )}}" class="primary edit mr-1">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
-
-
                                                         <a class="danger delete mr-1" 
                                                         onclick="confirm_delete({{$patient->id}})"><i class="fa fa-trash-o"></i></a>
 
-
-
-                                                 <!--        <a href="{{route('home')}}" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"
-                                                         class="danger delete mr-1"><i class="fa fa-trash-o"></i></a>
-
-                                                          -->
                                                         <form id="delete-form{{$patient->id}}" action="{{route('patients.destroy',  $patient->id  )}}" method="post">
                                                             @csrf
                                                             @method('delete')
@@ -221,6 +217,7 @@
                       confirmButtonClass: "btn btn-danger",
                       buttonsStyling: false
                     });
+                    $("#status_sel").val("");
                 }else{
                     sel_ids=[];
                     for (var i = items.length - 1; i >= 0; i--) {
