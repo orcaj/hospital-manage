@@ -7,17 +7,33 @@
     Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 $(document).ready(function () {
-
+    var row = $("#users-list-datatable_wrapper").children().first();
+    console.log(row);
     // variable declaration
     var usersTable;
     var usersDataArray = [];
+    var html = `<div style="justify-content: center; display: flex">
+                    <div class="form-group" style="display: flex;">
+                    <select class="custom-select custom-select-sm form-control form-control-sm" onchange="multi_status()"
+                            id="status_sel">
+                            <option value="">--Select Action--</option>
+                            <option value="published" class="text-primary">Publish</option>
+                            <option value="unpublished" class="text-danger">Unpublish</option>
+                        </select></div><button onclick="multi_delete()" class="btn btn-sm btn-danger btn-min-width mr-1 mb-1"
+                        id="multi-del" style="margin-left: 8px; visibility: hidden;">Delete</button>
+                </div>`;
     // datatable initialization
     if ($("#users-list-datatable").length > 0) {
         usersTable = $("#users-list-datatable").DataTable({
             'columnDefs': [{
                 "orderable": false
-            }]
+            }],
+            // dom: '<"pime-grid-button">l<"pime-grid-filter">f',
+            dom: '<"pime-grid-button col-md-4 col-12"l><"pime-grid-filter col-md-4 col-12">frtip'
         });
+        $("div.pime-grid-filter").html(html);
+    console.log(row);
+    // variable declaration
     };
     // on click selected users data from table(page named page-users-list)
     // to store into local storage to get rendered on second page named page-users-view
@@ -65,6 +81,7 @@ $(document).ready(function () {
         var usersStatusSelect = $("#users-list-status").val();
         // console.log(usersStatusSelect);
         usersTable.search(usersStatusSelect).draw();
+
     });
     // users language select
     if ($("#users-language-select2").length > 0) {
@@ -97,4 +114,5 @@ $(document).ready(function () {
     if ($(".users-edit").length > 0) {
         $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
     }
+
 });
