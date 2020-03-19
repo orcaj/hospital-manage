@@ -131,7 +131,8 @@ class InvoiceController extends Controller
 
     }
 
-    public function view_add_invoice(Request $request) {
-        return view('back.invoice-add');
+    public function view_add_invoice() {
+        $star=$this->star;
+        return view('back.invoice-add', compact('star'));
     }
 }
