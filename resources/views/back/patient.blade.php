@@ -84,7 +84,7 @@
                                                     <td>{{ date('j F, Y', strtotime($patient->status_date)) }} </td>
                                                     <td class="text-center"> 
                                                         <select class="primary" id="change_status">
-                                                          <option value="">--Select Action--</option>
+                                                          <option value=""></option>
                                                           <option value="Publish" class="text-primary">Publish</option>
                                                           <option value="Unpublish" class="text-danger">Unpublish</option>
                                                         </select>
