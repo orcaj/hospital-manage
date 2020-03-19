@@ -19,6 +19,8 @@ class CreateServicesTable extends Migration
             $table->double('price');
             $table->integer('department_id');
             $table->integer('doctor_id');
+            $table->string('status')->default('publish');
+            $table->date('status_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
         });
     }

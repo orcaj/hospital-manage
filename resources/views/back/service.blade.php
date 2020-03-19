@@ -76,18 +76,24 @@
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
                                                         @if($service->status == "publish")
-                                                        <a href="{{route('services.publish-change',
-                                                        ['service_id' => $service->id, 'status' => 'unpublish'])}}" class="info edit mr-1">
+                                                        <a href="{{route('status-change',
+                                                        ['part' => 'service', 'service_id' => $service->id, 'status' => 'unpublish'])}}" class="info edit mr-1">
                                                             <span class="badge badge-danger">Unpublish</span>
                                                         </a>
                                                         @else
-                                                        <a href="{{route('services.publish-change',
-                                                        ['service_id' => $service->id, 'status' => 'publish'])}}" class="info edit mr-1">
+                                                        <a href="{{route('status-change',
+                                                        ['part' => 'service', 'service_id' => $service->id, 'status' => 'publish'])}}" class="info edit mr-1">
                                                             <span class="badge badge-primary">Publish</span>
                                                         </a>
                                                         @endif
+
+                                                        
+
+
                                                         <a href="{{route('home')}}" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"
                                                          class="danger delete mr-1"><i class="fa fa-trash-o"></i></a>
+
+
                                                         <form id="delete-form" action="{{route('services.destroy',  $service->id  )}}" method="post">
                                                             @csrf
                                                             @method('delete')

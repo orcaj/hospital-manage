@@ -20,6 +20,8 @@ class CreateDoctorsTable extends Migration
             $table->string('email');
             $table->integer('department_id');
             $table->string('tel');
+            $table->string('status')->default('publish');
+            $table->date('status_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
         });
     }

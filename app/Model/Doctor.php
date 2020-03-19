@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Doctor extends Model
 {
     protected $fillable = [
-        'name', 'email','department_id', 'tel',
+        'name', 'email','department_id', 'tel','status','status_date',
     ];
 
     public function getDepartment(){

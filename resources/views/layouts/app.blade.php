@@ -38,11 +38,16 @@
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/pages/page-users.css')}}">
     <!-- END: Page CSS-->
 
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/extensions/sweetalert2.min.css')}}">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/style.css')}}">
+    <!-- <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/style.css')}}"> -->
     <!-- END: Custom CSS-->
+
 
  
 
@@ -67,7 +72,7 @@
 
 
     <!-- side bar select function -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     <input type="hidden" id="star" value="{{$star}}">
     <script type="text/javascript">
         $(function(){
@@ -103,6 +108,12 @@
     <script src="{{asset('app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 
     <script src="{{asset('app-assets/js/scripts/forms/select/form-select2.js')}} "></script>
+
+
+        <!-- BEGIN: Page JS-->
+    <script src="{{asset('app-assets/js/scripts/extensions/sweet-alerts.js')}} "></script>
+    <script src="{{asset('app-assets/vendors/js/extensions/sweetalert2.all.min.js')}} "></script>
+    <!-- END: Page JS-->
 
 
 

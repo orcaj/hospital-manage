@@ -4,6 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Model\Service;
+use App\Model\Patient;
+use App\Model\Doctor;
+use App\Model\Department;
+use App\Model\Invoice;
+use App\User;
+
+
 class HomeController extends Controller
 {
     private $star;
@@ -27,5 +35,35 @@ class HomeController extends Controller
     {
         $star=$this->star;
         return view('home', compact('star'));
+    }
+
+    public function status_change($part, $service_id, $status){
+        switch ($part) {
+            case 'service':
+                $ob=Service::Find($service_id);
+                break;
+            case 'department':
+                $ob=Department::Find($service_id);
+                break;
+            case 'doctor':
+                $ob=Doctor::Find($service_id);
+                break;
+            case 'invoice':
+                $ob=Invoice::Find($service_id);
+                break;
+            case 'patient':
+                $ob=Patient::Find($service_id);
+                break;
+            case 'staff':
+                $ob=User::Find($service_id);
+                break;
+            default:
+                return redirect()->back();
+                break;
+        }
+        $ob->status=$status;
+        $ob->status_date=date('yy-m-d');
+        $ob->save();
+        return redirect()->back()->with('status','Successfully ',$status );
     }
 }

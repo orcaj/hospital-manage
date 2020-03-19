@@ -29,11 +29,15 @@ Route::group(['middleware' => ['web','auth']], function(){
 	Route::resource('doctors', 'DoctorController');
 	Route::resource('services', 'ServiceController');
 
-	Route::get('services.publish-change/{service_id}/{status}', 'ServiceController@publishChange')->name('services.publish-change');	
+	Route::get('status-change/{part}/{service_id}/{status}', 'HomeController@status_change')->name('status-change');	
 
 	Route::post('get_patdata', 'InvoiceController@get_pat_date')->name('get_patdata');
 
 	Route::post('get_service_data', 'InvoiceController@get_service_data')->name('get_service_data');
+
+	Route::post('pat/multi_delete', 'PatientController@multi_delete')->name('pat.multi_delete');
+
+	Route::post('pat/multi_status', 'PatientController@multi_status')->name('pat.multi_status');
 	
 	Route::group(['middleware' => ['super']], function(){
 

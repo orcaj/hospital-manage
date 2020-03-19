@@ -18,7 +18,7 @@
                                 	<!-- update patient -->
                                   	
                                   	@isset($patient)
-                                  		<form method="POST" action="{{route('patients.update', $patient->id)}}">
+                                  		<form method="POST" action="{{route('patients.update', $patient->id)}}" id="update-form">
 	                                    	@csrf
 	                                    	@method('PUT')
 	                                        <div class="row">
@@ -62,7 +62,7 @@
 	                                            </div>
 	                                           
 	                                            <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
-	                                                <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">Update</button>
+	                                                <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1"  onclick="event.preventDefault(); confirm_update();">Update</button>
 	                                                <button type="reset" class="btn btn-light">Cancel</button>
 	                                            </div>
 	                                        </div>
@@ -72,7 +72,7 @@
 
                                   	<!-- create patient -->
                                   	@empty($patient)
-                                    <form method="POST" action="{{route('patients.store')}}">
+                                    <form method="POST" action="{{route('patients.store')}}" id='create-form'>
                                     	@csrf
                                         <div class="row">
                                             <div class="col-12 col-sm-6">
@@ -115,7 +115,7 @@
                                             </div>
                                            
                                             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
-                                                <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">Create</button>
+                                                <button class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1" onclick="event.preventDefault(); confirm_create();">Create</button>
                                                 <button type="reset" class="btn btn-light">Cancel</button>
                                             </div>
                                         </div>
@@ -133,6 +133,60 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        function confirm_create(){
+
+            Swal.fire({
+              title: "Are you sure?",
+              text: "You won't be able to revert this!",
+              type: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Yes, create it!",
+              confirmButtonClass: "btn btn-primary",
+              cancelButtonClass: "btn btn-danger ml-1",
+              buttonsStyling: false
+            }).then(function(result) {
+              if (result.value) {
+                $("#create-form").submit();
+                // Swal.fire({
+                //   type: "success",
+                //   title: "Created!",
+                //   text: "Your file has been created."
+                //   // confirmButtonClass: "btn btn-success"
+                // });
+              }
+            });
+        }
+
+        function confirm_update(){
+
+            Swal.fire({
+              title: "Are you sure?",
+              text: "You won't be able to revert this!",
+              type: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Yes, update it!",
+              confirmButtonClass: "btn btn-primary",
+              cancelButtonClass: "btn btn-danger ml-1",
+              buttonsStyling: false,
+            }).then(function(result) {
+              if (result.value) {
+                $("#update-form").submit();
+                // Swal.fire({
+                //   type: "success",
+                //   title: "Updated!",
+                //   text: "Your file has been updated."
+                //   // confirmButtonClass: "btn btn-success"
+                // });
+              }
+            });
+        }
+    </script>
 
 
 @endsection

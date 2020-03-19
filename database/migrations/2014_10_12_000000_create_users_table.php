@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('type');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('status')->default('publish');
+            $table->date('status_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->rememberToken();
             $table->timestamps();
         });

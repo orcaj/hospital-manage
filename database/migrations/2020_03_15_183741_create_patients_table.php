@@ -20,6 +20,8 @@ class CreatePatientsTable extends Migration
             $table->string('phone')->unique();
             $table->string('email')->unique();
             $table->string('address')->unique();
+            $table->string('status')->default('publish');
+            $table->date('status_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
         });
     }

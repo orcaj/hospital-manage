@@ -102,6 +102,26 @@ class PatientController extends Controller
     {
         
         Patient::destroy($id);
-        return redirect()->back()->with('status', 'Successfully deleted.');
+        return redirect()->back()->with('status','Successfully deleted.');
+    }
+
+    public function multi_delete(Request $request){
+        $del_ids=$request->sel_ids;
+        $ids=explode(',', $del_ids);
+        return $ids;
+        Patient::destroy($ids);
+        return redirect()->back()->with('status','Successfully deleted.');
+    }
+
+    public function multi_status(Request $request){
+        $sel_ids=$request->sel_ids;
+        $ids=explode(',', $sel_ids);
+        $status=$request->status;
+        foreach ($ids as $key => $id) {
+            $patient=Patient::Find($id);
+            $patient->status=$status;
+            $patient->save();
+        }
+        return redirect()->back()->with('status','Successfully deleted.');
     }
 }

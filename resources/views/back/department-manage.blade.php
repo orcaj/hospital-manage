@@ -25,14 +25,14 @@
                                             <div class="col-12 col-sm-12">
                                                 <div class="form-group">
                                                     <div class="controls">
-                                                        <label>Username</label>
-                                                        <input type="text" class="form-control" placeholder="Username" name="name" value="{{$department->name}}" required data-validation-required-message="This username field is required">
+                                                        <label>Department Name</label>
+                                                        <input type="text" class="form-control" placeholder="Department Name" name="name" value="{{$department->name}}" required data-validation-required-message="This Department Name field is required">
                                                     </div>
                                                 </div>
                                             </div>
                                            
                                             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
-                                                <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">Create</button>
+                                                <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">Update</button>
                                                 <button type="reset" class="btn btn-light">Cancel</button>
                                             </div>
                                         </div>
@@ -49,7 +49,7 @@
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>Deparment Name</label>
-                                                        <input type="text" class="form-control" placeholder="Username" name="name" value="" required data-validation-required-message="This Deparment Name field is required">
+                                                        <input type="text" class="form-control" placeholder="Department Name" name="name" value="" required data-validation-required-message="This Deparment Name field is required">
                                                     </div>
                                                 </div>
                                             </div>
