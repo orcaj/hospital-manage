@@ -29,7 +29,11 @@
                                           <div class="row">
                                             <div class="col-12 col-sm-6">
                                               <div class="form-group pb-1">
-                                                  <input type="checkbox" id="switchery1" class="switchery" />
+                                                    @if($patient->status == 'publish')
+                                                    <input type="checkbox" checked="checked" id="switchery1" class="switchery" />
+                                                    @else
+                                                    <input type="checkbox" id="switchery1" class="switchery" />
+                                                    @endif
                                               </div>
                                             </div>
                                           </div>

@@ -30,20 +30,6 @@
                                 <a href="{{route('patients.create')}}" class="btn btn-primary btn-min-width mr-1 mb-1"><i class="feather icon-user-plus"></i>&nbspCreate</a>
                             </div>
                                 <div class="card-body">
-                                    <!-- datatable start -->
-                                    <!-- <div class="row" style="justify-content: center;">
-                                        <div class="form-group" style="display: flex;">
-                                            <select class="form-control"  onchange="multi_status()" id="status_sel">
-                                                <option value="">--Select Action--</option>
-                                                <option value="Publish" class="text-primary">Publish</option>
-                                                <option value="Unpublish" class="text-danger">Unpublish</option>
-                                            </select>
-                                        </div>
-
-                              
-                                        <button onclick="multi_delete()" class="btn btn-danger btn-min-width mr-1 mb-1" style="visibility: hidden;" id="multi-del" style="margin-left: 5px">Delete</button>
-
-                                    </div> -->
                                     <div class="table-responsive">
                                         <table id="users-list-datatable" class="table center-table">
                                             <thead>
@@ -65,7 +51,7 @@
                                               @foreach($patients as $key => $patient)
                                                 <tr>
                                                     <td class="text-center">
-                                                        <input type="checkbox" unikey="{{$patient->id}}" class="switchery" id="test-{{$key}}" name="test-{{$key}}" data-size="sm">
+                                                        <input type="checkbox" unikey="{{$patient->id}}" id="test-{{$key}}" name="test-{{$key}}" data-size="sm">
                                                     </td>
                                                     <td>{{$key+1}}</td>
                                                     <td> {{$patient->name}} </td>
@@ -74,7 +60,7 @@
                                                     <td> {{$patient->phone}} </td>
                                                     <td> {{$patient->address}} </td>
                                                     <td>
-                                                        @if($patient->status == "Publish")
+                                                        @if($patient->status == "published")
                                                             <span class="badge badge-primary">Published</span>
                                                          
                                                         @else
@@ -83,24 +69,6 @@
                                                      </td>
                                                     <td>{{ date('j F, Y', strtotime($patient->status_date)) }} </td>
                                                     <td class="text-center"> 
-                                                      <!-- <form id="status-form" method="post" style="display: none" action="{{route('status-change')}}">
-                                                        @csrf
-                                                        <input type="hidden" name="part" id="status-part">
-                                                        <input type="hidden" name="service_id" id="status-id">
-                                                        <input type="hidden" name="status" id="status-status">
-                                                      </form> -->
-                                                       <!--  @if($patient->status == "Publish")
-                                                        <a data-part="patient" data-id="{{$patient->id}}" data-status="unpublish" 
-                                                          class="info edit mr-1 status-change">
-                                                            <span class="badge badge-danger">Unpublish</span>
-                                                        </a>
-                                                        @else
-                                                        <a data-part="patient" data-id="{{$patient->id}}" data-status="publish" 
-                                                          class="info edit mr-1 status-change">
-                                                            <span class="badge badge-primary">Publish</span>
-                                                        </a>
-
-                                                        @endif -->
                                                         <a href="{{route('patients.edit', $patient->id )}}" class="primary edit mr-1">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>

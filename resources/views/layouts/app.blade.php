@@ -47,9 +47,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/plugins/forms/switch.css')}}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <script src="{{asset('app-assets/vendors/js/vendors.min.js')}}"></script>
-    <!-- BEGIN: Page Vendor JS-->
-    <script src="{{asset('app-assets/vendors/js/tables/datatable/datatables.min.js')}}"></script>
+    
     <!-- END: Page Vendor JS-->
 
 
@@ -92,6 +90,9 @@
 
    <!-- BEGIN: Vendor JS-->
 
+    <script src="{{asset('app-assets/vendors/js/vendors.min.js')}}"></script>
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{{asset('app-assets/vendors/js/tables/datatable/datatables.min.js')}}"></script>
     <script src="{{asset('app-assets/vendors/js/forms/validation/jqBootstrapValidation.js')}}"></script>
     <!-- BEGIN Vendor JS-->
 
@@ -104,7 +105,7 @@
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
-    <script src="{{asset('app-assets/js/scripts/pages/page-users.js')}}"></script>
+   
     <!-- END: Page JS-->
 
     <!-- BEGIN: Page JS-->
@@ -162,8 +163,7 @@
             $(row).html(html)
         })
     </script>
-
-
+    <script src="{{asset('app-assets/js/scripts/pages/page-users.js')}}"></script>
 
 
 
