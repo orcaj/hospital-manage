@@ -13,12 +13,7 @@
     </style>
     <!-- BEGIN: Content-->
     <div class="app-content content">
-
-      <!-- alert section -->
-
-     
-        <!-- alert section end -->
-        
+      
         <div class="content-overlay"></div>
         <div class="content-wrapper">
             <div class="content-header row">
@@ -45,6 +40,7 @@
                                             </select>
                                         </div>
 
+                              
                                         <button onclick="multi_delete()" class="btn btn-danger btn-min-width mr-1 mb-1" style="visibility: hidden;" id="multi-del" style="margin-left: 5px">Delete</button>
 
                                     </div>
@@ -152,12 +148,14 @@
 
         function confirm_delete(id){
             Swal.fire({
+            
               title: "Delete",
               text: "Are you sure that you want to delete these records?",
               type: "warning",
               showCancelButton: true,
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",
+             
               confirmButtonText: "Ok",
               confirmButtonClass: "btn btn-primary",
               cancelButtonClass: "btn btn-danger ml-1",
@@ -291,8 +289,10 @@
             sel_count=sel_item.length;
 
             if(sel_count > 0){
+
                 $("#multi-del").css('visibility', 'visible');
             }else{
+
                 $("#multi-del").css('visibility', 'hidden');
             }
 
