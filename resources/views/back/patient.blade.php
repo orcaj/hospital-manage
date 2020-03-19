@@ -83,7 +83,7 @@
                                                      </td>
                                                     <td>{{ date('j F, Y', strtotime($patient->status_date)) }} </td>
                                                     <td class="text-center"> 
-                                                        @if($service->status == "publish")
+                                                        @if($patient->status == "publish")
                                                         <a href="{{route('status-change',
                                                         ['part' => 'patient', 'service_id' => $patient->id, 'status' => 'unpublish'])}}" class="info edit mr-1">
                                                             <span class="badge badge-danger">Unpublish</span>
