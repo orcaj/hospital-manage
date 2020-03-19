@@ -83,6 +83,25 @@
                                                      </td>
                                                     <td>{{ date('j F, Y', strtotime($patient->status_date)) }} </td>
                                                     <td class="text-center"> 
+                                                      <form id="status-form" method="post" style="display: none" action="{{route('status-change')}}">
+                                                        @csrf
+                                                        <input type="hidden" name="part" id="status-part">
+                                                        <input type="hidden" name="service_id" id="status-id">
+                                                        <input type="hidden" name="status" id="status-status">
+                                                      </form>
+
+                                                        @if($patient->status == "publish")
+                                                        <a data-part="patient" data-id="{{$patient->id}}" data-status="unpublish" 
+                                                          class="info edit mr-1 status-change">
+                                                            <span class="badge badge-danger">Unpublish</span>
+                                                        </a>
+                                                        @else
+                                                        <a data-part="patient" data-id="{{$patient->id}}" data-status="publish" 
+                                                          class="info edit mr-1 status-change">
+                                                            <span class="badge badge-primary">Publish</span>
+                                                        </a>
+
+                                                        @endif
                                                         <a href="{{route('patients.edit', $patient->id )}}" class="primary edit mr-1">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
@@ -148,6 +167,8 @@
       @endif
 
     <script type="text/javascript">
+
+     
 
         function confirm_delete(id){
             Swal.fire({
@@ -236,11 +257,11 @@
                           cancelButtonClass: "btn btn-danger ml-1",
                           buttonsStyling: false
                         }).then(function(result) {
-                      if (result.value) {
-                        $("#status").val(status);
-                        $("#multi-status").submit();
-                      }
-                    });
+                        if (result.value) {
+                          $("#status").val(status);
+                          $("#multi-status").submit();
+                        }
+                      });
                 
                 }   
             }                     
@@ -317,8 +338,34 @@
                 del_btn();
             });
 
+            $(".status-change").click(function(){
+              id=$(this).data('id');
+              part=$(this).data('part');
+              status=$(this).data('status');
+              $("#status-part").val(part);
+              $("#status-id").val(id);
+              $("#status-status").val(status);
+              Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes",
+                confirmButtonClass: "btn btn-primary",
+                cancelButtonClass: "btn btn-danger ml-1",
+                buttonsStyling: false
+              }).then(function(result) {
+                if (result.value) {
+                  $("#status-form").submit();
+                }
+              });
+            })
+
         })
     </script>
+
 
      
 

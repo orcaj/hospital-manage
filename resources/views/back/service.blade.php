@@ -75,17 +75,7 @@
                                                         <a href="{{route('services.edit', $service->id )}}" class="primary edit mr-1">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
-                                                        @if($service->status == "publish")
-                                                        <a href="{{route('status-change',
-                                                        ['part' => 'service', 'service_id' => $service->id, 'status' => 'unpublish'])}}" class="info edit mr-1">
-                                                            <span class="badge badge-danger">Unpublish</span>
-                                                        </a>
-                                                        @else
-                                                        <a href="{{route('status-change',
-                                                        ['part' => 'service', 'service_id' => $service->id, 'status' => 'publish'])}}" class="info edit mr-1">
-                                                            <span class="badge badge-primary">Publish</span>
-                                                        </a>
-                                                        @endif
+                                                        
 
                                                         
 

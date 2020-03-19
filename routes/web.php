@@ -29,7 +29,7 @@ Route::group(['middleware' => ['web','auth']], function(){
 	Route::resource('doctors', 'DoctorController');
 	Route::resource('services', 'ServiceController');
 
-	Route::get('status-change/{part}/{service_id}/{status}', 'HomeController@status_change')->name('status-change');	
+	Route::post('status-change', 'HomeController@status_change')->name('status-change');	
 
 	Route::post('get_patdata', 'InvoiceController@get_pat_date')->name('get_patdata');
 

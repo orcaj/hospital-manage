@@ -37,7 +37,10 @@ class HomeController extends Controller
         return view('home', compact('star'));
     }
 
-    public function status_change($part, $service_id, $status){
+    public function status_change(Request $request){
+        $part=$request->part;
+        $service_id=$request->service_id;
+        $status=$request->status;
         switch ($part) {
             case 'service':
                 $ob=Service::Find($service_id);
