@@ -37,7 +37,7 @@
                                                 <tr>
                                                     <th class="text-center"><input type="checkbox" id="selectAll" data-size="sm" ></th>
                                                     <th>No</th>
-                                                    <th>Username</th>
+                                                    <th>Patient name</th>
                                                     <th>Civil ID</th>
                                                     <th>E-mail</th>
                                                     <th>Contact Phone</th>
