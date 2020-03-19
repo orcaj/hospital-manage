@@ -17,10 +17,10 @@
     	<!-- alert section -->
 
     	@if(session('status'))
-    	<div class="alert alert-success alert-dismissible mb-2" role="alert">
-            {{session('status')}}
-        </div>
-        @endif
+    	<div class="alert alert-success alert-dismissible mb-2"  role="alert">
+          {{session('status')}}
+      </div>
+      @endif
         <!-- alert section end -->
         
         <div class="content-overlay"></div>
@@ -144,15 +144,16 @@
     <!-- end form -->
 
     <script type="text/javascript">
+
         function confirm_delete(id){
             Swal.fire({
-              title: "Are you sure?",
-              text: "You won't be able to revert this!",
+              title: "Delete",
+              text: "Are you sure that you want to delete these records?",
               type: "warning",
               showCancelButton: true,
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",
-              confirmButtonText: "Yes, delete it!",
+              confirmButtonText: "Ok",
               confirmButtonClass: "btn btn-primary",
               cancelButtonClass: "btn btn-danger ml-1",
               buttonsStyling: false
