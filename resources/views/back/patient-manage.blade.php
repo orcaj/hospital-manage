@@ -2,6 +2,11 @@
 @section('content')
  
     <!-- BEGIN: Content-->
+    <style type="text/css">
+      .switchery {
+        background-color: red !important;
+      }
+    </style>
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="content-wrapper">
