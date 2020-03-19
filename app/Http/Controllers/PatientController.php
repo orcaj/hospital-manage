@@ -88,7 +88,8 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $unique=Patient::where('civil_id', $request->civil_id)->count();
+
+        $unique=Patient::where('civil_id', $request->civil_id)->where('id','<>',$id)->count();
         if($unique>0){
             return redirect()->back()->with(['action'=>'Error','msg' => 'Civil ID already exist.']);
         }
