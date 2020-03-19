@@ -43,10 +43,11 @@
 
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/extensions/toastr.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/plugins/extensions/toastr.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/forms/toggle/switchery.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/plugins/forms/switch.css')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-            <script src="{{asset('app-assets/vendors/js/vendors.min.js')}}"></script>
+    <script src="{{asset('app-assets/vendors/js/vendors.min.js')}}"></script>
     <!-- BEGIN: Page Vendor JS-->
     <script src="{{asset('app-assets/vendors/js/tables/datatable/datatables.min.js')}}"></script>
     <!-- END: Page Vendor JS-->
@@ -122,6 +123,10 @@
 
     <script src="{{asset('app-assets/vendors/js/extensions/toastr.min.js')}}"></script>
     <script src="{{asset('app-assets/js/scripts/extensions/toastr.js')}}"></script>
+
+    <script src="{{asset('app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js')}}"></script>
+    <script src="{{asset('app-assets/vendors/js/forms/toggle/switchery.min.js')}}"></script>
+    <script src="{{asset('app-assets/js/scripts/forms/switch.js')}}"></script>
 
 
     <script type="text/javascript">
