@@ -74,7 +74,7 @@
                                                     <td> {{$patient->phone}} </td>
                                                     <td> {{$patient->address}} </td>
                                                     <td>
-                                                        @if($patient->status == "publish")
+                                                        @if($patient->status == "Publish")
                                                             <span class="badge badge-primary">Published</span>
                                                          
                                                         @else
@@ -90,7 +90,7 @@
                                                         <input type="hidden" name="status" id="status-status">
                                                       </form>
 
-                                                        @if($patient->status == "publish")
+                                                        @if($patient->status == "Publish")
                                                         <a data-part="patient" data-id="{{$patient->id}}" data-status="unpublish" 
                                                           class="info edit mr-1 status-change">
                                                             <span class="badge badge-danger">Unpublish</span>
