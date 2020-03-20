@@ -245,8 +245,6 @@
             }                     
         }
 
-
-
         function del_btn(){
             sel_item=$("input[type=checkbox]:checked");
             sel_count=sel_item.length;

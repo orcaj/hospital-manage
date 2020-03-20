@@ -16,36 +16,11 @@
                         <!-- Bootstrap card component -->
                         <div class="card">
                             <div class="card-body">
-
-                                <!-- card header -->
-                                <div class="card-header">
-                                    <div class="row">
-                                        <div class="col-xl-3 col-md-12 d-flex justify-content-start align-items-center pl-0">
-                                            <h6 class="invoice-text mr-1 font-weight-bold">Invoice# </h6>
-                                            <input type="text" name="invoice" class="form-control w-50" value="#000">
-                                        </div>
-                                        <div class="col-xl-9 col-md-12 d-flex justify-content-xl-end align-items-lg-start align-items-sm-start align-items-xs-start  align-items-center flex-wrap px-0 pt-xl-0 pt-1">
-                                            <div class="issue-date d-flex align-items-center justify-content-start mr-2 mb-75 mb-xl-0">
-                                                <h6 class="invoice-text mr-1 font-weight-bold">Date Issue</h6>
-                                                <input type="text" name="date" class="pick-a-date bg-white form-control" value="Select Date">
-                                            </div>
-                                            <div class="due-date d-flex align-items-center justify-content-start">
-                                                <h6 class="invoice-text mr-1 font-weight-bold">Date Due</h6>
-                                                <input type="text" name="date" class="pick-a-date bg-white form-control" value="Select Date">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-
                                 <!-- logo and invoice title -->
                                 <div class="row my-2">
                                     <div class="col-sm-6 col-12 order-2 order-sm-1">
                                         <h4 class="invoice-title text-primary">Invoice</h4>
                                         <input type="text" class="form-control" value="" placeholder="Product Name">
-                                    </div>
-                                    <div class="col-sm-6 col-12 order-1 order-sm-1 d-flex justify-content-end align-items-center">
-                                        <img src="../../../app-assets/images/logo/pixinvent-logo.png" alt="logo" height="46" width="164">
                                     </div>
                                 </div>
                                 <hr>
