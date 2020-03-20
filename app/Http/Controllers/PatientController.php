@@ -91,12 +91,12 @@ class PatientController extends Controller
             return redirect()->back()->with(['action'=>'Error','msg' => 'Civil ID already exist.', 'error_civil_id' => $request->civil_id]);
         }
         $patient=Patient::FindOrFail($id);
-        $patient->name=$request->name;
-        $patient->email=$request->email;
-        $patient->phone=$request->phone;
-        $patient->civil_id=$request->civil_id;
-        $patient->address=$request->address;
-        $patient->status=$request->status;
+        $patient->name = $request->name;
+        $patient->email = $request->email;
+        $patient->phone = $request->phone;
+        $patient->civil_id = $request->civil_id;
+        $patient->address = $request->address;
+        $patient->status = $request->status;
         $patient->save();
         return redirect()->route('patients.index')->with(['action' => 'Update', 'msg'=>"Patient detail successfully updated."]);
 

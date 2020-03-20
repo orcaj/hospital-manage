@@ -94,6 +94,7 @@ class StaffController extends Controller
         $staff->name=$request->name;
         $staff->email=$request->email;
         $staff->status = $request->status;
+        $staff->type = $request->type;
         $staff->password=Hash::make($request->password);
         $staff->save();
         return redirect()->route('staff.index')->with(['action' => 'Update', 'msg'=>"Patient detail successfully updated."]);
