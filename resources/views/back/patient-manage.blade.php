@@ -64,7 +64,7 @@
 	                                                <div class="form-group">
 	                                                	<div class="controls">
 	                                                        <label>Civil ID</label>
-	                                                        <input type="text" name="civil_id" class="form-control" placeholder="Civil ID" value="{{session('action')!='Error' ? $patient->civil_id: session('error_civil_id') }}" required data-validation-required-message="This name field is required">
+	                                                        <input type="text" name="civil_id" class="form-control" placeholder="Civil ID" value="{{session('action')!='Error' ? $patient->civil_id: session('error_civil_id') }}" required style="{{session('action')=='Error' '"border-color": "red"'}}" data-validation-required-message="This name field is required">
 	                                                    </div>
 	                                                    
 	                                                </div>
@@ -188,7 +188,9 @@
        $(function(){
         var action = "<?php echo session('action') ?>";
         var msg = "<?php echo session('msg') ?>";
-        console.log("msg", action);
+        // console.log("msg", action);
+        // $("#civil_id").css("border-color", '#d3167f');
+        // $("#civil_id").focus();
         toastr.error(msg, action, {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
        })
      </script>
