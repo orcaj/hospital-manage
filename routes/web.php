@@ -35,8 +35,10 @@ Route::group(['middleware' => ['web','auth']], function(){
 	Route::post('pat/multi_delete', 'PatientController@multi_delete')->name('pat.multi_delete');
 	Route::post('pat/multi_status', 'PatientController@multi_status')->name('pat.multi_status');
 	Route::get('add-invoice', 'InvoiceController@view_add_invoice')->name('invoice.view_add_invoice');
-	Route::post('pat/confirm_create', 'PatientController@confirm_create')->name('confirm_create');
-
+	Route::post('pat/confirm_create', 'PatientController@confirm_create')->name('pat.confirm_create');
+	Route::post('staf/confirm_create', 'StaffController@confirm_create')->name('staf.confirm_create');
+	Route::post('staf/multi_delete', 'StaffController@multi_delete')->name('staf.multi_delete');
+	Route::post('staf/multi_status', 'StaffController@multi_status')->name('staf.multi_status');
 	Route::group(['middleware' => ['super']], function(){
 
 	});
