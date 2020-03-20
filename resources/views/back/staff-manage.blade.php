@@ -133,18 +133,7 @@
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>Type</label>
-                                                        <select class="form-control" name="type" id="type">
-                                                           @if(auth()->user()->type == "super_admin")
-                                                            <option value="super_admin">Supder admin</option>
-                                                            <option value="admin">Admin</option>
-                                                            <option value="staff">Staff</option>
-                                                            @elseif(auth()->user()->type == "admin")
-                                                            <option value="admin">Admin</option>
-                                                            <option value="staff">Staff</option>
-                                                            @elseif(auth()->user()->type == "staff")
-                                                            <option value="staff">Staff</option>
-                                                            @endif
-                                                        </select>
+                                                        <select class="form-control" required="" name="type" user-type="{{auth()->user()->type}}" id="type"></select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -270,11 +259,13 @@
         $(function(){
             var staff = '<?php if(isset($staff)) echo $staff;?>';
             var user_type = $("#type").attr("user-type");
-            // console.log(val.type);
-            var json_val = JSON.parse(staff);
-            console.log(json_val.type);
+            console.log(user_type);
+            if(staff) var json_val = JSON.parse(staff);
+            // console.log(json_val.type);
+
             switch(user_type) {
                 case 'super_admin':
+                    console.log("here");
                     var options = '<option value="super_admin">Super Admin</option><option value="admin">Admin</option><option value="staff">Staff</option>';
                     $("#type").html(options);
                     break;
@@ -283,9 +274,13 @@
                     $("#type").html(options);
                     break;
                 default:
+                    var options = '<option value="super_admin">Super Admin</option><option value="admin">Admin</option><option value="staff">Staff</option>';
+                    $("#type").html(options);
                     break;
             }
-            $("#type").val(json_val.type);
+            if (json_val) {
+                $("#type").val(json_val.type);
+            }
             set_status();
             $("#switchery1").change(function(){
                 set_status();
