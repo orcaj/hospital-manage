@@ -21,12 +21,24 @@
                                   	<form method="POST" action="{{route('staff.update', $staff->id)}}">
                                     	@csrf
                                     	@method('PUT')
+                                        <input type="hidden" name="status" id="status_val">
+                                        <div class="row">
+                                            <div class="col-12 col-sm-6">
+                                                <div class="form-group pb-1">
+                                                    @if($staff->status == 'published')
+                                                    <input type="checkbox" checked="checked" id="switchery1" class="switchery" />
+                                                    @else
+                                                    <input type="checkbox" id="switchery1" class="switchery" />
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-12 col-sm-6">
                                                 <div class="form-group">
                                                     <div class="controls">
-                                                        <label>Username</label>
-                                                        <input type="text" class="form-control" placeholder="Username" name="name" value="{{$staff->name}}" required data-validation-required-message="This username field is required">
+                                                        <label>Name</label>
+                                                        <input type="text" class="form-control" placeholder="Name" name="name" value="{{$staff->name}}" required data-validation-required-message="This Name field is required">
                                                     </div>
                                                 </div>
                                             </div>
@@ -44,7 +56,7 @@
                                             <div class="col-12 col-sm-6">
                                                 <div class="form-group">
                                                     <div class="controls">
-                                                        <label for="account-new-password">New Password</label>
+                                                        <label for="account-new-password">Password</label>
                                                         <input type="password" value="" name="password" id="account-new-password" class="form-control" placeholder="New Password" required data-validation-required-message="The password field is required" minlength="6">
                                                     </div>
                                                 </div>
@@ -52,7 +64,7 @@
                                             <div class="col-12 col-sm-6">
                                                 <div class="form-group">
                                                     <div class="controls">
-                                                        <label for="account-retype-new-password">Retype New
+                                                        <label for="account-retype-new-password">Confirm
                                                             Password</label>
                                                         <input type="password" value="" name="con-password" class="form-control" required id="account-retype-new-password" data-validation-match-match="password" placeholder="New Password" data-validation-required-message="The Confirm password field is required" minlength="6">
                                                     </div>
@@ -77,8 +89,8 @@
                                             <div class="col-12 col-sm-6">
                                                 <div class="form-group">
                                                     <div class="controls">
-                                                        <label>Username</label>
-                                                        <input type="text" class="form-control" placeholder="Username" name="name" value="" required data-validation-required-message="This username field is required">
+                                                        <label>Name</label>
+                                                        <input type="text" class="form-control" placeholder="Name" name="name" value="" required data-validation-required-message="This name field is required">
                                                     </div>
                                                 </div>
                                             </div>
@@ -96,7 +108,7 @@
                                             <div class="col-12 col-sm-6">
                                                 <div class="form-group">
                                                     <div class="controls">
-                                                        <label for="account-new-password">New Password</label>
+                                                        <label for="account-new-password">Password</label>
                                                         <input type="password" name="password" id="account-new-password" value="" class="form-control" placeholder="New Password" required data-validation-required-message="The password field is required" minlength="6">
                                                     </div>
                                                 </div>
@@ -104,7 +116,7 @@
                                             <div class="col-12 col-sm-6">
                                                 <div class="form-group">
                                                     <div class="controls">
-                                                        <label for="account-retype-new-password">Retype New
+                                                        <label for="account-retype-new-password">Confirm
                                                             Password</label>
                                                         <input type="password" name="con-password" class="form-control" required id="account-retype-new-password" data-validation-match-match="password" value="" placeholder="New Password" data-validation-required-message="The Confirm password field is required" minlength="6">
                                                     </div>

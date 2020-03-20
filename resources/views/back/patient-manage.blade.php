@@ -27,16 +27,17 @@
                                   		<form method="POST" action="{{route('patients.update', $patient->id)}}" id="update-form">
 	                                    	@csrf
 	                                    	@method('PUT')
+
                                         <input type="hidden" name="status" id="status_val">
                                           <div class="row">
                                             <div class="col-12 col-sm-6">
-                                              <div class="form-group pb-1">
+                                                <div class="form-group pb-1">
                                                     @if($patient->status == 'published')
                                                     <input type="checkbox" checked="checked" id="switchery1" class="switchery" />
                                                     @else
                                                     <input type="checkbox" id="switchery1" class="switchery" />
                                                     @endif
-                                              </div>
+                                                </div>
                                             </div>
                                           </div>
 	                                        <div class="row">
@@ -101,8 +102,10 @@
                                             <div class="col-12 col-sm-6">
                                                 <div class="form-group">
                                                     <div class="controls">
-                                                        <label>Name</label>
-                                                        <input type="text" class="form-control" placeholder="Username" id="name" name="name" value="" required data-validation-required-message="This username field is required">
+
+                                                        <label>Patient Name</label>
+                                                        <input type="text" class="form-control" placeholder="Patient Name" name="name" value="" required data-validation-required-message="This username field is required">
+
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
