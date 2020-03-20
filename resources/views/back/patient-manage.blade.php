@@ -90,8 +90,8 @@
                                             <div class="col-12 col-sm-6">
                                                 <div class="form-group">
                                                     <div class="controls">
-                                                        <label>Name</label>
-                                                        <input type="text" class="form-control" placeholder="Username" name="name" value="" required data-validation-required-message="This username field is required">
+                                                        <label>Patient Name</label>
+                                                        <input type="text" class="form-control" placeholder="Patient Name" name="name" value="" required data-validation-required-message="This username field is required">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
