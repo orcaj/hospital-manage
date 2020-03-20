@@ -104,14 +104,14 @@
                                                     <div class="controls">
 
                                                         <label>Patient Name</label>
-                                                        <input type="text" class="form-control" placeholder="Patient Name" name="name" value="" required data-validation-required-message="This username field is required">
+                                                        <input type="text" class="form-control" placeholder="Patient Name" name="name" value="" required data-validation-required-message="Patient name is required">
 
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>E-mail</label>
-                                                        <input type="email" class="form-control" placeholder="Email" id="email" name="email" value="" required data-validation-required-message="This email field is required">
+                                                        <input type="email" class="form-control" placeholder="Email" id="email" name="email" value="" required data-validation-required-message="Email is required">
                                                     </div>
                                                 </div>
                                                 
@@ -122,21 +122,25 @@
                                                 <div class="form-group">
                                                 	<div class="controls">
                                                         <label>Civil Id</label>
-                                                        <input type="text" id="civil_id" name="civil_id" class="form-control" placeholder="Civil ID" value="" required data-validation-required-message="This name field is required">
+                                                        <input type="text" id="civil_id" name="civil_id" class="form-control" placeholder="Civil ID" value="" required data-validation-required-message="Civil Id is required">
                                                     </div>
                                                     
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Contact Phone</label>
-                                                    <input type="text" name="phone" class="form-control" placeholder="Contact Phone" value="" required data-validation-required-message="This name field is required">
+                                                    <div class="controls">
+                                                        <label>Contact Phone</label>
+                                                        <input type="text" name="phone" class="form-control" placeholder="Contact Phone" value="" required  id="phone_number" data-validation-required-message="Phone number is required">
+                                                    </div>
                                                 </div>
 
                                             </div>
                                             <div class="col-12 col-sm-6">
                                                
                                                 <div class="form-group">
+                                                  <div class="controls">
                                                     <label>Address</label>
-                                                    <input type="text" name="address" class="form-control" placeholder="Address">
+                                                    <input type="text" id="address" name="address" class="form-control" required value="" data-validation-required-message="Address is required" placeholder="Address">
+                                                  </div>
                                                 </div>
                                             </div>
 
@@ -184,7 +188,7 @@
        $(function(){
         var action = "<?php echo session('action') ?>";
         var msg = "<?php echo session('msg') ?>";
-        console.log("sadf", msg);
+        console.log("msg", action);
         toastr.error(msg, action, {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
        })
      </script>
@@ -206,6 +210,8 @@
                         $("#create-form").submit();
                     }else{
                         toastr.error('Civil ID already exist.', 'Error', {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
+                        $("#civil_id").css("border-color", "#d3167f");
+                        $("#civil_id").focus();
                     }
                 },
                 error: function(e){
