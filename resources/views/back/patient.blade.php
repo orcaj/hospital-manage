@@ -217,8 +217,14 @@
                         sel_ids.push(sel_id);
                     }
                     $("#status_ids").val(sel_ids);
+                      var title = '';
+                      if (status === 'published'){
+                        title = 'Publish';
+                      } else {
+                        title = 'UnPublish';
+                      }
                         Swal.fire({
-                          title: status,
+                          title: title,
                           text: msg,
                           type: "warning",
                           showCancelButton: true,
