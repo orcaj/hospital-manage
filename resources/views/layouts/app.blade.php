@@ -130,8 +130,8 @@
     <script src="{{asset('app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js')}}"></script>
     <script src="{{asset('app-assets/vendors/js/forms/toggle/switchery.min.js')}}"></script>
     <script src="{{asset('app-assets/js/scripts/forms/switch.js')}}"></script>
-    <script src="../../../app-assets/vendors/js/forms/select/select2.full.min.js"></script>
-
+    <script src="{{asset('app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
+    <script src="{{asset('app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
 
 
 

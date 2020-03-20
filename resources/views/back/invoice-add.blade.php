@@ -20,7 +20,7 @@
                                 <div class="row my-2">
                                     <div class="col-sm-6 col-12 order-2 order-sm-1">
                                         <h4 class="invoice-title text-primary">Invoice</h4>
-                                        <input type="text" class="form-control" value="" placeholder="Product Name">
+                                        
                                     </div>
                                 </div>
                                 <hr>

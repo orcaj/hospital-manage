@@ -210,7 +210,7 @@
         function confirm_create(){
             civil_id=$("#civil_id").val();
             $.ajax({
-                url:"{{route('confirm_create')}}",
+                url:"{{route('pat.confirm_create')}}",
                 data:{
                     _token:"{{csrf_token()}}",
                     civil_id:civil_id

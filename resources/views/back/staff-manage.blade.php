@@ -18,7 +18,7 @@
                                 	<!-- update patient -->
                                   	
                                   	@isset($staff)
-                                  	<form method="POST" action="{{route('staff.update', $staff->id)}}">
+                                  	<form method="POST" action="{{route('staff.update', $staff->id)}}" id="update-form">
                                     	@csrf
                                     	@method('PUT')
                                         <input type="hidden" name="status" id="status_val">
@@ -46,7 +46,14 @@
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>E-mail</label>
-                                                        <input type="email" class="form-control" placeholder="Email" value="{{$staff->email}}" name="email" required data-validation-required-message="This email field is required">
+                                                        @if(session('action')=='Error')
+                                                        <input type="email" class="form-control" placeholder="Email" value="{{$staff->email}}" name="email" value="{{ session('error_email') }}"
+                                                        style="border-color: red"
+                                                        autofocus
+                                                        required data-validation-required-message="This email field is required" id="email">
+                                                        @else
+                                                        <input type="email" class="form-control" placeholder="Email" value="{{$staff->email}}" name="email" required data-validation-required-message="This email field is required" id="email">
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 
@@ -72,9 +79,18 @@
                                             </div>
                                             
                                            
-                                            <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
-                                                <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">Update</button>
-                                                <button type="reset" class="btn btn-light">Cancel</button>
+                                            <div class="col-12">
+                                                <div class="form-actions clearfix">
+                                                    <div class="buttons-group float-left">
+                                                        <a href="{{route('staff.index')}}" class="btn btn-warning mr-1">
+                                                             Back
+                                                        </a>
+                                                    </div>
+                                                    <div class="buttons-group float-right">
+                                                         <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1" onclick="event.preventDefault(); confirm_update()">Update</button>
+                                                        <button type="reset" class="btn btn-danger glow mb-1 mb-sm-0 mr-0 mr-sm-1">Reset</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </form>
@@ -90,7 +106,26 @@
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>Name</label>
-                                                        <input type="text" class="form-control" placeholder="Name" name="name" value="" required data-validation-required-message="This name field is required">
+                                                        <input type="text" class="form-control" placeholder="Name" name="name" id="name" value="" required data-validation-required-message="This name field is required">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <div class="form-group">
+                                                    <div class="controls">
+                                                        <label>Type</label>
+                                                        <select class="form-control" name="type" id="type">
+                                                           @if(auth()->user()->type == "super_admin")
+                                                            <option value="super_admin">Supder admin</option>
+                                                            <option value="admin">Admin</option>
+                                                            <option value="staff">Staff</option>
+                                                            @elseif(auth()->user()->type == "admin")
+                                                            <option value="admin">Admin</option>
+                                                            <option value="staff">Staff</option>
+                                                            @elseif(auth()->user()->type == "staff")
+                                                            <option value="staff">Staff</option>
+                                                            @endif
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,13 +133,10 @@
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>E-mail</label>
-                                                        <input type="email" class="form-control" placeholder="Email" value="" name="email" required data-validation-required-message="This email field is required">
+                                                        <input type="email" class="form-control" placeholder="Email" value="" name="email" required id="email" data-validation-required-message="This email field is required">
                                                     </div>
-                                                </div>
-                                                
-                                                
+                                                </div>    
                                             </div>
-
                                             <div class="col-12 col-sm-6">
                                                 <div class="form-group">
                                                     <div class="controls">
@@ -118,15 +150,22 @@
                                                     <div class="controls">
                                                         <label for="account-retype-new-password">Confirm
                                                             Password</label>
-                                                        <input type="password" name="con-password" class="form-control" required id="account-retype-new-password" data-validation-match-match="password" value="" placeholder="New Password" data-validation-required-message="The Confirm password field is required" minlength="6">
+                                                        <input type="password" name="con-password" class="form-control" required id="account-retype-new-password" data-validation-match-match="password" value="" placeholder="New Password" data-validation-match-message="Must match with password" minlength="6">
                                                     </div>
                                                 </div>
-                                            </div>
-                                            
-                                           
-                                            <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
-                                                <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">Create</button>
-                                                <button type="reset" class="btn btn-light">Cancel</button>
+                                            </div>  
+                                            <div class="col-12">
+                                                <div class="form-actions clearfix">
+                                                    <div class="buttons-group float-left">
+                                                        <a href="{{route('staff.index')}}" class="btn btn-warning mr-1">
+                                                             Back
+                                                        </a>
+                                                    </div>
+                                                    <div class="buttons-group float-right">
+                                                         <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1" onclick="event.preventDefault(); confirm_create()">Create</button>
+                                                        <button type="reset" class="btn btn-danger glow mb-1 mb-sm-0 mr-0 mr-sm-1">Reset</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </form>
@@ -143,23 +182,79 @@
             </div>
         </div>
     </div>
+    @if(session('action'))
+     <script type="text/javascript">
+       $(function(){
+        var action = "<?php echo session('action') ?>";
+        var msg = "<?php echo session('msg') ?>";
+        // console.log("msg", action);
+        // $("#civil_id").css("border-color", '#d3167f');
+        // $("#civil_id").focus();
+        toastr.error(msg, action, {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
+       })
+     </script>
+    @endif
 
-<!-- 
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript">
-    	$("#create-form").on('click', function(e){
-            e.preventDefault();
-            pass=$("#password").val();
-            pass_confirm=$("#password_confirm").val();
-            if(pass == pass_confirm){
-            	// $("#create-form").submit();
-            	console.log("asddddddf");
+    	function confirm_create() {
+            var email = $("#email").val();
+            $.ajax({
+                url:"{{route('staf.confirm_create')}}",
+                data:{
+                    _token:"{{csrf_token()}}",
+                    email:email
+                },
+                method:"post",
+                success:function(result){
+                    console.log(result);
+                    if(result==1){
+                        $("#create-form").submit();
+                    }else{
+                        toastr.error('Emial already exist.', 'Error', {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
+                        $("#email").css("border-color", "#d3167f");
+                        $("#email").focus();
+                    }
+                },
+                error: function(e){
+                    console.log(e);
+                }
+            })
+            // $("#create-form").submit();
+        }
+        function confirm_update(){
+            Swal.fire({
+              title: "Update",
+              text: "Are you sure you want to update?",
+              type: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Yes",
+              confirmButtonClass: "btn btn-primary",
+              cancelButtonClass: "btn btn-danger ml-1",
+              buttonsStyling: false,
+            }).then(function(result) {
+              if (result.value) {
+                $("#update-form").submit();
+              }
+            });
+        }
+        function set_status(){
+            star=$("#switchery1").prop('checked');
+            if(star){
+                $("#status_val").val('published');
             }else{
-            	console.log("asdf");
+                $("#status_val").val('unpublished');
             }
+        }
+        $(function(){
+            set_status();
+            $("#switchery1").change(function(){
+                set_status();
+                console.log($("#status_val").val());
+            })
         })
-    </script> -->
+    </script>
 
   
 
