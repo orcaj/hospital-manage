@@ -38,12 +38,14 @@
                         <span class="menu-title" data-i18n="Patients">Patients</span>
                     </a>
                 </li>
+                @if(auth()->user()->type !='staff')
                 <li class=" nav-item staff">
                     <a href="{{route('staff.index')}}">
                         <i class="feather icon-user"></i>
                         <span class="menu-title" data-i18n="Staff">Staff</span>
                     </a>
                 </li>
+                @endif
                 <li class=" nav-item department">
                     <a href="{{route('department.index')}}">
                         <i class="feather icon-layers"></i>
