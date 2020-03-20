@@ -64,7 +64,15 @@
 	                                                <div class="form-group">
 	                                                	<div class="controls">
 	                                                        <label>Civil ID</label>
-	                                                        <input type="text" name="civil_id" class="form-control" placeholder="Civil ID" value="{{session('action')!='Error' ? $patient->civil_id: session('error_civil_id') }}" required style="{{session('action')=='Error' '"border-color": "red"'}}" data-validation-required-message="This name field is required">
+                                                            @if(session('action')=='Error')
+	                                                        <input type="text" name="civil_id" class="form-control" placeholder="Civil ID" value="{{ session('error_civil_id') }}" required 
+                                                            style="border-color: red"
+                                                            autofocus
+                                                            data-validation-required-message="This name field is required">
+                                                            @else
+                                                            <input type="text" name="civil_id" class="form-control" placeholder="Civil ID" value="{{$patient->civil_id}}" required              
+                                                            data-validation-required-message="This name field is required">
+                                                            @endif
 	                                                    </div>
 	                                                    
 	                                                </div>
