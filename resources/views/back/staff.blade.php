@@ -10,6 +10,14 @@
       .space-center{
         display: flex;
       }
+      .pime-grid-button{
+    float:left !important;
+
+  }
+.pime-grid-filter{
+    float:left !important;
+    margin-left:10px !important
+}
     </style>
     <!-- BEGIN: Content-->
     <div class="app-content content">

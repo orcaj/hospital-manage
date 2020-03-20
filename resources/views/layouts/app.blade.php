@@ -96,6 +96,7 @@
     <script src="{{asset('app-assets/vendors/js/forms/validation/jqBootstrapValidation.js')}}"></script>
     <!-- BEGIN Vendor JS-->
 
+    <script src="{{asset('app-assets/js/scripts/pages/page-init.js')}}"></script>
 
 
 
@@ -129,10 +130,6 @@
     <script src="{{asset('app-assets/vendors/js/forms/toggle/switchery.min.js')}}"></script>
     <script src="{{asset('app-assets/js/scripts/forms/switch.js')}}"></script>
 
-
-    <script type="text/javascript">
-    </script>
-    <script src="{{asset('app-assets/js/scripts/pages/page-users.js')}}"></script>
 
 
 
