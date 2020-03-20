@@ -29,17 +29,13 @@ Route::group(['middleware' => ['web','auth']], function(){
 	Route::resource('doctors', 'DoctorController');
 	Route::resource('services', 'ServiceController');
 
-	Route::post('status-change', 'HomeController@status_change')->name('status-change');	
-
+	Route::post('status-change', 'HomeController@status_change')->name('status-change');
 	Route::post('get_patdata', 'InvoiceController@get_pat_date')->name('get_patdata');
-
 	Route::post('get_service_data', 'InvoiceController@get_service_data')->name('get_service_data');
-
 	Route::post('pat/multi_delete', 'PatientController@multi_delete')->name('pat.multi_delete');
-
 	Route::post('pat/multi_status', 'PatientController@multi_status')->name('pat.multi_status');
-
 	Route::get('add-invoice', 'InvoiceController@view_add_invoice')->name('invoice.view_add_invoice');
+	Route::post('pat/confirm_create', 'PatientController@confirm_create')->name('confirm_create');
 
 	Route::group(['middleware' => ['super']], function(){
 

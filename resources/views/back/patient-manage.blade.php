@@ -72,11 +72,22 @@
 	                                                    <input type="text" name="phone" class="form-control" placeholder="Contact Phone" value="{{$patient->phone}}" required data-validation-required-message="This name field is required">
 	                                                </div>
 	                                            </div>
-	                                           
-	                                            <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
-	                                                <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1"  onclick="event.preventDefault(); confirm_update();">Update</button>
-	                                                <button type="reset" class="btn btn-light">Cancel</button>
-	                                            </div>
+
+                                                <div class="col-12 col-sm-12">
+                                                    <div class="form-actions clearfix">
+                                                        <div class="buttons-group float-left">
+                                                            <a href="{{route('patients.index')}}" class="btn btn-warning mr-1">
+                                                                 Back
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="buttons-group float-right">
+                                                            <button type="submit" class="btn btn-info mr-1" onclick="event.preventDefault(); confirm_update();">Update</button>
+                                                            <button type="reset" class="btn btn-danger mr-1">Reset</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
 	                                        </div>
 	                                    </form>
                                   	@endisset
@@ -91,13 +102,13 @@
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>Name</label>
-                                                        <input type="text" class="form-control" placeholder="Username" name="name" value="" required data-validation-required-message="This username field is required">
+                                                        <input type="text" class="form-control" placeholder="Username" id="name" name="name" value="" required data-validation-required-message="This username field is required">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>E-mail</label>
-                                                        <input type="email" class="form-control" placeholder="Email" value="" name="email" required data-validation-required-message="This email field is required">
+                                                        <input type="email" class="form-control" placeholder="Email" id="email" name="email" value="" required data-validation-required-message="This email field is required">
                                                     </div>
                                                 </div>
                                                 
@@ -108,7 +119,7 @@
                                                 <div class="form-group">
                                                 	<div class="controls">
                                                         <label>Civil Id</label>
-                                                        <input type="text" name="civil_id" class="form-control" placeholder="Civil ID" value="" required data-validation-required-message="This name field is required">
+                                                        <input type="text" id="civil_id" name="civil_id" class="form-control" placeholder="Civil ID" value="" required data-validation-required-message="This name field is required">
                                                     </div>
                                                     
                                                 </div>
@@ -125,10 +136,20 @@
                                                     <input type="text" name="address" class="form-control" placeholder="Address">
                                                 </div>
                                             </div>
-                                           
-                                            <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
-                                                <button class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1" type="submit">Create</button>
-                                                <button type="reset" class="btn btn-light">Cancel</button>
+
+                                            <div class="col-12 col-sm-12">
+                                                <div class="form-actions clearfix">
+                                                    <div class="buttons-group float-left">
+                                                        <a href="{{route('patients.index')}}" class="btn btn-warning mr-1">
+                                                             Back
+                                                        </a>
+                                                    </div>
+
+                                                    <div class="buttons-group float-right">
+                                                        <button type="submit" class="btn btn-info mr-1"  onclick="event.preventDefault(); confirm_create();">Create</button>
+                                                        <button type="reset" class="btn btn-danger mr-1">Reset</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </form>
@@ -168,31 +189,27 @@
 
 
     <script type="text/javascript">
-        // function confirm_create(){
-
-        //     Swal.fire({
-        //       title: "Are you sure?",
-        //       text: "You won't be able to revert this!",
-        //       type: "warning",
-        //       showCancelButton: true,
-        //       confirmButtonColor: "#3085d6",
-        //       cancelButtonColor: "#d33",
-        //       confirmButtonText: "Yes, create it!",
-        //       confirmButtonClass: "btn btn-primary",
-        //       cancelButtonClass: "btn btn-danger ml-1",
-        //       buttonsStyling: false
-        //     }).then(function(result) {
-        //       if (result.value) {
-        //         $("#create-form").submit();
-        //         // Swal.fire({
-        //         //   type: "success",
-        //         //   title: "Created!",
-        //         //   text: "Your file has been created."
-        //         //   // confirmButtonClass: "btn btn-success"
-        //         // });
-        //       }
-        //     });
-        // }
+        function confirm_create(){
+            civil_id=$("#civil_id").val();
+            $.ajax({
+                url:"{{route('confirm_create')}}",
+                data:{
+                    _token:"{{csrf_token()}}",
+                    civil_id:civil_id
+                },
+                method:"post",
+                success:function(result){
+                    if(result==1){
+                        $("#create-form").submit();
+                    }else{
+                        toastr.error('Civil ID already exist.', 'Error', {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
+                    }
+                },
+                error: function(e){
+                    console.log(e);
+                }
+            })
+        }
 
 
 

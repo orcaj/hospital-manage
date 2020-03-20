@@ -45,10 +45,7 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        $unique=Patient::where('civil_id', $request->civil_id)->count();
-        if($unique>0){
-            return redirect()->back()->with(['action'=>'Error','msg' => 'Civil ID already exist.']);
-        }
+        
         $patient=new Patient($request->all());
         $patient->save();
         // $request->session()->flash('status','Successfully created.');
@@ -135,5 +132,13 @@ class PatientController extends Controller
             $patient->save();
         }
         return redirect()->back()->with(['action' => $status, 'msg'=>"Patients successfully".$status."."]);
+    }
+
+    public function confirm_create(Request $request){
+        $unique=Patient::where('civil_id', $request->civil_id)->count();
+        if($unique>0){
+            return json_encode(0);
+        }
+        return json_encode(1);
     }
 }
