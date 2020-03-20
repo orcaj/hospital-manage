@@ -45,6 +45,25 @@
                                             <div class="col-12 col-sm-6">
                                                 <div class="form-group">
                                                     <div class="controls">
+                                                        <label>Type</label>
+                                                        <select class="form-control" name="type" user-type="{{auth()->user()->type}}" id="type">
+                                                           <!-- @if(auth()->user()->type == "super_admin")
+                                                            <option value="super_admin">Supder admin</option>
+                                                            <option value="admin">Admin</option>
+                                                            <option value="staff">Staff</option>
+                                                            @elseif(auth()->user()->type == "admin")
+                                                            <option value="admin">Admin</option>
+                                                            <option value="staff">Staff</option>
+                                                            @elseif(auth()->user()->type == "staff")
+                                                            <option value="staff">Staff</option>
+                                                            @endif -->
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <div class="form-group">
+                                                    <div class="controls">
                                                         <label>E-mail</label>
                                                         @if(session('action')=='Error')
                                                         <input type="email" class="form-control" placeholder="Email" value="{{$staff->email}}" name="email" value="{{ session('error_email') }}"
@@ -235,6 +254,7 @@
               buttonsStyling: false,
             }).then(function(result) {
               if (result.value) {
+                // console.log($("#type").val());
                 $("#update-form").submit();
               }
             });
@@ -248,6 +268,24 @@
             }
         }
         $(function(){
+            var staff = '<?php if(isset($staff)) echo $staff;?>';
+            var user_type = $("#type").attr("user-type");
+            // console.log(val.type);
+            var json_val = JSON.parse(staff);
+            console.log(json_val.type);
+            switch(user_type) {
+                case 'super_admin':
+                    var options = '<option value="super_admin">Super Admin</option><option value="admin">Admin</option><option value="staff">Staff</option>';
+                    $("#type").html(options);
+                    break;
+                case 'admin':
+                    var options = '</option><option value="admin">Admin</option><option value="staff">Staff</option>';
+                    $("#type").html(options);
+                    break;
+                default:
+                    break;
+            }
+            $("#type").val(json_val.type);
             set_status();
             $("#switchery1").change(function(){
                 set_status();
