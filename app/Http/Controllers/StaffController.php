@@ -22,7 +22,7 @@ class StaffController extends Controller
      */
     public function index()
     {
-        $staffs=User::all();
+        $staffs=User::where('id','<>', auth()->user()->id )->get();
         $star=$this->star;
         return view('back.staff', compact('staffs', 'star'));
     }
