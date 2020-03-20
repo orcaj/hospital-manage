@@ -45,7 +45,7 @@
 	                                                <div class="form-group">
 	                                                    <div class="controls">
 	                                                        <label>Patient Name</label>
-	                                                        <input type="text" class="form-control" placeholder="Patient name" name="name" value="{{$patient->name}}" required data-validation-required-message="This patient name field is required">
+	                                                        <input type="text" class="form-control" placeholder="Patient name" name="name" value="{{$patient->name}}" required data-validation-required-message="This patient name field is required" required pattern="[a-zA-Z ]+" data-validation-pattern-message="Only characters allowed">
 	                                                    </div>
 	                                                </div>
 	                                                <div class="form-group">
@@ -73,12 +73,13 @@
                                                             <input type="text" name="civil_id" class="form-control" placeholder="Civil ID" value="{{$patient->civil_id}}" required              
                                                             data-validation-required-message="This name field is required">
                                                             @endif
-	                                                    </div>
-	                                                    
+                                                    </div>   
 	                                                </div>
 	                                                <div class="form-group">
-	                                                    <label>Contact Phone</label>
-	                                                    <input type="text" name="phone" class="form-control" placeholder="Contact Phone" value="{{$patient->phone}}" required data-validation-required-message="This name field is required">
+                                                      <div class="controls">
+  	                                                    <label>Contact Phone</label>
+  	                                                    <input type="text" name="phone" class="form-control" placeholder="Contact Phone" value="{{$patient->phone}}" required="" pattern="[0-9]+" data-validation-pattern-message="Only numbers allowed" data-validation-required-message="Phone number is required">
+                                                      </div>
 	                                                </div>
 	                                            </div>
 
@@ -112,7 +113,7 @@
                                                     <div class="controls">
 
                                                         <label>Patient Name</label>
-                                                        <input type="text" class="form-control" placeholder="Patient Name" name="name" value="" required data-validation-required-message="Patient name is required">
+                                                        <input type="text" class="form-control" placeholder="Patient Name" name="name" value="" required data-validation-required-message="Patient name is required" pattern="[a-zA-Z ]+" data-validation-pattern-message="Only characters allowed">
 
                                                     </div>
                                                 </div>
@@ -137,7 +138,7 @@
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>Contact Phone</label>
-                                                        <input type="text" name="phone" class="form-control" placeholder="Contact Phone" value="" required  id="phone_number" data-validation-required-message="Phone number is required">
+                                                        <input type="text" name="phone" class="form-control" placeholder="Contact Phone" value="" required  id="phone_number" pattern="[0-9]+" data-validation-pattern-message="Only numbers allowed" data-validation-required-message="Phone number is required">
                                                     </div>
                                                 </div>
 
