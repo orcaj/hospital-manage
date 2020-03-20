@@ -64,7 +64,7 @@
 	                                                <div class="form-group">
 	                                                	<div class="controls">
 	                                                        <label>Civil ID</label>
-	                                                        <input type="text" name="civil_id" class="form-control" placeholder="Civil ID" value="{{$patient->civil_id}}" required data-validation-required-message="This name field is required">
+	                                                        <input type="text" name="civil_id" class="form-control" placeholder="Civil ID" value="{{session('action')!='Error' ? $patient->civil_id: session('error_civil_id') }}" required data-validation-required-message="This name field is required">
 	                                                    </div>
 	                                                    
 	                                                </div>
@@ -128,7 +128,8 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Contact Phone</label>
-                                                    <input type="text" name="phone" class="form-control" placeholder="Contact Phone" value="" required data-validation-required-message="This name field is required">
+                                                    <input type="text" name="phone" id="phone" class="form-control" placeholder="Contact Phone" value="" required data-validation-required-message="This name field is required">
+                                                    
                                                 </div>
 
                                             </div>
@@ -136,7 +137,7 @@
                                                
                                                 <div class="form-group">
                                                     <label>Address</label>
-                                                    <input type="text" name="address" class="form-control" placeholder="Address">
+                                                    <input type="text" name="address" class="form-control" placeholder="Address" required data-validation-required-message="This name field is required">
                                                 </div>
                                             </div>
 

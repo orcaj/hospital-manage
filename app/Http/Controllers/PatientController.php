@@ -88,7 +88,7 @@ class PatientController extends Controller
 
         $unique=Patient::where('civil_id', $request->civil_id)->where('id','<>',$id)->count();
         if($unique>0){
-            return redirect()->back()->with(['action'=>'Error','msg' => 'Civil ID already exist.']);
+            return redirect()->back()->with(['action'=>'Error','msg' => 'Civil ID already exist.', 'error_civil_id' => $request->civil_id]);
         }
         $patient=Patient::FindOrFail($id);
         $patient->name=$request->name;
