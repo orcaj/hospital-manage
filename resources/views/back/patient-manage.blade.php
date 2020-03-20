@@ -64,7 +64,7 @@
 	                                                <div class="form-group">
 	                                                	<div class="controls">
 	                                                        <label>Civil ID</label>
-	                                                        <input type="text" name="civil_id" class="form-control" placeholder="Civil ID" value="{{$patient->civil_id}}" required data-validation-required-message="This name field is required">
+	                                                        <input type="text" name="civil_id" class="form-control" placeholder="Civil ID" value="{{session('action')!='Error' ? $patient->civil_id: session('error_civil_id') }}" required data-validation-required-message="This name field is required">
 	                                                    </div>
 	                                                    
 	                                                </div>
