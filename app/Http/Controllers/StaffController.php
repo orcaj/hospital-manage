@@ -22,7 +22,7 @@ class StaffController extends Controller
      */
     public function index()
     {
-        $staffs=User::where('type','staff')->get();
+        $staffs=User::all();
         $star=$this->star;
         return view('back.staff', compact('staffs', 'star'));
     }
@@ -48,10 +48,9 @@ class StaffController extends Controller
     {
         // return $request;
         $staff=new User($request->all());
-        $staff->type='staff';
         $staff->password=Hash::make($request->password);
         $staff->save();
-        return redirect()->route('staff.index')->with('status','Successfully created.');
+        return redirect()->route('staff.index')->with(['action' => 'Create', 'msg'=>"User successfully created."]);
     }
 
     /**
@@ -87,12 +86,17 @@ class StaffController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $unique=User::where('email', $request->email)->where('email','<>',$request->email)->count();
+        if($unique > 0){
+            return redirect()->back()->with(['action'=>'Error','msg' => 'Email already exist.', 'error_email' => $request->email]);
+        }
         $staff=User::FindOrFail($id);
         $staff->name=$request->name;
         $staff->email=$request->email;
+        $staff->status = $request->status;
         $staff->password=Hash::make($request->password);
         $staff->save();
-        return redirect()->route('staff.index')->with('status','Successfully updated.');
+        return redirect()->route('staff.index')->with(['action' => 'Update', 'msg'=>"Patient detail successfully updated."]);
     }
 
     /**
@@ -105,5 +109,38 @@ class StaffController extends Controller
     {
         User::destroy($id);
         return redirect()->back()->with('status','Successfully deleted.');
+    }
+
+    /**
+     * Check if user email exist
+     *
+     * @param  int  $req
+     * @return 0 if exist, 1 not exist
+     */
+    public function confirm_create(Request $request) {
+        $unique=User::where('email', $request->email)->count();
+        if($unique>0){
+            return json_encode(0);
+        }
+        return json_encode(1);
+    }
+
+    public function multi_delete(Request $request){
+        $del_ids=$request->sel_ids;
+        $ids=explode(',', $del_ids);
+        User::destroy($ids);
+        return redirect()->back()->with(['action' => 'Delete', 'msg'=>"User detail successfully deleted."]);
+    }
+
+    public function multi_status(Request $request){
+        $sel_ids=$request->sel_ids;
+        $ids=explode(',', $sel_ids);
+        $status=$request->status;
+        foreach ($ids as $key => $id) {
+            $staff=User::Find($id);
+            $staff->status=$status;
+            $staff->save();
+        }
+        return redirect()->back()->with(['action' => $status, 'msg'=>"User successfully".$status."."]);
     }
 }
