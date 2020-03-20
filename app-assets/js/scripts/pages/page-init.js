@@ -7,8 +7,9 @@
     Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 $(document).ready(function () {
+    console.log("d")
     var row = $("#users-list-datatable_wrapper").children().first();
-    console.log(row);
+    console.log("asdf",row);
     // variable declaration
     var usersTable;
     var usersDataArray = [];
