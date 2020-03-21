@@ -39,6 +39,14 @@ Route::group(['middleware' => ['web','auth']], function(){
 	Route::post('staf/confirm_create', 'StaffController@confirm_create')->name('staf.confirm_create');
 	Route::post('staf/multi_delete', 'StaffController@multi_delete')->name('staf.multi_delete');
 	Route::post('staf/multi_status', 'StaffController@multi_status')->name('staf.multi_status');
+	Route::put('changePassword/{staff}', 'StaffController@changePassword')->name('staf.changePassword');
+	Route::post('depart/check_duplication', 'DepartmentController@check_duplication')->name('depart.check_duplication');
+	Route::post('depart/multi_delete', 'DepartmentController@multi_delete')->name('depart.multi_delete');
+	Route::post('depart/multi_status', 'DepartmentController@multi_status')->name('depart.multi_status');
+
+	Route::post('doct/check_duplication', 'DoctorController@check_duplication')->name('doct.check_duplication');
+	Route::post('doct/multi_delete', 'DoctorController@multi_delete')->name('doct.multi_delete');
+	Route::post('doct/multi_status', 'DoctorController@multi_status')->name('doct.multi_status');
 	Route::group(['middleware' => ['super']], function(){
 
 	});
