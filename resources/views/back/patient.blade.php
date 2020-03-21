@@ -31,9 +31,7 @@
                             <div class="card-content">
                               <div class="card-header space-bet">
                                 <h3 class="card-title" id="emailCompose">Patients List</h3>
-                                @if(auth()->user()->type !='staff')
                                 <a href="{{route('patients.create')}}" class="btn btn-primary btn-min-width mr-1 mb-1"><i class="feather icon-user-plus"></i>&nbspCreate</a>
-                                @endif
                             </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -78,7 +76,6 @@
                                                         @endif
                                                      </td>
                                                     <td>{{ date('j F, Y', strtotime($patient->status_date)) }} </td>
-                                                    @if(auth()->user()->type !='staff')
                                                     <td class="text-center">
                                                         <a href="{{route('patients.edit', $patient->id )}}" class="primary edit mr-1">
                                                             <i class="fa fa-pencil"></i>
@@ -91,9 +88,6 @@
                                                             @method('delete')
                                                         </form>
                                                     </td>
-                                                    @else
-                                                    <td>Not available</td>
-                                                    @endif
                                                 </tr>
                                                 @endforeach
 

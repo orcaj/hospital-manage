@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
- 
+
     <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
@@ -16,7 +16,7 @@
                                 <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
 
                                 	<!-- update doctor-->
-                                  	
+
                                   	@isset($doctor)
                                   		<form method="POST" action="{{route('doctors.update', $doctor->id)}}" id="update-form">
 	                                    	@csrf
@@ -52,7 +52,7 @@
                                                         	@endforeach
                                                         </select>
                                                     </div>
-                                                    
+
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-6">
@@ -70,7 +70,7 @@
                                                     </div>
                                                 </div>
 
-                                                
+
                                                 <div class="form-group">
                                                     <label>Telephone</label>
                                                     <div class="controls">
@@ -79,7 +79,7 @@
                                                 </div>
 
                                             </div>
-                                           
+
                                             <div class="col-12 ">
                                                 <div class="buttons-group float-left">
                                                     <a href="{{route('doctors.index')}}" class="btn btn-warning mr-1">
@@ -93,7 +93,7 @@
                                                 </div>
                                             </div>
 
-                                            
+
                                         </div>
 	                                    </form>
                                   	@endisset
@@ -122,7 +122,7 @@
                                                         	@endforeach
                                                         </select>
                                                     </div>
-                                                    
+
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-6">
@@ -133,7 +133,7 @@
                                                     </div>
                                                 </div>
 
-                                                
+
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>Telephone</label>
@@ -142,7 +142,7 @@
                                                 </div>
 
                                             </div>
-                                           
+
                                             <div class="col-12 ">
                                                 <div class="buttons-group float-left">
                                                     <a href="{{route('doctors.index')}}" class="btn btn-warning mr-1">
@@ -190,7 +190,7 @@
     @endif
 
     <script type="text/javascript">
-        
+
         function createDoctor() {
             var email = $("#email").val();
             // console.log("name", name);
@@ -237,7 +237,7 @@
             });
         }
 
-         function set_status(){
+        function set_status(){
             star=$("#switchery1").prop('checked');
             if(star){
                 $("#status_val").val('published');

@@ -17,10 +17,18 @@
                         <div class="card">
                             <div class="card-body">
                                 <!-- logo and invoice title -->
-                                <div class="row my-2">
-                                    <div class="col-sm-6 col-12 order-2 order-sm-1">
-                                        <h4 class="invoice-title text-primary">Invoice</h4>
-                                        
+                                <div class="row">
+                                    <div class="col-sm-6 col-12">
+                                        <h4 class="invoice-title text-primary">Civil Id</h4>
+                                        <select class="form-control select2" id="patient_id" onchange="onPatientChange()">
+                                            <option value="">Input Civil Id</option>
+                                            @foreach($patients as $patient)
+                                                <option value="{{$patient->id}}">{{$patient->civil_id}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6 col-12" style="display: flex;align-items: flex-end;">
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#add-patient-modal">Add Patient</button>
                                     </div>
                                 </div>
                                 <hr>
@@ -32,16 +40,16 @@
                                         <div class="title-text">Bill To</div>
                                         <div class="row">
                                             <div class="col-12 col-xs-12 mb-1">
-                                                <input type="text" class="form-control" value="" placeholder="House no.">
+                                                <input type="text" class="form-control" value="" placeholder="Patient name" id="patient_name">
                                             </div>
                                             <div class="col-12 col-xs-12 mb-1">
-                                                <textarea class="form-control" rows="3" placeholder="Landmark/Street"></textarea>
+                                                <textarea class="form-control" rows="3" placeholder="Phone number" id="patient_phone"></textarea>
                                             </div>
                                             <div class="col-12 col-xs-12 mb-1">
-                                                <input type="text" class="form-control" value="" placeholder="City">
+                                                <input type="text" class="form-control" value="" placeholder="E-mail" id="patient_email">
                                             </div>
                                             <div class="col-12 col-xs-12 mb-2">
-                                                <input type="text" class="form-control" value="" placeholder="Pincode">
+                                                <input type="text" class="form-control" value="" placeholder="Address" id="patient_address">
                                             </div>
                                         </div>
                                     </div>
@@ -53,83 +61,30 @@
                                     <form class="repeater-form">
                                         <div data-repeater-list="group-a">
                                             <div data-repeater-item class="mb-1">
-                                                <div class="row item-heading-titles mb-50">
-                                                    <div class="col-3 col-md-4 item-subtitle font-bold">Item</div>
-                                                    <div class="col-3 cost-subtitle font-bold">Cost</div>
-                                                    <div class="col-3 qty-subtitle font-bold">Qty</div>
-                                                    <div class="col-3 col-md-2 price-subtitle font-bold">Price</div>
-                                                </div>
                                                 <div class="repeater-controls d-flex">
-                                                    <div class="input-fields border border-light rounded p-1 d-flex">
-                                                        <div class="row invoice-item-controls d-flex">
-                                                            <div class="col-12 col-md-4 form-group item-name">
-                                                                <select class="form-control" id="item-options">
-                                                                    <option value="stack">Stack Admin template</option>
-                                                                    <option value="modern">Modern Admin template</option>
-                                                                    <option value="apex">Apex Admin template</option>
-                                                                    <option value="robust">Robust Admin template</option>
-                                                                    <option value="frest">Frest Admin template</option>
+                                                    <div class="input-fields border border-light rounded p-1 d-flex" style="width: 100%;">
+                                                        <div class="row invoice-item-controls d-flex" style="width: 100%;">
+                                                            <div class="col-12 col-md-6 form-group item-name">
+                                                                <label>Department</label>
+                                                                <select class="form-control select2" id="department" onchange="changeDepart()">
+                                                                    <option value="">--Select department--</option>
+                                                                    @foreach($departments as $department)
+                                                                        <option value="{{$department->id}}">{{$department->name}}</option>
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
-                                                            <div class="col-12 col-md-3 form-group item-cost">
-                                                                <input type="text" class="form-control" value="24">
+                                                            <div class="col-12 col-md-6 form-group item-cost">
+                                                                <label>Doctor</label>
+                                                                <select class="form-control select2" id="doctor" onchange="changeDoctor()">
+                                                                </select>
                                                             </div>
-                                                            <div class="col-12 col-md-3 form-group item-quantity">
-                                                                <input type="text" class="form-control" value="1">
+                                                            <div class="col-12 col-md-6 form-group item-description mb-0">
+                                                                <!-- <input type="text" class="form-control description-input" value="The most developer friendly & highly customisable HTML5 Admin"> -->
+                                                                <select class="form-control select2" style="width: 100%;" onchange="changeService()" id="service">
+                                                                </select>
                                                             </div>
-                                                            <div class="col-12 col-md-2 form-group item-price">
-                                                                $24.00</div>
-                                                            <div class="col-12 col-md-4 form-group item-description mb-0">
-                                                                <input type="text" class="form-control description-input" value="The most developer friendly & highly customisable HTML5 Admin">
-                                                            </div>
-                                                            <div class="col-12 col-md-8 form-group discounts mb-0">
-                                                                <div class='discount-element'>
-                                                                    <span class="title-text">Discount:</span>
-                                                                    <span class="discount-value">0%</span>
-                                                                    <span class="tax-1-value mx-1">0%</span>
-                                                                    <span class="tax-2-value mx-1">0%</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="delete-and-discount-config h-100 ml-50 d-flex flex-column justify-content-between">
-                                                            <span class="cursor-pointer d-flex justify-content-center align-items-center">
-                                                                <i class="fa fa-times-circle-o font-size-increase" data-repeater-delete></i>
-                                                            </span>
-                                                            <div class="dropdown d-flex justify-content-center align-items-center">
-                                                                <span role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    <i class="fa fa-cog font-size-increase m-0"></i>
-                                                                </span>
-                                                                <div class="dropdown-menu p-1 dropdown-sizing" aria-labelledby="dropdownMenuButton">
-                                                                    <div class="row invoice-taxes-controls">
-                                                                        <div class="col-12 form-group">
-                                                                            <label for="discount">Discount(%)</label>
-                                                                            <input type="number" class="form-control" id="applicable-discount" placeholder="0">
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <label for="tax1">Tax1</label>
-                                                                            <select name="tax-val-1" class="form-control stopPropgate" id="applicable-tax1">
-                                                                                <option value="1%" selected="">1%</option>
-                                                                                <option value="10%">10%</option>
-                                                                                <option value="18%">18%</option>
-                                                                                <option value="40%">40%</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <label for="tax2">Tax2</label>
-                                                                            <select name="tax-val-2" class="form-control stopPropgate" id="applicable-tax2">
-                                                                                <option value="1%" selected="">1%</option>
-                                                                                <option value="10%">10%</option>
-                                                                                <option value="18%">18%</option>
-                                                                                <option value="40%">40%</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <hr>
-                                                                        <div class="col-12 buttons d-flex justify-content-between mt-1">
-                                                                            <button type="button" class="btn btn-primary discount-apply-btn">Apply</button>
-                                                                            <button type="button" class="btn btn-light cancel-btn">Cancel</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                            <div class="col-12 col-md-6 form-group discounts mb-0">
+                                                                <input type="text" class="form-control" id="service_price" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -138,7 +93,7 @@
                                         </div>
                                         <div class="form-group">
                                             <button data-repeater-create class="btn btn-primary mt-1" type="button">
-                                                <i class="fa fa-plus"></i> Add Button
+                                                <i class="fa fa-plus"></i> Add Service
                                             </button>
                                         </div>
                                     </form>
@@ -253,4 +208,180 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade text-left" id="add-patient-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="myModalLabel35">Add Patient</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+                <div class="modal-body">
+                    <form action="" id='add-patient'>
+                        @csrf
+                        <div class="row">
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <div class="controls">
+
+                                        <label>Patient Name</label>
+                                        <input type="text" class="form-control" placeholder="Patient Name" id="add_patient_name" name="name" value="" required data-validation-required-message="Patient name is required" pattern="[a-zA-Z ]+" data-validation-pattern-message="Only characters allowed">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="controls">
+                                        <label>E-mail</label>
+                                        <input type="email" class="form-control" placeholder="Email" id="add_patient_email" name="email" value="" required data-validation-required-message="Email is required">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+
+                                <div class="form-group">
+                                    <div class="controls">
+                                        <label>Civil Id</label>
+                                        <input type="text" name="civil_id" class="form-control" placeholder="Civil ID" id="add_patient_civil_id" value="" required data-validation-required-message="Civil Id is required">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="controls">
+                                        <label>Contact Phone</label>
+                                        <input type="text" name="phone" class="form-control" placeholder="Contact Phone" value="" required  id="add_patient_phone" pattern="[0-9]+" data-validation-pattern-message="Only numbers allowed" data-validation-required-message="Phone number is required">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+
+                                <div class="form-group">
+                                <div class="controls">
+                                    <label>Address</label>
+                                    <input type="text" id="address" name="address" class="form-control" required id="add_patient_address" data-validation-required-message="Address is required" placeholder="Address">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12">
+                                <div class="form-actions clearfix">
+                                    <div class="buttons-group float-left">
+                                        <a href="{{route('patients.index')}}" class="btn btn-warning mr-1">
+                                            Close
+                                        </a>
+                                    </div>
+                                    <div class="buttons-group float-right">
+                                        <button type="submit" class="btn btn-info mr-1"  onclick="event.preventDefault(); addPatient();">Create</button>
+                                        <button type="reset" class="btn btn-danger mr-1">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function onPatientChange() {
+        // console.log("chnagd");
+        $.post("{{route('pat.get_patient_detail')}}", {id: $("#patient_id").val(), _token:"{{csrf_token()}}"}, function(data) {
+            var data = JSON.parse(data);
+            console.log(data);
+            if (!data) {
+                $("#patient_name").val("");
+                $("#patient_phone").val("");
+                $("#patient_email").val("");
+                $("#patient_address").val("");
+            } else {
+                $("#patient_name").val(data.name);
+                $("#patient_phone").val(data.phone);
+                $("#patient_email").val(data.email);
+                $("#patient_address").val(data.address);
+            }
+        })
+    }
+    function addPatient() {
+        // $('#add-patient-modal').modal('hide');
+        // $("#add-patient").submit();
+        // console.log($("#add-patient")[0].checkValidity(), $("#add-patient")[0]);
+        if (!$("#add-patient")[0].checkValidity()) {
+            $("#add-patient").submit();
+        } else {
+            var data = new Object();
+            data.name = $("#add_patient_name").val();
+            data.civil_id = $("#add_patient_civil_id").val();
+            data.email = $("#add_patient_email").val();
+            data.phone = $("#add_patient_phone").val();
+            data.address = $("#add_patient_phone").val();
+            $.post("{{route('pat.add_patient_on_invoice')}}", {data:data, _token:"{{csrf_token()}}"}, function(data){
+                var data = JSON.parse(data);
+                console.log(data);
+                if (data.status == 'success') {
+                    $('#add-patient-modal').modal('hide');
+                    toastr.success(data.msg, data.status, {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
+                    $("#patient_id").append("<option value='" + data.data.id + "'>" + data.data.civil_id + "</option>");
+                    $("#patient_id").val(data.data.id);
+                    $("#patient_name").val(data.data.name);
+                    $("#patient_phone").val(data.data.phone);
+                    $("#patient_email").val(data.data.email);
+                    $("#patient_address").val(data.data.address);
+                } else {
+                    toastr.error(data.msg, data.status, {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
+                    $("#add_patient_civil_id").css('border-color', 'red');
+                    $("#add_patient_civil_id").focus();
+                }
+            })
+            // console.log(data);
+        }
+    }
+    function changeDepart() {
+        var doctorId = $("#department").val();
+        $.post("{{route('doct.get_doctor_by_department')}}", {id: doctorId, _token:"{{csrf_token()}}"}, function(data) {
+            var data = JSON.parse(data);
+            if (data) {
+                console.log(data);
+                var options = "<option value=''>--Select Doctor--</option>";
+                data.forEach(ele => {
+                    var option = "<option value='" + ele.id + "'>" + ele.name + "</option>";
+                    options += option;
+                });
+                console.log(options);
+                $("#doctor").html(options);
+            }
+        })
+    }
+    function changeDoctor() {
+        var doctorId = $("#doctor").val();
+        var departId = $("#department").val();
+        console.log("doctor: ", doctorId);
+        $.post("{{route('servi.get_service_by_doctor_depart')}}", {doctorId: doctorId, departId: departId, _token:"{{csrf_token()}}"}, function(data) {
+            // console.log(data);
+            var data = JSON.parse(data);
+            var services = "<option value=''>--Select Service--</option>";
+            if (data) {
+                // var service = "<option value='" + ele.id + "'>" + ele.name + "</option>";
+                data.forEach(ele => {
+                    var service = "<option value='" + ele.id + "'>" + ele.name + "</option>";
+                    services += service;
+                });
+
+            }
+            $("#service").html(services);
+        });
+    }
+    function changeService() {
+        var serviceId = $("#service").val();
+        console.log("sss", serviceId);
+        $.post("{{route('servi.get_service_detail_on_invoice')}}", {id: serviceId, _token:"{{csrf_token()}}"}, function(data) {
+            var data = JSON.parse(data);
+            if (data) {
+                $("#service_price").val(data.price);
+            }
+        })
+    }
+    $(function(){
+        // var civil_id = $("#patient_id").val();
+
+    })
+</script>
 @endsection
