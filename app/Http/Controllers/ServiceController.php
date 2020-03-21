@@ -77,9 +77,13 @@ class ServiceController extends Controller
         $cur_depart = Department::Find($service->department_id);
         $cur_doctor = Doctor::Find($service->doctor_id);
         $departments=Department::where('status', 'published')->get();
-        $departments[] = $cur_depart;
+        if ($departments->count() == 0) {
+            $departments[] = $cur_depart;
+        }
         $doctors=Doctor::where('status', 'published')->get();
-        $doctors[] = $cur_doctor;
+        if ($doctors->count() == 0) {
+            $doctors[] = $cur_doctor;
+        }
         $star=$this->star;
         return view('back.service-manage', compact('service','departments','doctors','star'));
     }
