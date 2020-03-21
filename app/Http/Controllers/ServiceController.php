@@ -138,4 +138,17 @@ class ServiceController extends Controller
         return redirect()->back()->with(['action' => $status, 'msg'=>"Services successfully".$status."."]);
     }
 
+    public function get_service_by_doctor_depart(Request $request) {
+        $doctor_id = $request->doctorId;
+        $depart_id = $request->departId;
+        // echo $doctor_id.$depart_id;
+        $services = Service::where(['department_id' => $depart_id, 'doctor_id' => $doctor_id])->get();
+        return json_encode($services);
+    }
+
+    public function get_service_detail_on_invoice(Request $request) {
+        $service = Service::Find($request->id);
+        return json_encode($service);
+    }
+
 }

@@ -37,10 +37,11 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        $patients=Patient::all();
+        $patients = Patient::where('status', 'published')->get();
+        $departments = Department::where('status', 'published')->get();
         $services=Service::all();
         $star=$this->star;
-        return view('back.invoice-manage', compact('patients','services','star'));
+        return view('back.invoice-add', compact('patients','services','star', 'departments'));
     }
 
     /**

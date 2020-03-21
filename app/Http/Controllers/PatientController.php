@@ -136,9 +136,32 @@ class PatientController extends Controller
 
     public function confirm_create(Request $request){
         $unique=Patient::where('civil_id', $request->civil_id)->count();
-        if($unique>0){
+        if($unique > 0){
             return json_encode(0);
         }
         return json_encode(1);
+    }
+
+    public function get_patient_detail(Request $request) {
+        $patient = Patient::Find($request->id);
+        return json_encode($patient);
+    }
+
+    public function add_patient_on_invoice(Request $request) {
+        $data = $request->data;
+        // var_dump($data);
+        $unique = Patient::where('civil_id', $data['civil_id'])->count();
+        if ($unique > 0) {
+            return json_encode(array("status" => "error", "msg" => "Civil Id already exist"));
+        }
+        // exit();
+        $patient=new Patient($data);
+        $patient->save();
+        $response = array(
+            "status" => "success",
+            "msg" => "Patient details added",
+            "data" => $patient
+        );
+        return json_encode($response);
     }
 }

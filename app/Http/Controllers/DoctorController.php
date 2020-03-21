@@ -143,4 +143,9 @@ class DoctorController extends Controller
         }
         return redirect()->back()->with(['action' => $status, 'msg'=>"Doctor successfully".$status."."]);
     }
+
+    public function get_doctor_by_department(Request $request) {
+        $doctors = Doctor::where('department_id', $request->id)->get();
+        return json_encode($doctors);
+    }
 }
