@@ -76,7 +76,7 @@
                                                         <span class="badge badge-danger">Unpublished</span>
                                                         @endif
                                                      </td>
-                                                    <td>{{ date('j F, Y', strtotime($doctor->status_date)) }} </td>
+                                                    <td>{{date('j F, Y', strtotime($doctor->status_date))}}</td>
                                                     @if(auth()->user()->type !='staff')
                                                     <td class="text-center"> 
                                                         <a href="{{route('doctors.edit', $doctor->id )}}" class="primary edit mr-1">

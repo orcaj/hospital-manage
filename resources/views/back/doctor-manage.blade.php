@@ -151,7 +151,7 @@
                                                 </div>
 
                                                 <div class="buttons-group float-right">
-                                                    <button type="submit" class="btn btn-info mr-1" onclick="event.preventDefault(); createDoctor();">Update</button>
+                                                    <button type="submit" class="btn btn-info mr-1" onclick="event.preventDefault(); createDoctor();">Create</button>
                                                     <button type="reset" class="btn btn-danger mr-1">Reset</button>
                                                 </div>
                                             </div>

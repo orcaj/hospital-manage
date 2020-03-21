@@ -70,7 +70,7 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        {{$department->status_date}}
+                                                        {{date('j F, Y', strtotime($department->status_date))}}
                                                     </td>
                                                     @if(auth()->user()->type !='staff')
                                                     <td class="text-center"> 
