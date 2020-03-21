@@ -46,7 +46,10 @@ Route::group(['middleware' => ['web','auth']], function(){
 
 	Route::post('doct/check_duplication', 'DoctorController@check_duplication')->name('doct.check_duplication');
 	Route::post('doct/multi_delete', 'DoctorController@multi_delete')->name('doct.multi_delete');
-	Route::post('doct/multi_status', 'DoctorController@multi_status')->name('doct.multi_status');
+    Route::post('doct/multi_status', 'DoctorController@multi_status')->name('doct.multi_status');
+
+    Route::post('servi/multi_delete', 'ServiceController@multi_delete')->name('servi.multi_delete');
+	Route::post('servi/multi_status', 'ServiceController@multi_status')->name('servi.multi_status');
 	Route::group(['middleware' => ['super']], function(){
 
 	});
