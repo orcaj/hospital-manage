@@ -99,9 +99,9 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    {{ date('j F, Y', strtotime($service->status_date)) }}
+                                                    {{date('j F, Y', strtotime($service->status_date))}}
                                                 </td>
-                                                <!-- @if(auth()->user()->type !='staff') -->
+                                                @if(auth()->user()->type !='staff')
                                                 <td class="text-center">
                                                     <a
                                                         href="{{route('services.edit', $service->id )}}"
@@ -130,11 +130,11 @@
                                                         @csrf @method('delete')
                                                     </form>
                                                 </td>
-                                                <!-- @else
-                                                    <td>
-                                                    	Not available
-                                                    <td>
-                                                    @endif -->
+                                                @else
+                                                <td>
+                                                    Not available
+                                                </td>
+                                                @endif
                                             </tr>
                                             @endforeach
                                         </tbody>
