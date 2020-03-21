@@ -33,7 +33,10 @@ Route::group(['middleware' => ['web','auth']], function(){
 	Route::post('get_patdata', 'InvoiceController@get_pat_date')->name('get_patdata');
 	Route::post('get_service_data', 'InvoiceController@get_service_data')->name('get_service_data');
 	Route::post('pat/multi_delete', 'PatientController@multi_delete')->name('pat.multi_delete');
-	Route::post('pat/multi_status', 'PatientController@multi_status')->name('pat.multi_status');
+    Route::post('pat/multi_status', 'PatientController@multi_status')->name('pat.multi_status');
+    Route::post('pat/get_patient_detail', 'PatientController@get_patient_detail')->name('pat.get_patient_detail');
+    Route::post('pat/add_patient_on_invoice', 'PatientController@add_patient_on_invoice')->name('pat.add_patient_on_invoice');
+
 	Route::get('add-invoice', 'InvoiceController@view_add_invoice')->name('invoice.view_add_invoice');
 	Route::post('pat/confirm_create', 'PatientController@confirm_create')->name('pat.confirm_create');
 	Route::post('staf/confirm_create', 'StaffController@confirm_create')->name('staf.confirm_create');
@@ -47,9 +50,12 @@ Route::group(['middleware' => ['web','auth']], function(){
 	Route::post('doct/check_duplication', 'DoctorController@check_duplication')->name('doct.check_duplication');
 	Route::post('doct/multi_delete', 'DoctorController@multi_delete')->name('doct.multi_delete');
     Route::post('doct/multi_status', 'DoctorController@multi_status')->name('doct.multi_status');
+    Route::post('doct/get_doctor_by_department', 'DoctorController@get_doctor_by_department')->name('doct.get_doctor_by_department');
 
     Route::post('servi/multi_delete', 'ServiceController@multi_delete')->name('servi.multi_delete');
-	Route::post('servi/multi_status', 'ServiceController@multi_status')->name('servi.multi_status');
+    Route::post('servi/multi_status', 'ServiceController@multi_status')->name('servi.multi_status');
+    Route::post('servi/get_service_by_doctor_depart', 'ServiceController@get_service_by_doctor_depart')->name('servi.get_service_by_doctor_depart');
+    Route::post('servi/get_service_detail_on_invoice', 'ServiceController@get_service_detail_on_invoice')->name('servi.get_service_detail_on_invoice');
 	Route::group(['middleware' => ['super']], function(){
 
 	});
