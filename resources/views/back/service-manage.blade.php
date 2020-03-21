@@ -142,7 +142,7 @@
                                                 <div class="form-group">
                                                 	<div class="controls">
                                                         <label>Doctor</label>
-                                                        <select class="form-control" name="doctor_id" required  data-validation-required-message="Service name is required">
+                                                        <select class="form-control" name="doctor_id" required  data-validation-required-message="Service name is required" id="doctor">
                                                         	@foreach($doctors as $doctor)
                                                             	<option value="{{$doctor->id}}">{{$doctor->name}}</option>
                                                         	@endforeach
@@ -158,7 +158,7 @@
                                                         </a>
                                                     </div>
                                                     <div class="buttons-group float-right">
-                                                        <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1" onclick="event.preventDefault();createDoctor()">Create</button>
+                                                        <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1" onclick="event.preventDefault();createService()">Create</button>
                                                         <button type="reset" class="btn btn-danger glow mb-1 mb-sm-0 mr-0 mr-sm-1">Reset</button>
                                                     </div>
                                                 </div>
@@ -196,9 +196,9 @@
        })
      </script>
     @endif
-
     <script type="text/javascript">
-        function createDoctor() {
+        function createService() {
+            console.log("34e2323");
             var doctor =  $("#doctor").val();
             if (!doctor) {
                 $("#doctor").css("border-color", "#d3167f")
@@ -207,8 +207,6 @@
             }
             $("#create-form").submit();
         }
-    </script>
-    <script type="text/javascript">
         function confirm_update(){
             var doctor =  $("#doctor").val();
             if (!doctor) {
