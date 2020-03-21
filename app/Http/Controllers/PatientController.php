@@ -45,7 +45,7 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $patient=new Patient($request->all());
         $patient->save();
         // $request->session()->flash('status','Successfully created.');
@@ -110,9 +110,9 @@ class PatientController extends Controller
      */
     public function destroy($id)
     {
-        
+
         Patient::destroy($id);
-        return redirect()->back()->with('status','Successfully deleted.');
+        return redirect()->back()->with(['action' => 'Delete', 'msg'=>"Patient detail successfully deleted."]);
     }
 
     public function multi_delete(Request $request){

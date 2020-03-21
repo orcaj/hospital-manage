@@ -85,7 +85,7 @@ class StaffController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
+    {
         $old_email = User::Find($id)->email;
         $unique=User::where('email', $request->email)->where('email','<>', $old_email)->count();
         if($unique > 0){
@@ -110,7 +110,7 @@ class StaffController extends Controller
     public function destroy($id)
     {
         User::destroy($id);
-        return redirect()->back()->with(['action' => 'DEL', 'msg'=>"Patient detail successfully deleted."]);
+        return redirect()->back()->with(['action' => 'Delete', 'msg'=>"User detail successfully deleted."]);
     }
 
     /**

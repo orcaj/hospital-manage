@@ -22,7 +22,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-       
+
         $services=Service::all();
         $star=$this->star;
         return view('back.service', compact('services','star'));
@@ -35,8 +35,8 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        $departments=Department::all();
-        $doctors=Doctor::all();
+        $departments=Department::where('status', 'published')->get();
+        $doctors=Doctor::where('status', 'published')->get();
         $star=$this->star;
         return view('back.service-manage', compact('departments','doctors','star'));
     }
@@ -50,10 +50,8 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $service=new Service($request->all());
-        $service->status="publish";
-        $service->publish_date=date('yy-m-d');
         $service->save();
-        return redirect()->route('services.index')->with('status', 'Successfully created');
+        return redirect()->route('services.index')->with(['action' => 'Create', 'msg'=>"Service successfully created."]);
     }
 
     /**
@@ -76,8 +74,12 @@ class ServiceController extends Controller
     public function edit($id)
     {
         $service=Service::FindOrFail($id);
-        $departments=Department::all();
-        $doctors=Doctor::all();
+        $cur_depart = Department::Find($service->department_id);
+        $cur_doctor = Doctor::Find($service->doctor_id);
+        $departments=Department::where('status', 'published')->get();
+        $departments[] = $cur_depart;
+        $doctors=Doctor::where('status', 'published')->get();
+        $doctors[] = $cur_doctor;
         $star=$this->star;
         return view('back.service-manage', compact('service','departments','doctors','star'));
     }
@@ -96,8 +98,9 @@ class ServiceController extends Controller
         $service->price=$request->price;
         $service->department_id=$request->department_id;
         $service->doctor_id=$request->doctor_id;
+        $service->status = $request->status;
         $service->save();
-        return redirect()->route('services.index')->with('status','Successfully updated.');
+        return redirect()->route('services.index')->with(['action' => 'Update', 'msg'=>"Service detail successfully updated."]);
     }
 
     /**
@@ -112,10 +115,23 @@ class ServiceController extends Controller
         return redirect()->back()->with('status','Successfully deleted.');
     }
 
-    public function publishChange($service_id, $status){
-        $service=Service::Find($service_id);
-        $service->status=$status;
-        $service->save();
-        return redirect()->back()->with('status', 'Successfully changed!');
+    public function multi_delete(Request $request){
+        $del_ids=$request->sel_ids;
+        $ids=explode(',', $del_ids);
+        Service::destroy($ids);
+        return redirect()->back()->with(['action' => 'Delete', 'msg'=>"Services detail successfully deleted."]);
     }
+
+    public function multi_status(Request $request){
+        $sel_ids=$request->sel_ids;
+        $ids=explode(',', $sel_ids);
+        $status=$request->status;
+        foreach ($ids as $key => $id) {
+            $service=Service::Find($id);
+            $service->status=$status;
+            $service->save();
+        }
+        return redirect()->back()->with(['action' => $status, 'msg'=>"Services successfully".$status."."]);
+    }
+
 }

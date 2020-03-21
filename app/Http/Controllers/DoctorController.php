@@ -10,7 +10,7 @@ use App\Model\Doctor;
 class DoctorController extends Controller
 {
     private $star;
-    
+
     public function __construct(){
         $star="doctor";
         $this->star=$star;
@@ -34,7 +34,7 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        $departments=Department::all();
+        $departments=Department::where('status', 'published')->get();
         $star=$this->star;
         return view('back.doctor-manage', compact('departments','star'));
     }
@@ -48,6 +48,7 @@ class DoctorController extends Controller
     public function store(Request $request)
     {
         $doctor=new Doctor($request->all());
+        $doctor->status = 'published';
         $doctor->save();
         return redirect()->route('doctors.index')->with(['action' => 'Create', 'msg'=>"Doctor successfully created."]);
     }
@@ -72,7 +73,7 @@ class DoctorController extends Controller
     public function edit($id)
     {
         $doctor=Doctor::FindOrFail($id);
-        $departments=Department::all();
+        $departments=Department::where('status', 'published')->get();
         $star=$this->star;
         return view('back.doctor-manage', compact('doctor','departments','star'));
     }

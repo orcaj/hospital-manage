@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Model\Department;
+use App\Model\Doctor;
+use APp\Model\Service;
 
 class DepartmentController extends Controller
 {
     private $star;
-    
+
     public function __construct(){
         $star="department";
         $this->star=$star;
@@ -90,9 +92,9 @@ class DepartmentController extends Controller
         }
         $department=Department::FindOrFail($id);
         $department->name = $request->name;
-        $department->status = $request->status; 
+        $department->status = $request->status;
         $department->save();
-        return redirect()->route('department.index')->with(['action' => 'Update', 'msg'=>"Department detail successfully updated."]); 
+        return redirect()->route('department.index')->with(['action' => 'Update', 'msg'=>"Department detail successfully updated."]);
     }
 
     /**
@@ -103,8 +105,14 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
+        // return $id;
+        // $doctors = Doctor::where('department_id', $id)->get();
+        // $services = Service::where('')
+        // echo count($doctors);
+        // echo $id;
+        // exit;
         Department::destroy($id);
-        return redirect()->route('department.index')->with('status', 'Successfully deleted'); 
+        return redirect()->route('department.index')->with(['action' => 'Delete', 'msg'=>"Department detail successfully deleted."]);
     }
 
     public function check_duplication(Request $request) {
