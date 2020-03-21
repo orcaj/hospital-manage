@@ -33,6 +33,7 @@
                                 <div class="avatar avatar-online">
                                     <img src="{{asset('app-assets/images/portrait/small/avatar-default.jpg')}}" alt="avatar">
                                         <i></i>
+                                    <input type="hidden" value="{{auth()->user()->type}}" id="global_user_type">
                                     </div><span class="user-name">{{auth()->user()->name}}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">

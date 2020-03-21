@@ -35,7 +35,9 @@
                             <div class="card-content">
                               <div class="card-header space-bet">
                                 <h3 class="card-title" id="emailCompose">Service List</h3>
+                                @if(auth()->user()->type !='staff')
                                 <a href="{{route('services.create')}}" class="btn btn-primary btn-min-width mr-1 mb-1"><i class="feather icon-user-plus"></i>&nbspCreate</a>
+                                @endif
                             </div>
                                 <div class="card-body">
                                     <!-- datatable start -->
@@ -71,26 +73,25 @@
                                                         @endif
                                                      </td>
                                                     <td> {{$service->publish_date}} </td>
+                                                    <!-- @if(auth()->user()->type !='staff') -->
                                                     <td class="text-center"> 
                                                         <a href="{{route('services.edit', $service->id )}}" class="primary edit mr-1">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
-                                                        
-
-                                                        
-
-
                                                         <a href="{{route('home')}}" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"
                                                          class="danger delete mr-1"><i class="fa fa-trash-o"></i></a>
 
 
-                                                        <form id="delete-form" action="{{route('services.destroy',  $service->id  )}}" method="post">
+                                                        <form id="delete-form" action="{{route('services.destroy',  $service->id)}}" method="post">
                                                             @csrf
                                                             @method('delete')
-                                                        </form>
-
-                                                        
+                                                        </form>  
                                                     </td>
+                                                    <!-- @else
+                                                    <td>
+                                                    	Not available
+                                                    <td>
+                                                    @endif -->
                                                 </tr>
                                                 @endforeach
                                                 

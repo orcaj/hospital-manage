@@ -97,7 +97,7 @@
     <script src="{{asset('app-assets/vendors/js/forms/validation/jqBootstrapValidation.js')}}"></script>
     <!-- BEGIN Vendor JS-->
 
-    <script src="{{asset('app-assets/js/scripts/pages/page-init.js')}}"></script>
+    <script src="{{asset('app-assets/js/scripts/pages/page-init-2.js')}}"></script>
 
 
 

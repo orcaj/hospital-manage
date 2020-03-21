@@ -28,18 +28,18 @@
 	                                    	@csrf
 	                                    	@method('PUT')
 
-                                        <input type="hidden" name="status" id="status_val">
-                                          <div class="row">
-                                            <div class="col-12 col-sm-6">
-                                                <div class="form-group pb-1">
-                                                    @if($patient->status == 'published')
-                                                    <input type="checkbox" checked="checked" id="switchery1" class="switchery" />
-                                                    @else
-                                                    <input type="checkbox" id="switchery1" class="switchery" />
-                                                    @endif
+                                            <input type="hidden" name="status" id="status_val">
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-group pb-1">
+                                                        @if($patient->status == 'published')
+                                                        <input type="checkbox" checked="checked" id="switchery1" class="switchery" />
+                                                        @else
+                                                        <input type="checkbox" id="switchery1" class="switchery" />
+                                                        @endif
+                                                    </div>
                                                 </div>
                                             </div>
-                                          </div>
 	                                        <div class="row">
 	                                            <div class="col-12 col-sm-6">
 	                                                <div class="form-group">
@@ -197,9 +197,6 @@
        $(function(){
         var action = "<?php echo session('action') ?>";
         var msg = "<?php echo session('msg') ?>";
-        // console.log("msg", action);
-        // $("#civil_id").css("border-color", '#d3167f');
-        // $("#civil_id").focus();
         toastr.error(msg, action, {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
        })
      </script>
@@ -230,8 +227,6 @@
                 }
             })
         }
-
-
 
         function confirm_update(){
 

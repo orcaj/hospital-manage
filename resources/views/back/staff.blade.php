@@ -76,7 +76,7 @@
                                                         <a href="{{route('staff.edit', $staff->id )}}" class="primary edit mr-1">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
-                                                        <a href="{{route('home')}}" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"
+                                                        <a href="{{route('home')}}" onclick="event.preventDefault(); confirm_delete({{$staff->id}})"
                                                          class="danger delete mr-1"><i class="fa fa-trash-o"></i></a>
                                                         <form id="delete-form" action="{{route('staff.destroy',  $staff->id  )}}" method="post">
                                                             @csrf
@@ -107,7 +107,7 @@
                                                         <a href="{{route('staff.edit', $staff->id )}}" class="primary edit mr-1">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
-                                                        <a href="{{route('home')}}" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"
+                                                        <a href="{{route('home')}}" onclick="confirm_delete({{$staff->id}})"
                                                          class="danger delete mr-1"><i class="fa fa-trash-o"></i></a>
                                                         <form id="delete-form" action="{{route('staff.destroy',  $staff->id  )}}" method="post">
                                                             @csrf
@@ -139,7 +139,7 @@
                                                         <a href="{{route('staff.edit', $staff->id )}}" class="primary edit mr-1">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
-                                                        <a href="{{route('home')}}" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"
+                                                        <a href="{{route('home')}}" onclick="confirm_delete({{$staff->id}})"
                                                          class="danger delete mr-1"><i class="fa fa-trash-o"></i></a>
                                                         <form id="delete-form" action="{{route('staff.destroy',  $staff->id  )}}" method="post">
                                                             @csrf
@@ -189,7 +189,7 @@
       console.log("msg", action);
       // $("#civil_id").css("border-color", '#d3167f');
       // $("#civil_id").focus();
-      if (action == "Create" || action == 'Update' || action == 'published' || action == 'unpublished' || action == 'Delete') {
+      if (action == "Create" || action == 'Update' || action == 'published' || action == 'unpublished' || action == 'Delete' || action == 'DEL') {
         toastr.success(msg, action, {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
       } else {
         toastr.error(msg, action, {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
@@ -274,6 +274,26 @@
             $("#multi-delete").submit();
           }
         });            
+      }
+      function confirm_delete(id){
+        Swal.fire({
+        
+          title: "Delete",
+          text: "Are you sure that you want to delete this record?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+         
+          confirmButtonText: "Ok",
+          confirmButtonClass: "btn btn-primary",
+          cancelButtonClass: "btn btn-danger ml-1",
+          buttonsStyling: false
+        }).then(function(result) {
+          if (result.value) {
+            $("#delete-form").submit();
+          }
+        });
       }
       function del_btn(){
           sel_item=$("input[type=checkbox]:checked");
