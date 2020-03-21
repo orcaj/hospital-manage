@@ -47,7 +47,7 @@ class DepartmentController extends Controller
     {
         $department=new Department($request->all());
         $department->save();
-        return redirect()->route('department.index')->with('status', 'Successfully created');
+        return redirect()->route('department.index')->with(['action' => 'Create', 'msg'=>"Department successfully created."]);
     }
 
     /**
@@ -83,10 +83,16 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $old_data = Department::Find($id)->name;
+        $unique = Department::where('name', $request->name)->where('name','<>', $old_data)->count();
+        if($unique>0){
+            return redirect()->back()->with(['action'=>'Error','msg' => 'Department name already exist.', 'error_depart' => $request->name]);
+        }
         $department=Department::FindOrFail($id);
-        $department->name=$request->name;
+        $department->name = $request->name;
+        $department->status = $request->status; 
         $department->save();
-        return redirect()->route('department.index')->with('status', 'Successfully updated'); 
+        return redirect()->route('department.index')->with(['action' => 'Update', 'msg'=>"Department detail successfully updated."]); 
     }
 
     /**
@@ -99,5 +105,32 @@ class DepartmentController extends Controller
     {
         Department::destroy($id);
         return redirect()->route('department.index')->with('status', 'Successfully deleted'); 
+    }
+
+    public function check_duplication(Request $request) {
+        $unique=Department::where('name', $request->name)->count();
+        if($unique>0){
+            return json_encode(0);
+        }
+        return json_encode(1);
+    }
+
+    public function multi_delete(Request $request){
+        $del_ids=$request->sel_ids;
+        $ids=explode(',', $del_ids);
+        Department::destroy($ids);
+        return redirect()->back()->with(['action' => 'Delete', 'msg'=>"Department detail successfully deleted."]);
+    }
+
+    public function multi_status(Request $request){
+        $sel_ids=$request->sel_ids;
+        $ids=explode(',', $sel_ids);
+        $status=$request->status;
+        foreach ($ids as $key => $id) {
+            $patient=Department::Find($id);
+            $patient->status=$status;
+            $patient->save();
+        }
+        return redirect()->back()->with(['action' => $status, 'msg'=>"Department successfully".$status."."]);
     }
 }

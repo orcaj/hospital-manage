@@ -35,7 +35,7 @@ class StaffController extends Controller
     public function create()
     {
         $star=$this->star;
-        return view('back.staff-manage', compact('star'));
+        return view('back.staff-create', compact('star'));
     }
 
     /**
@@ -85,8 +85,9 @@ class StaffController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $unique=User::where('email', $request->email)->where('email','<>',$request->email)->count();
+    {   
+        $old_email = User::Find($id)->email;
+        $unique=User::where('email', $request->email)->where('email','<>', $old_email)->count();
         if($unique > 0){
             return redirect()->back()->with(['action'=>'Error','msg' => 'Email already exist.', 'error_email' => $request->email]);
         }
@@ -95,7 +96,7 @@ class StaffController extends Controller
         $staff->email=$request->email;
         $staff->status = $request->status;
         $staff->type = $request->type;
-        $staff->password=Hash::make($request->password);
+        // $staff->password=Hash::make($request->password);
         $staff->save();
         return redirect()->route('staff.index')->with(['action' => 'Update', 'msg'=>"Patient detail successfully updated."]);
     }
@@ -109,7 +110,7 @@ class StaffController extends Controller
     public function destroy($id)
     {
         User::destroy($id);
-        return redirect()->back()->with('status','Successfully deleted.');
+        return redirect()->back()->with(['action' => 'DEL', 'msg'=>"Patient detail successfully deleted."]);
     }
 
     /**
@@ -143,5 +144,16 @@ class StaffController extends Controller
             $staff->save();
         }
         return redirect()->back()->with(['action' => $status, 'msg'=>"User successfully".$status."."]);
+    }
+
+    public function changePassword($id, Request $request){
+        $staff=User::FindOrFail($id);
+        // var_dump($request);
+        $staff->password = Hash::make($request->password);
+        $staff->save();
+        return redirect()->back()->with(['action' => "Password Changed", 'msg'=>"Password changed."]);
+        // var_dump($staff);
+        // exit();
+        // $staff
     }
 }
