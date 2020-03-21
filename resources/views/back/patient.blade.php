@@ -18,7 +18,7 @@
     </style>
     <!-- BEGIN: Content-->
     <div class="app-content content">
-      
+
         <div class="content-overlay"></div>
         <div class="content-wrapper">
             <div class="content-header row">
@@ -39,7 +39,7 @@
                                     <div class="table-responsive">
                                         <table id="users-list-datatable" class="table center-table">
                                             <thead>
-                                                
+
                                                 <tr>
                                                     @if(auth()->user()->type !='staff')
                                                     <th class="text-center"><input type="checkbox" id="selectAll" data-size="sm" ></th>
@@ -72,18 +72,18 @@
                                                     <td>
                                                         @if($patient->status == "published")
                                                             <span class="badge badge-primary">Published</span>
-                                                         
+
                                                         @else
                                                         <span class="badge badge-danger">Unpublished</span>
                                                         @endif
                                                      </td>
                                                     <td>{{ date('j F, Y', strtotime($patient->status_date)) }} </td>
                                                     @if(auth()->user()->type !='staff')
-                                                    <td class="text-center"> 
+                                                    <td class="text-center">
                                                         <a href="{{route('patients.edit', $patient->id )}}" class="primary edit mr-1">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
-                                                        <a class="danger delete mr-1" 
+                                                        <a class="danger delete mr-1"
                                                         onclick="confirm_delete({{$patient->id}})"><i class="fa fa-trash-o"></i></a>
 
                                                         <form id="delete-form{{$patient->id}}" action="{{route('patients.destroy',  $patient->id)}}" method="post">
@@ -96,7 +96,7 @@
                                                     @endif
                                                 </tr>
                                                 @endforeach
-                                                
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -111,7 +111,6 @@
             </div>
         </div>
     </div>
-
     <!-- delete multi -->
     <form id="multi-delete" action="{{route('pat.multi_delete')}}" method="post">
         @csrf
@@ -126,10 +125,6 @@
         <input type="hidden" name="status" id="status">
     </form>
     <!-- end form -->
-
-
-
-
      @if(session('action'))
      <script type="text/javascript">
        $(function(){
@@ -139,23 +134,23 @@
         toastr.success(msg, action, {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
        })
      </script>
-      
+
     @endif
 
     <script type="text/javascript">
 
-     
+
 
         function confirm_delete(id){
             Swal.fire({
-            
+
               title: "Delete",
               text: "Are you sure that you want to delete this record?",
               type: "warning",
               showCancelButton: true,
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",
-             
+
               confirmButtonText: "Ok",
               confirmButtonClass: "btn btn-primary",
               cancelButtonClass: "btn btn-danger ml-1",
@@ -199,7 +194,7 @@
               if (result.value) {
                 $("#multi-delete").submit();
               }
-            });            
+            });
         }
 
         function multi_status(){
@@ -249,9 +244,9 @@
                           $("#multi-status").submit();
                         }
                       });
-                
-                }   
-            }                     
+
+                }
+            }
         }
 
         function del_btn(){

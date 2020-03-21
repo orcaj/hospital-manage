@@ -18,7 +18,7 @@
     </style>
     <!-- BEGIN: Content-->
     <div class="app-content content">
-        
+
         <div class="content-overlay"></div>
         <div class="content-wrapper">
             <div class="content-header row">
@@ -40,7 +40,7 @@
                                     <div class="table-responsive">
                                         <table id="users-list-datatable" class="table center-table">
                                             <thead>
-                                            	  
+
                                                 <tr>
                                                     @if(auth()->user()->type !='staff')
                                                     <th class="text-center"><input type="checkbox" id="selectAll" data-size="sm" ></th>
@@ -73,13 +73,13 @@
                                                         {{date('j F, Y', strtotime($department->status_date))}}
                                                     </td>
                                                     @if(auth()->user()->type !='staff')
-                                                    <td class="text-center"> 
+                                                    <td class="text-center">
                                                         <a href="{{route('department.edit', $department->id )}}" class="primary edit mr-1">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
-                                                        <a href="{{route('home')}}" onclick="event.preventDefault();confirm_delete();"
+                                                        <a href="{{route('home')}}" onclick="event.preventDefault();confirm_delete({{$department->id}});"
                                                          class="danger delete mr-1"><i class="fa fa-trash-o"></i></a>
-                                                        <form id="delete-form" action="{{route('department.destroy',  $department->id  )}}" method="post">
+                                                        <form id="delete-form{{$department->id}}" action="{{route('department.destroy',  $department->id  )}}" method="post">
                                                             @csrf
                                                             @method('delete')
                                                         </form>
@@ -89,7 +89,7 @@
                                                     @endif
                                                 </tr>
                                                 @endforeach
-                                                
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -160,25 +160,25 @@
               if (result.value) {
                 $("#multi-delete").submit();
               }
-            });            
+            });
         }
         function confirm_delete(id){
             Swal.fire({
-            
+
               title: "Delete",
               text: "Are you sure that you want to delete this record?",
               type: "warning",
               showCancelButton: true,
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",
-             
+
               confirmButtonText: "Yes",
               confirmButtonClass: "btn btn-primary",
               cancelButtonClass: "btn btn-danger ml-1",
               buttonsStyling: false
             }).then(function(result) {
                 if (result.value) {
-                    $("#delete-form").submit();
+                    $("#delete-form" + id).submit();
                   }
                 });
             }
@@ -229,9 +229,9 @@
                           $("#multi-status").submit();
                         }
                       });
-                
-                }   
-            }                     
+
+                }
+            }
         }
 
         function del_btn(){

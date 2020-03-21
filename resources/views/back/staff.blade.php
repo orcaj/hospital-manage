@@ -2,25 +2,25 @@
 @section('content')
 
 
-    <style type="text/css">
-      .space-bet{
-        display: flex;
-        justify-content: space-between;
-      }
-      .space-center{
-        display: flex;
-      }
-      .pime-grid-button{
+<style type="text/css">
+    .space-bet{
+    display: flex;
+    justify-content: space-between;
+    }
+    .space-center{
+    display: flex;
+    }
+    .pime-grid-button{
     float:left !important;
 
-  }
-.pime-grid-filter{
-    float:left !important;
-    margin-left:10px !important
-}
-    </style>
+    }
+    .pime-grid-filter{
+        float:left !important;
+        margin-left:10px !important
+    }
+</style>
     <!-- BEGIN: Content-->
-    <div class="app-content content">        
+    <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="content-wrapper">
             <div class="content-header row">
@@ -40,7 +40,7 @@
                                     <div class="table-responsive">
                                         <table id="users-list-datatable" class="table center-table">
                                             <thead>
-                                            	  
+
                                                 <tr>
                                                     <th class="text-center"><input type="checkbox" id="selectAll" data-size="sm" ></th>
                                                     <th>No</th>
@@ -67,18 +67,18 @@
                                                     <td>
                                                         @if($staff->status == "published")
                                                             <span class="badge badge-primary">Published</span>
-                                                         
+
                                                         @else
                                                         <span class="badge badge-danger">Unpublished</span>
                                                         @endif
                                                      </td>
-                                                    <td class="text-center"> 
+                                                    <td class="text-center">
                                                         <a href="{{route('staff.edit', $staff->id )}}" class="primary edit mr-1">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
                                                         <a href="{{route('home')}}" onclick="event.preventDefault(); confirm_delete({{$staff->id}})"
                                                          class="danger delete mr-1"><i class="fa fa-trash-o"></i></a>
-                                                        <form id="delete-form" action="{{route('staff.destroy',  $staff->id  )}}" method="post">
+                                                        <form id="delete-form{{$staff->id}}" action="{{route('staff.destroy',  $staff->id  )}}" method="post">
                                                             @csrf
                                                             @method('delete')
                                                         </form>
@@ -98,18 +98,18 @@
                                                     <td>
                                                         @if($staff->status == "published")
                                                             <span class="badge badge-primary">Published</span>
-                                                         
+
                                                         @else
                                                         <span class="badge badge-danger">Unpublished</span>
                                                         @endif
                                                      </td>
-                                                    <td class="text-center"> 
+                                                    <td class="text-center">
                                                         <a href="{{route('staff.edit', $staff->id )}}" class="primary edit mr-1">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
                                                         <a href="{{route('home')}}" onclick="confirm_delete({{$staff->id}})"
                                                          class="danger delete mr-1"><i class="fa fa-trash-o"></i></a>
-                                                        <form id="delete-form" action="{{route('staff.destroy',  $staff->id  )}}" method="post">
+                                                        <form id="delete-form{{$staff->id}}" action="{{route('staff.destroy',  $staff->id  )}}" method="post">
                                                             @csrf
                                                             @method('delete')
                                                         </form>
@@ -130,18 +130,19 @@
                                                     <td>
                                                         @if($staff->status == "published")
                                                             <span class="badge badge-primary">Published</span>
-                                                         
+
                                                         @else
                                                         <span class="badge badge-danger">Unpublished</span>
                                                         @endif
                                                      </td>
-                                                    <td class="text-center"> 
+                                                    <td class="text-center">
                                                         <a href="{{route('staff.edit', $staff->id )}}" class="primary edit mr-1">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
-                                                        <a href="{{route('home')}}" onclick="confirm_delete({{$staff->id}})"
-                                                         class="danger delete mr-1"><i class="fa fa-trash-o"></i></a>
-                                                        <form id="delete-form" action="{{route('staff.destroy',  $staff->id  )}}" method="post">
+                                                        <a class="danger delete mr-1"
+                                                        onclick="confirm_delete({{$staff->id}})"><i class="fa fa-trash-o"></i></a>
+
+                                                        <form id="delete-form{{$staff->id}}" action="{{route('staff.destroy',  $staff->id)}}" method="post">
                                                             @csrf
                                                             @method('delete')
                                                         </form>
@@ -150,7 +151,7 @@
                                                   @endif
                                                 @endif
                                                 @endforeach
-                                                
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -245,9 +246,9 @@
                         $("#multi-status").submit();
                       }
                     });
-              
-              }   
-          }                     
+
+              }
+          }
       }
       function multi_delete(){
         var items=$(".check_item:checked");
@@ -273,25 +274,26 @@
           if (result.value) {
             $("#multi-delete").submit();
           }
-        });            
+        });
       }
       function confirm_delete(id){
         Swal.fire({
-        
+
           title: "Delete",
           text: "Are you sure that you want to delete this record?",
           type: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
-         
+
           confirmButtonText: "Ok",
           confirmButtonClass: "btn btn-primary",
           cancelButtonClass: "btn btn-danger ml-1",
           buttonsStyling: false
         }).then(function(result) {
           if (result.value) {
-            $("#delete-form").submit();
+              console.log(id);
+            $("#delete-form"+id).submit();
           }
         });
       }

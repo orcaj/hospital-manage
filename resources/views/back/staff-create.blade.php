@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-   
+
     <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
@@ -41,7 +41,7 @@
                                                         <label>E-mail</label>
                                                         <input type="email" class="form-control" placeholder="Email" value="" name="email" required id="email" data-validation-required-message="This email field is required">
                                                     </div>
-                                                </div>    
+                                                </div>
                                             </div>
                                             <div class="col-12 col-sm-6">
                                                 <div class="form-group">
@@ -59,7 +59,7 @@
                                                         <input type="password" name="con-password" class="form-control" required id="account-retype-new-password" data-validation-match-match="password" value="" placeholder="New Password" data-validation-match-message="Must match with password" minlength="6">
                                                     </div>
                                                 </div>
-                                            </div>  
+                                            </div>
                                             <div class="col-12">
                                                 <div class="form-actions clearfix">
                                                     <div class="buttons-group float-left">
@@ -187,7 +187,7 @@
         })
     </script>
 
-  
+
 
 
 @endsection

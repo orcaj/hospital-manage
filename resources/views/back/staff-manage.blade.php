@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-   
+
     <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
@@ -73,7 +73,7 @@
                                                             @endif
                                                         </div>
                                                     </div>
-                                                </div> 
+                                                </div>
                                                 <div class="col-12">
                                                     <div class="form-actions clearfix">
                                                         <div class="buttons-group float-left">
@@ -117,9 +117,9 @@
                                                 <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1" onclick="event.preventDefault(); changePassword()">Change Password</button>
                                                 <a href="{{route('staff.index')}}" class="btn btn-warning mr-1">
                                                      Back
-                                                </a>                                              
+                                                </a>
                                             </div>
-                                        </form>    
+                                        </form>
                                     </div>
                                 </div>
                                 @endisset
@@ -238,7 +238,7 @@
         })
     </script>
 
-  
+
 
 
 @endsection
