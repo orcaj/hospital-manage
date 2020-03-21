@@ -9,7 +9,8 @@
 $(document).ready(function () {
     console.log("d")
     var row = $("#users-list-datatable_wrapper").children().first();
-    console.log("asdf",row);
+    var user_type = "<?php echo auth()->user()->type; ?>";
+    console.log("fffff", user_type);
     // variable declaration
     var usersTable;
     var usersDataArray = [];
@@ -25,15 +26,23 @@ $(document).ready(function () {
                 </div>`;
     // datatable initialization
     if ($("#users-list-datatable").length > 0) {
-        usersTable = $("#users-list-datatable").DataTable({
-            'columnDefs': [{
-                "orderable": false
-            }],
-            // dom: '<"pime-grid-button">l<"pime-grid-filter">f',
-            dom: '<"pime-grid-button col-md-4 col-12"l><"pime-grid-filter col-md-4 col-12">frtip'
-        });
-        $("div.pime-grid-filter").html(html);
-    console.log(row);
+        if (user_type == 'staff') {
+            usersTable = $("#users-list-datatable").DataTable({
+                'columnDefs': [{
+                    "orderable": false
+                }],
+                // dom: '<"pime-grid-button">l<"pime-grid-filter">f',
+                dom: '<"pime-grid-button col-md-4 col-12"l><"pime-grid-filter col-md-4 col-12">frtip'
+            });
+            $("div.pime-grid-filter").html(html);
+        } else {
+            usersTable = $("#users-list-datatable").DataTable({
+                'columnDefs': [{
+                    "orderable": false
+                }]
+            });
+        }
+        
     // variable declaration
     };
     // on click selected users data from table(page named page-users-list)
