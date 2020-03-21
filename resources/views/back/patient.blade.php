@@ -138,9 +138,6 @@
     @endif
 
     <script type="text/javascript">
-
-
-
         function confirm_delete(id){
             Swal.fire({
 
@@ -167,9 +164,6 @@
               }
             });
         }
-
-
-
         function multi_delete(){
             var items=$(".check_item:checked");
             sel_ids=[];

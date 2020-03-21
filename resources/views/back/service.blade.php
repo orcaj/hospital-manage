@@ -99,7 +99,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    {{$service->publish_date}}
+                                                    {{ date('j F, Y', strtotime($service->status_date)) }}
                                                 </td>
                                                 <!-- @if(auth()->user()->type !='staff') -->
                                                 <td class="text-center">
@@ -115,7 +115,7 @@
                                                         href="{{
                                                             route('home')
                                                         }}"
-                                                        onclick="event.preventDefault(); document.getElementById('delete-form').submit();"
+                                                        onclick="event.preventDefault();confirm_delete({{$service->id}})"
                                                         class="danger delete mr-1"
                                                         ><i
                                                             class="fa fa-trash-o"
@@ -123,7 +123,7 @@
                                                     ></a>
 
                                                     <form
-                                                        id="delete-form"
+                                                        id="delete-form{{$service->id}}"
                                                         action="{{route('services.destroy',  $service->id)}}"
                                                         method="post"
                                                     >
