@@ -12,12 +12,12 @@ class CreateInvoicesTable extends Migration
      * @return void
      */
     public function up()
-    {     
+    {
         Schema::create('invoices', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('civil_id');
+            $table->string('civil_id', 190);
             $table->integer('service_id');
-            $table->string('status')->default('publish');
+            $table->string('status', 190)->default('published');
             $table->date('status_date')->nullable();
             $table->timestamps();
         });

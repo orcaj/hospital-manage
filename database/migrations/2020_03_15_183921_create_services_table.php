@@ -17,9 +17,12 @@ class CreateServicesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->double('price');
-            $table->integer('department_id');
-            $table->integer('doctor_id');
-            $table->string('status')->default('publish');
+            $table->bigInteger('department_id')->unsigned();
+            // $table->foreign('department_id')->references('id')->on('departments');
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
+            $table->bigInteger('doctor_id')->unsigned();
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
+            $table->string('status')->default('published');
             $table->date('status_date')->nullable();
             $table->timestamps();
         });

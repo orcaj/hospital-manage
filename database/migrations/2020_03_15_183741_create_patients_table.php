@@ -15,12 +15,12 @@ class CreatePatientsTable extends Migration
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('civil_id')->unique();
-            $table->string('phone');
-            $table->string('email');
-            $table->string('address');
-            $table->string('status')->default('publish');
+            $table->string('name', 155);
+            $table->string('civil_id', 155)->unique();
+            $table->string('phone', 155);
+            $table->string('email', 155);
+            $table->string('address', 155);
+            $table->string('status', 155)->default('published');
             $table->date('status_date')->nullable();
             $table->timestamps();
         });
