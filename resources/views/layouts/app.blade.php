@@ -45,10 +45,11 @@
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/plugins/extensions/toastr.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/forms/toggle/switchery.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/plugins/forms/switch.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/plugins/forms/checkboxes-radios.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/forms/selects/select2.min.css')}}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    
+
     <!-- END: Page Vendor JS-->
 
 
@@ -57,7 +58,7 @@
     <!-- END: Custom CSS-->
 
 
- 
+
 
 </head>
 <!-- END: Head-->
@@ -107,7 +108,7 @@
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
-   
+
     <!-- END: Page JS-->
 
     <!-- BEGIN: Page JS-->
@@ -128,9 +129,11 @@
     <script src="{{asset('app-assets/js/scripts/extensions/toastr.js')}}"></script>
 
     <script src="{{asset('app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js')}}"></script>
+    <script src="{{asset('app-assets/vendors/js/forms/repeater/jquery.repeater.min.js')}}"></script>
     <script src="{{asset('app-assets/vendors/js/forms/toggle/switchery.min.js')}}"></script>
     <script src="{{asset('app-assets/js/scripts/forms/switch.js')}}"></script>
     <script src="{{asset('app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
+    <!-- <script src="../../../app-assets/js/scripts/forms/checkbox-radio.js"></script> -->
     <script src="{{asset('app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
 
 

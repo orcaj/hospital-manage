@@ -66,7 +66,7 @@
                                                         <div class="row invoice-item-controls d-flex" style="width: 100%;">
                                                             <div class="col-12 col-md-6 form-group item-name">
                                                                 <label>Department</label>
-                                                                <select class="form-control select2" id="department" onchange="changeDepart()">
+                                                                <select class="form-control" onchange="changeDepart(this)">
                                                                     <option value="">--Select department--</option>
                                                                     @foreach($departments as $department)
                                                                         <option value="{{$department->id}}">{{$department->name}}</option>
@@ -75,16 +75,45 @@
                                                             </div>
                                                             <div class="col-12 col-md-6 form-group item-cost">
                                                                 <label>Doctor</label>
-                                                                <select class="form-control select2" id="doctor" onchange="changeDoctor()">
+                                                                <select class="form-control"  onchange="changeDoctor(this)">
                                                                 </select>
                                                             </div>
                                                             <div class="col-12 col-md-6 form-group item-description mb-0">
                                                                 <!-- <input type="text" class="form-control description-input" value="The most developer friendly & highly customisable HTML5 Admin"> -->
-                                                                <select class="form-control select2" style="width: 100%;" onchange="changeService()" id="service">
+                                                                <select class="form-control" style="width: 100%;" onchange="changeService(this)">
                                                                 </select>
                                                             </div>
-                                                            <div class="col-12 col-md-6 form-group discounts mb-0">
-                                                                <input type="text" class="form-control" id="service_price" disabled>
+                                                            <div class="col-12 col-md-4 form-group discounts mb-0">
+                                                                <input type="text" class="form-control service_price" disabled>
+                                                            </div>
+                                                            <div class="col-12 col-md-2 form-group discounts mb-0">
+                                                                    <div class='discount-element'>
+                                                                        <span class="title-text">Discount:</span>
+                                                                        <span class="discount-value">0</span><span>%</span>
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                        <div class="delete-and-discount-config h-100 ml-50 d-flex flex-column justify-content-between">
+                                                            <span class="cursor-pointer d-flex justify-content-center align-items-center">
+                                                                <i class="fa fa-times-circle-o font-size-increase" data-repeater-delete></i>
+                                                            </span>
+                                                            <div class="dropdown d-flex justify-content-center align-items-center">
+                                                                <span role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <i class="fa fa-cog font-size-increase m-0"></i>
+                                                                </span>
+                                                                <div class="dropdown-menu p-1 dropdown-sizing" aria-labelledby="dropdownMenuButton">
+                                                                    <div class="row invoice-taxes-controls">
+                                                                        <div class="col-12 form-group">
+                                                                            <label for="discount">Discount(%)</label>
+                                                                            <input type="number" class="form-control" id="applicable-discount" placeholder="0">
+                                                                        </div>
+                                                                        <hr>
+                                                                        <div class="col-12 buttons d-flex justify-content-between mt-1">
+                                                                            <button type="button" class="btn btn-primary discount-apply-btn">Apply</button>
+                                                                            <button type="button" class="btn btn-light cancel-btn">Cancel</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -115,28 +144,24 @@
                                             <ul class="list-group cost-list">
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Subtotal </span>
-                                                    <span class="cost-value">$ 00.00</span>
+                                                    <span class="cost-value">$ <span id="subtotal">00.00</span></span>
                                                 </li>
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Discount </span>
-                                                    <span class="cost-value">-$ 00.00</span>
-                                                </li>
-                                                <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
-                                                    <span class="cost-title mr-2">Tax </span>
-                                                    <span class="cost-value">0%</span>
+                                                    <span class="cost-value">-$ <span id="total_discount">0.00</span></span>
                                                 </li>
                                                 <li class="dropdown-divider"></li>
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Invoice Total </span>
-                                                    <span class="cost-value">$ 00.00</span>
+                                                    <span class="cost-value">$ <span id="invoice_total">00.00</span></span>
                                                 </li>
-                                                <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
+                                                <!-- <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Paid To Date </span>
                                                     <span class="cost-value">-$ 00.00</span>
-                                                </li>
+                                                </li> -->
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
-                                                    <span class="cost-title mr-2">Balance (USD) </span>
-                                                    <span class="cost-value">$ 00.00</span>
+                                                    <span class="cost-title mr-2">Total Due (USD) </span>
+                                                    <span class="cost-value">$ <span id="total_due">0.00</span></span>
                                                 </li>
                                             </ul>
                                             <button class="btn btn-primary mt-1 btn-block">Preview</button>
@@ -160,23 +185,34 @@
                                         <button class="btn btn-light mb-1 btn-block">Save</button>
                                     </div>
                                 </div>
-                                <button class="btn btn-block btn-success"><i class="fa fa-usd common-size"></i>
-                                    Payment</button>
+                                <div class="form-group mb-25">
+                                    <div class="float-right">
+                                        <input type="checkbox" name="switchery5" id="" class="switchery" checked />
+                                    </div>
+                                    <label for="switchery5" class="font-medium-2">Payment Received</label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <label for="received_amount" class="font-medium-2" style="display: flex;align-items: center;">Payment &nbsp;</label>
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <input type="checkbox" aria-label="Checkbox for following text input">&nbsp; In Full
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" name="received_amount" aria-label="Text input with checkbox">
+                                </div>
+                                <div class="form-group mb-25" style="margin-top:5px">
+                                    <label class="font-medium-2">Payment Type</label>
+                                    <div class="float-right">
+                                        <select class="form-control form-control-sm">
+                                            <option value="knet">KNET</option>
+                                            <option value="credit_card">Credit Card</option>
+                                            <option value="cash">CASH</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="payment-options border rounded m-0 py-2 row">
-                            <div class="col-12">
-                                <h6 class="title">Accept Payment Via</h6>
-                            </div>
-                            <div class="col-12 mt-75">
-                                <select name="payment" id="paymentOption" class="form-control bg-transparent mb-1">
-                                    <option value="DebitCard">Debit Card</option>
-                                    <option value="DebitCard">Credit Card</option>
-                                    <option value="DebitCard">Paypal</option>
-                                    <option value="DebitCard">Internet Banking</option>
-                                    <option value="DebitCard">UPI Transfer</option>
-                                </select>
-                            </div>
                             <div class="col-12 mt-1">
                                 <div class="form-group mb-25">
                                     <div class="float-right">
@@ -281,6 +317,7 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="{{asset('app-assets/js/scripts/invoice-init.js')}}"></script>
 <script type="text/javascript">
     function onPatientChange() {
         // console.log("chnagd");
@@ -334,26 +371,30 @@
             // console.log(data);
         }
     }
-    function changeDepart() {
-        var doctorId = $("#department").val();
+    function changeDepart(obj) {
+        // console.log(obj);
+        var doctorId = $(obj).val();
+        var doctELe = $(obj).parent().siblings().first().children().next().first();
+        // console.log(doctELe);
         $.post("{{route('doct.get_doctor_by_department')}}", {id: doctorId, _token:"{{csrf_token()}}"}, function(data) {
             var data = JSON.parse(data);
             if (data) {
-                console.log(data);
+                // console.log(data);
                 var options = "<option value=''>--Select Doctor--</option>";
                 data.forEach(ele => {
                     var option = "<option value='" + ele.id + "'>" + ele.name + "</option>";
                     options += option;
                 });
-                console.log(options);
-                $("#doctor").html(options);
+                // console.log(options);
+                doctELe.html(options);
             }
         })
     }
-    function changeDoctor() {
-        var doctorId = $("#doctor").val();
-        var departId = $("#department").val();
-        console.log("doctor: ", doctorId);
+    function changeDoctor(obj) {
+        var doctorId = $(obj).val();
+        var departId = $(obj).parent().prev().children().next().first().val();
+        var doctELe = $(obj).parent().next().children().first();
+        // console.log("departId: ", doctELe);
         $.post("{{route('servi.get_service_by_doctor_depart')}}", {doctorId: doctorId, departId: departId, _token:"{{csrf_token()}}"}, function(data) {
             // console.log(data);
             var data = JSON.parse(data);
@@ -366,22 +407,77 @@
                 });
 
             }
-            $("#service").html(services);
+            doctELe.html(services);
         });
     }
-    function changeService() {
-        var serviceId = $("#service").val();
-        console.log("sss", serviceId);
+    function changeService(obj) {
+        var serviceId = $(obj).val();
+        var docEle = $(obj).parent().next().children().first();
+        // console.log(docEle);
         $.post("{{route('servi.get_service_detail_on_invoice')}}", {id: serviceId, _token:"{{csrf_token()}}"}, function(data) {
             var data = JSON.parse(data);
             if (data) {
-                $("#service_price").val(data.price);
+               docEle.val(data.price);
+               setInvoicePreview();
             }
-        })
+        });
     }
-    $(function(){
-        // var civil_id = $("#patient_id").val();
+    function setInvoicePreview(){
+        //calculate sub total
+        var prices = $(".service_price");
+        var subTotal = 0;
+        for(var i = 0 ; i < prices.length; i ++ ){
+            var ele = $(prices[i]);
+            subTotal += Number(ele.val());
+        }
+        $("#subtotal").html(subTotal);
+        var total_discount = Number($("#total_discount").html());
+        var invoice_total = subTotal - total_discount;
+        $("#invoice_total").html(invoice_total);
+        $("#total_due").html(invoice_total);
+    }
 
+    $(document).on('click', '.discount-apply-btn', function (e) {
+        discount_value = $(this).parents().eq(2).find('#applicable-discount').val();
+        tax_one_val = $(this).parents().eq(2).find('#applicable-tax1').val();
+        tax_two_val = $(this).parents().eq(2).find('#applicable-tax2').val();
+        valArr = [discount_value, tax_one_val, tax_two_val]
+
+        if (discount_value || tax_one_val || tax_two_val) {
+            var elems = $(this)
+                .parents()
+                .eq(4)
+                .prev()
+                .find(".discount-value, .tax-1-value, .tax-2-value").toArray();
+
+            for (var i = 0; i < elems.length; i++) {
+                elems[i].textContent = valArr[i] ? valArr[i] : '0';
+            }
+
+            var discounts = $(".discount-value");
+            var discountTotal = 0;
+            for(var i = 0 ; i < discounts.length; i ++) {
+                var ele = $(discounts[i]);
+                var discount = Number(ele.html());
+                // console.log("ggg", discount);
+                var priceEle = ele.parent().parent().prev().children().first();
+                // console.log(priceEle);
+                var price = priceEle.val();
+                // console.log(price);
+                var discountPrice = price * (discount/100);
+                discountPrice = discountPrice.toFixed(2);
+                console.log(discountPrice);
+                discountTotal += Number(discountPrice);
+            }
+            $("#total_discount").html(discountTotal);
+            var invoice_total = Number($("#subtotal").html()) - discountTotal;
+            // console.log("aaaaa", invoice_total);
+            $("#invoice_total").html(invoice_total);
+            $("#total_due").html(invoice_total);
+        }
+    })
+    $(function() {
+        $(".select2").select2();
     })
 </script>
 @endsection
