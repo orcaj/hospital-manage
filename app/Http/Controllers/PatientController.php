@@ -164,4 +164,9 @@ class PatientController extends Controller
         );
         return json_encode($response);
     }
+
+    public function getAllCivilId(Request $request) {
+        $data = Patient::all();
+        return json_encode($data);
+    }
 }
