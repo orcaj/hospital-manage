@@ -29,7 +29,21 @@
                                     </div>
                                     <div class="col-sm-6 col-12" style="display: flex;align-items: flex-end;">
                                         <button class="btn btn-primary" data-toggle="modal" data-target="#add-patient-modal">Add Patient</button>
+                                        <!-- <input type="" name="" > -->
+                                        
                                     </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12 d-flex justify-content-start align-items-lg-start align-items-sm-start align-items-start  align-items-center flex-wrap px-0 pt-xl-0 pt-1" style="margin-top: 20px">
+                                                <div class="issue-date d-flex align-items-center justify-content-start col-6">
+                                                    <h6 class="invoice-text font-weight-bold col-2">Date Issue</h6>
+                                                    <input type="text" name="date" class="pick-a-date bg-white form-control" value="Select Date">
+                                                </div>
+                                                <div class="due-date d-flex align-items-center justify-content-start col-6">
+                                                    <h6 class="invoice-text font-weight-bold">Date Due</h6>
+                                                    <input type="text" name="date" class="pick-a-date bg-white form-control" value="Select Date">
+                                                </div>
+                                            </div>
                                 </div>
                                 <hr>
 
@@ -94,7 +108,7 @@
                                                                 </div>
                                                         </div>
                                                         <div class="delete-and-discount-config h-100 ml-50 d-flex flex-column justify-content-between">
-                                                            <span class="cursor-pointer d-flex justify-content-center align-items-center" onclick="removePanel(this)" >
+                                                    <span class="cursor-pointer d-flex justify-content-center align-items-center" onclick="removePanel(this)" >
                                                                 <i class="fa fa-times-circle-o font-size-increase" data-repeater-delete></i>
                                                             </span>
                                                             <div class="dropdown d-flex justify-content-center align-items-center">
@@ -369,9 +383,10 @@
         var doctorId = $(obj).val();
         var doctELe = $(obj).parent().siblings().first().children().next().first();
         var serviceEle = $(obj).parent().siblings().first().next().children().first();
-        console.log(serviceEle.val())
+        var priceEle = $(obj).parent().next().next().next().children().first();
+        var discountEle = $(obj).parent().next().next().next().next().children().first().find(':nth-child(2)');
         serviceEle.html("<option value=''>--Select Service--</option>");
-        // console.log(doctELe);
+        console.log("priceEle", priceEle);
         $.post("{{route('doct.get_doctor_by_department')}}", {id: doctorId, _token:"{{csrf_token()}}"}, function(data) {
             var data = JSON.parse(data);
             if (data) {
@@ -383,6 +398,10 @@
                 });
                 // console.log(options);
                 doctELe.html(options);
+                priceEle.val(0);
+                discountEle.html(0);
+                resetDiscount();
+                setInvoicePreview();
             }
         })
     }
@@ -390,7 +409,9 @@
         var doctorId = $(obj).val();
         var departId = $(obj).parent().prev().children().next().first().val();
         var doctELe = $(obj).parent().next().children().first();
-        // console.log("departId: ", doctELe);
+        var priceEle = $(obj).parent().next().next().children().first();
+        var discountEle = $(obj).parent().next().next().next().children().first().find(':nth-child(2)');
+        console.log("discountEle: ", discountEle);
         $.post("{{route('servi.get_service_by_doctor_depart')}}", {doctorId: doctorId, departId: departId, _token:"{{csrf_token()}}"}, function(data) {
             // console.log(data);
             var data = JSON.parse(data);
@@ -401,7 +422,10 @@
                     var service = "<option value='" + ele.id + "'>" + ele.name + "</option>";
                     services += service;
                 });
-
+                priceEle.val(0);
+                discountEle.html(0);
+                resetDiscount();
+                setInvoicePreview();
             }
             doctELe.html(services);
         });
@@ -417,25 +441,28 @@
             if (data) {
                 docEle.val(data.price);
                 discountEle.html(0);
-                var discounts = $(".discount-value");
-                var discountTotal = 0;
-                for(var i = 0 ; i < discounts.length; i ++) {
-                    var ele = $(discounts[i]);
-                    var discount = Number(ele.html());
-                    // console.log("ggg", discount);
-                    var priceEle = ele.parent().parent().prev().children().first();
-                    // console.log(priceEle);
-                    var price = priceEle.val();
-                    // console.log(price);
-                    var discountPrice = price * (discount/100);
-                    discountPrice = discountPrice.toFixed(2);
-                    console.log(discountPrice);
-                    discountTotal += Number(discountPrice);
-                }
-                $("#total_discount").html(discountTotal);
-               setInvoicePreview();
+                resetDiscount();
+                setInvoicePreview();
             }
         });
+    }
+    function resetDiscount() {
+        var discounts = $(".discount-value");
+        var discountTotal = 0;
+        for(var i = 0 ; i < discounts.length; i ++) {
+            var ele = $(discounts[i]);
+            var discount = Number(ele.html());
+            // console.log("ggg", discount);
+            var priceEle = ele.parent().parent().prev().children().first();
+            // console.log(priceEle);
+            var price = priceEle.val();
+            // console.log(price);
+            var discountPrice = price * (discount/100);
+            discountPrice = discountPrice.toFixed(2);
+            console.log(discountPrice);
+            discountTotal += Number(discountPrice);
+        }
+        $("#total_discount").html(discountTotal);
     }
     function setInvoicePreview(){
         //calculate sub total
