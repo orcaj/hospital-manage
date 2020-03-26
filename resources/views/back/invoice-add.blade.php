@@ -18,7 +18,7 @@
                             <div class="card-body">
                                 <!-- logo and invoice title -->
                                 <div class="row">
-                                    <div class="col-sm-6 col-12">
+                                    <div class="col-sm-2 col-12">
                                         <h4 class="invoice-title text-primary">Civil Id</h4>
                                         <select class="form-control select2" id="patient_id" onchange="onPatientChange()">
                                             <option value="">Input Civil Id</option>
@@ -27,16 +27,14 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-sm-6 col-12" style="display: flex;align-items: flex-end;">
+                                    <div class="col-sm-2 col-12" style="display: flex;align-items: flex-end;">
                                         <button class="btn btn-primary" data-toggle="modal" data-target="#add-patient-modal">Add Patient</button>
                                         <!-- <input type="" name="" > -->
                                         
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xl-12 col-md-12 d-flex justify-content-start align-items-lg-start align-items-sm-start align-items-start  align-items-center flex-wrap px-0 pt-xl-0 pt-1" style="margin-top: 20px">
+                                    <div class="col-sm-8 col-12 d-flex justify-content-xl-end align-items-lg-start align-items-sm-start align-items-xs-start  align-items-center flex-wrap px-0 pt-xl-0 pt-1" style="display: flex !important;align-items: flex-end !important;">
                                                 <div class="issue-date d-flex align-items-center justify-content-start col-6">
-                                                    <h6 class="invoice-text font-weight-bold col-2">Date Issue</h6>
+                                                    <h6 class="invoice-text font-weight-bold col-4">Date Issue</h6>
                                                     <input type="text" name="date" class="pick-a-date bg-white form-control" value="Select Date">
                                                 </div>
                                                 <div class="due-date d-flex align-items-center justify-content-start col-6">
@@ -44,6 +42,9 @@
                                                     <input type="text" name="date" class="pick-a-date bg-white form-control" value="Select Date">
                                                 </div>
                                             </div>
+                                </div>
+                                <div class="row">
+                                    
                                 </div>
                                 <hr>
 
