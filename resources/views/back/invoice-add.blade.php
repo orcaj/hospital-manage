@@ -542,7 +542,7 @@
         obj.civil_id = $("#patient_id").val();
         obj.bill_name = $("#patient_name").val();
         obj.bill_phone = $("#patient_phone").val();
-        obj.
+        // obj.
     }
 
     $(function() {
