@@ -94,7 +94,7 @@
                                                                 </div>
                                                         </div>
                                                         <div class="delete-and-discount-config h-100 ml-50 d-flex flex-column justify-content-between">
-                                                            <span class="cursor-pointer d-flex justify-content-center align-items-center">
+                                                            <span class="cursor-pointer d-flex justify-content-center align-items-center" onclick="removePanel(this)" >
                                                                 <i class="fa fa-times-circle-o font-size-increase" data-repeater-delete></i>
                                                             </span>
                                                             <div class="dropdown d-flex justify-content-center align-items-center">
@@ -182,25 +182,26 @@
                                         <button class="btn btn-light mb-1 btn-block">Preview</button>
                                     </div>
                                     <div class="btn-preview w-50 ml-50">
-                                        <button class="btn btn-light mb-1 btn-block">Save</button>
+                                        <button class="btn btn-light mb-1 btn-block" onclick="saveInvoice()">Save</button>
                                     </div>
                                 </div>
                                 <div class="form-group mb-25">
                                     <div class="float-right">
-                                        <input type="checkbox" name="switchery5" id="" class="switchery" checked />
+                                        <input type="checkbox" name="switchery5" id="receivedPayment" class="switchery" onchange="changeReceivePayment()" />
                                     </div>
                                     <label for="switchery5" class="font-medium-2">Payment Received</label>
                                 </div>
-                                <div class="input-group input-group-sm">
+                                <div class="input-group input-group-sm payment_received_section">
                                     <label for="received_amount" class="font-medium-2" style="display: flex;align-items: center;">Payment &nbsp;</label>
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
-                                            <input type="checkbox" aria-label="Checkbox for following text input">&nbsp; In Full
+                                            <input type="checkbox" aria-label="Checkbox for following text input" id="is_full" onchange="changeIsFull()">&nbsp; In Full
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control" name="received_amount" aria-label="Text input with checkbox">
+                                    <input type="text" class="form-control" name="received_amount" id="received_amount" aria-label="Text input with checkbox">
                                 </div>
-                                <div class="form-group mb-25" style="margin-top:5px">
+                                <div class="form-group mb-25 payment_received_section
+                                " style="margin-top:5px">
                                     <label class="font-medium-2">Payment Type</label>
                                     <div class="float-right">
                                         <select class="form-control form-control-sm">
@@ -216,7 +217,7 @@
                             <div class="col-12 mt-1">
                                 <div class="form-group mb-25">
                                     <div class="float-right">
-                                        <input type="checkbox" name="switchery" id="switchery0" class="switchery" checked />
+                                        <input type="checkbox"  name="switchery" id="payment_terms" class="switchery" checked />
                                     </div>
                                     <label for="switchery0" class="font-medium-2">Payment Terms</label>
                                 </div>
@@ -224,17 +225,9 @@
                             <div class="col-12">
                                 <div class="form-group mb-25">
                                     <div class="float-right">
-                                        <input type="checkbox" name="switchery" id="switchery1" class="switchery" checked />
+                                        <input type="checkbox" name="switchery" id="client_notes" class="switchery" checked />
                                     </div>
                                     <label for="switchery0" class="font-medium-2">Client Notes</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group mb-25">
-                                    <div class="float-right">
-                                        <input type="checkbox" name="switchery" id="switchery2" class="switchery" />
-                                    </div>
-                                    <label for="switchery0" class="font-medium-2">Payment Stub</label>
                                 </div>
                             </div>
                         </div>
@@ -375,6 +368,9 @@
         // console.log(obj);
         var doctorId = $(obj).val();
         var doctELe = $(obj).parent().siblings().first().children().next().first();
+        var serviceEle = $(obj).parent().siblings().first().next().children().first();
+        console.log(serviceEle.val())
+        serviceEle.html("<option value=''>--Select Service--</option>");
         // console.log(doctELe);
         $.post("{{route('doct.get_doctor_by_department')}}", {id: doctorId, _token:"{{csrf_token()}}"}, function(data) {
             var data = JSON.parse(data);
@@ -413,11 +409,30 @@
     function changeService(obj) {
         var serviceId = $(obj).val();
         var docEle = $(obj).parent().next().children().first();
+        var discountEle = $(obj).parent().next().next().children().first().find(':nth-child(2)');
+        console.log(discountEle);
         // console.log(docEle);
         $.post("{{route('servi.get_service_detail_on_invoice')}}", {id: serviceId, _token:"{{csrf_token()}}"}, function(data) {
             var data = JSON.parse(data);
             if (data) {
-               docEle.val(data.price);
+                docEle.val(data.price);
+                discountEle.html(0);
+                var discounts = $(".discount-value");
+                var discountTotal = 0;
+                for(var i = 0 ; i < discounts.length; i ++) {
+                    var ele = $(discounts[i]);
+                    var discount = Number(ele.html());
+                    // console.log("ggg", discount);
+                    var priceEle = ele.parent().parent().prev().children().first();
+                    // console.log(priceEle);
+                    var price = priceEle.val();
+                    // console.log(price);
+                    var discountPrice = price * (discount/100);
+                    discountPrice = discountPrice.toFixed(2);
+                    console.log(discountPrice);
+                    discountTotal += Number(discountPrice);
+                }
+                $("#total_discount").html(discountTotal);
                setInvoicePreview();
             }
         });
@@ -435,8 +450,34 @@
         var invoice_total = subTotal - total_discount;
         $("#invoice_total").html(invoice_total);
         $("#total_due").html(invoice_total);
+        var isFull = $("#is_full").is(":checked");
+        if (isFull) {
+            $("#received_amount").val(invoice_total);
+        } else {
+            $("#received_amount").val(0);
+        }
     }
 
+    function removePanel(obj) {
+        console.log("removed...");
+        console.log($(obj));
+        var priceEle = $(obj).parent().prev().find(':nth-child(4)').children().first();
+        var discountEle = $(obj).parent().prev().find(':nth-child(5)').children().find(':nth-child(2)');
+        var deletedPrice = Number(priceEle.val());
+        var deletedDiscount = Number(discountEle.html());
+        var discountPrice = deletedPrice * (deletedDiscount/100);
+        var totalDeleted = deletedPrice - discountPrice;
+        // console.log(priceEle, deletedPrice);
+        console.log(discountPrice, totalDeleted);
+    }
+    function changeReceivePayment() {
+        var isPaid = $("#receivedPayment").is(":checked");
+        if (isPaid) {
+            $(".payment_received_section").show();
+        } else {
+            $(".payment_received_section").hide();
+        }
+    }
     $(document).on('click', '.discount-apply-btn', function (e) {
         discount_value = $(this).parents().eq(2).find('#applicable-discount').val();
         tax_one_val = $(this).parents().eq(2).find('#applicable-tax1').val();
@@ -474,10 +515,31 @@
             // console.log("aaaaa", invoice_total);
             $("#invoice_total").html(invoice_total);
             $("#total_due").html(invoice_total);
+            var isFull = $("#is_full").is(":checked");
+            if (isFull) {
+                $("#received_amount").val(invoice_total);
+            } else {
+                $("#received_amount").val(0);
+            }
         }
     })
+
+    function changeIsFull(){
+        var isFull = $("#is_full").is(":checked");
+        console.log(isFull);
+        if (isFull) {
+            // console.log(Number($("#total_due").html().toFixed(2));
+            var total_due = $("#total_due").html();
+            console.log(total_due);
+            $("#received_amount").val(total_due);
+        } else {
+            $("#received_amount").val(0);
+        }
+    }
+
     $(function() {
         $(".select2").select2();
+        $(".payment_received_section").hide();
     })
 </script>
 @endsection

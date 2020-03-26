@@ -124,7 +124,7 @@
                                                 <div class="form-group">
                                                 	<div class="controls">
                                                         <label>Department</label>
-                                                        <select class="form-control" name="department_id" required id="department" required data-validation-required-message="Department is required">
+                                                        <select class="form-control" name="department_id" required id="department" required onchange="departChange()" data-validation-required-message="Department is required">
                                                         	@foreach($departments as $department)
                                                             	<option value="{{$department->id}}">{{$department->name}}</option>
                                                         	@endforeach
@@ -143,9 +143,7 @@
                                                 	<div class="controls">
                                                         <label>Doctor</label>
                                                         <select class="form-control" name="doctor_id" required  data-validation-required-message="Service name is required" id="doctor">
-                                                        	@foreach($doctors as $doctor)
-                                                            	<option value="{{$doctor->id}}">{{$doctor->name}}</option>
-                                                        	@endforeach
+                                                        	
                                                         </select>
                                                     </div>
                                                 </div>
@@ -238,6 +236,23 @@
             }else{
                 $("#status_val").val('unpublished');
             }
+        }
+        function departChange() {
+            var depart = $("#department").val();
+            $.post("{{route('doct.get_doctor_by_department')}}", {id: depart, _token:"{{csrf_token()}}"}, function(data) {
+                console.log(data);
+                var data = JSON.parse(data);
+                if (data) {
+                    // console.log(data);
+                    var options = "<option value=''>--Select Doctor--</option>";
+                    data.forEach(ele => {
+                        var option = "<option value='" + ele.id + "'>" + ele.name + "</option>";
+                        options += option;
+                    });
+                    // console.log(options);
+                    $("#doctor").html(options);
+                }
+            })
         }
         $(function(){
             set_status();
