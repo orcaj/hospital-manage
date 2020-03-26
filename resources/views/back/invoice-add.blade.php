@@ -537,6 +537,14 @@
         }
     }
 
+    function saveInvoice() {
+        var obj = new Object();
+        obj.civil_id = $("#patient_id").val();
+        obj.bill_name = $("#patient_name").val();
+        obj.bill_phone = $("#patient_phone").val();
+        obj.
+    }
+
     $(function() {
         $(".select2").select2();
         $(".payment_received_section").hide();
