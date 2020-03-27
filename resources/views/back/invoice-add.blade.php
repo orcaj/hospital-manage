@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <!-- BEGIN: Content-->
-<div class="app-content content">
+<div class="app-content content" id="invoiceForm">
     <div class="content-overlay"></div>
     <div class="content-wrapper">
         <div class="content-header row">
@@ -18,7 +18,7 @@
                             <div class="card-body">
                                 <!-- logo and invoice title -->
                                 <div class="row">
-                                    <div class="col-sm-2 col-12">
+                                    <div class="col-sm-3 col-12">
                                         <h4 class="invoice-title text-primary">Civil Id</h4>
                                         <select class="form-control select2" id="patient_id" onchange="onPatientChange()">
                                             <option value="">Input Civil Id</option>
@@ -26,25 +26,30 @@
                                                 <option value="{{$patient->id}}">{{$patient->civil_id}}</option>
                                             @endforeach
                                         </select>
+                                       <!--  <ul role="alert"><li>This email field is required</li></ul> -->
+                                        
                                     </div>
-                                    <div class="col-sm-2 col-12" style="display: flex;align-items: flex-end;">
-                                        <button class="btn btn-primary" data-toggle="modal" data-target="#add-patient-modal">Add Patient</button>
+                                    <div class="col-sm-6 col-12" style="display: flex; align-items: baseline">
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#add-patient-modal" style="margin-top: 28px;">Add Patient</button>
                                         <!-- <input type="" name="" > -->
                                         
                                     </div>
-                                    <div class="col-sm-8 col-12 d-flex justify-content-xl-end align-items-lg-start align-items-sm-start align-items-xs-start  align-items-center flex-wrap px-0 pt-xl-0 pt-1" style="display: flex !important;align-items: flex-end !important;">
-                                                <div class="issue-date d-flex align-items-center justify-content-start col-6">
-                                                    <h6 class="invoice-text font-weight-bold col-4">Date Issue</h6>
-                                                    <input type="text" name="date" class="pick-a-date bg-white form-control" value="Select Date">
-                                                </div>
-                                                <div class="due-date d-flex align-items-center justify-content-start col-6">
-                                                    <h6 class="invoice-text font-weight-bold">Date Due</h6>
-                                                    <input type="text" name="date" class="pick-a-date bg-white form-control" value="Select Date">
-                                                </div>
-                                            </div>
                                 </div>
                                 <div class="row">
-                                    
+                                    <div class="col-xl-12 col-md-12 d-flex justify-content-start align-items-lg-start align-items-sm-start align-items-start  align-items-center flex-wrap px-0 pt-xl-0 pt-1" style="margin-top: 20px">
+                                        <div class="issue-date d-flex align-items-center justify-content-start col-md-4 col-12">
+                                            <h6 class="invoice-text font-weight-bold">Date Issue</h6>
+                                            <input type="text" name="date" class="pick-a-date bg-white form-control" placeholder="Select Date" id="date_issue" disabled>
+                                        </div>
+                                        <div class="due-date d-flex align-items-center justify-content-start col-md-4 col-12">
+                                            <h6 class="invoice-text font-weight-bold">Date Due</h6>
+                                            <input type="text" name="date" class="pick-a-date bg-white form-control" placeholder="Select Date" id="due_date">
+                                        </div>
+                                        <div class="due-date d-flex align-items-center justify-content-start col-md-4 col-12">
+                                            <h6 class="invoice-text font-weight-bold">Appointment Date</h6>
+                                            <input type="text" name="date" class="pick-a-date bg-white form-control" placeholder="Select Date" id="appointment_date">
+                                        </div>
+                                    </div>
                                 </div>
                                 <hr>
 
@@ -170,16 +175,16 @@
                                                     <span class="cost-title mr-2">Invoice Total </span>
                                                     <span class="cost-value">$ <span id="invoice_total">00.00</span></span>
                                                 </li>
-                                                <!-- <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
-                                                    <span class="cost-title mr-2">Paid To Date </span>
-                                                    <span class="cost-value">-$ 00.00</span>
-                                                </li> -->
+                                                <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
+                                                    <span class="cost-title mr-2">Total Paid </span>
+                                                    <span class="cost-value" >$ <sapn id="total_paid">00.00</sapn></span>
+                                                </li>
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Total Due (USD) </span>
                                                     <span class="cost-value">$ <span id="total_due">0.00</span></span>
                                                 </li>
                                             </ul>
-                                            <button class="btn btn-primary mt-1 btn-block">Preview</button>
+                                            <button class="btn btn-primary mt-1 btn-block" onclick="gotoPreview()">Preview</button>
                                         </div>
                                     </div>
                                 </div>
@@ -213,7 +218,7 @@
                                             <input type="checkbox" aria-label="Checkbox for following text input" id="is_full" onchange="changeIsFull()">&nbsp; In Full
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control" name="received_amount" id="received_amount" aria-label="Text input with checkbox">
+                                    <input type="text" class="form-control" name="received_amount" id="received_amount" aria-label="Text input with checkbox" onblur="setTotalPaid()">
                                 </div>
                                 <div class="form-group mb-25 payment_received_section
                                 " style="margin-top:5px">
@@ -325,7 +330,7 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="{{asset('app-assets/js/scripts/invoice-init.js')}}"></script>
+<script type="text/javascript" src="{{asset('app-assets/js/scripts/invoice-init1.js')}}"></script>
 <script type="text/javascript">
     function onPatientChange() {
         // console.log("chnagd");
@@ -477,12 +482,14 @@
         var total_discount = Number($("#total_discount").html());
         var invoice_total = subTotal - total_discount;
         $("#invoice_total").html(invoice_total);
-        $("#total_due").html(invoice_total);
+        $("#total_due").html(invoice_total - $("#received_amount").val());
         var isFull = $("#is_full").is(":checked");
         if (isFull) {
             $("#received_amount").val(invoice_total);
+            $("#total_paid").html(invoice_total);
         } else {
             $("#received_amount").val(0);
+            $("#total_paid").html(0);
         }
     }
 
@@ -542,12 +549,14 @@
             var invoice_total = Number($("#subtotal").html()) - discountTotal;
             // console.log("aaaaa", invoice_total);
             $("#invoice_total").html(invoice_total);
-            $("#total_due").html(invoice_total);
+            $("#total_due").html(invoice_total - $("#received_amount").val());
             var isFull = $("#is_full").is(":checked");
             if (isFull) {
                 $("#received_amount").val(invoice_total);
+                $("#total_paid").html(invoice_total);
             } else {
                 $("#received_amount").val(0);
+                $("#total_paid").html(0);
             }
         }
     })
@@ -560,8 +569,10 @@
             var total_due = $("#total_due").html();
             console.log(total_due);
             $("#received_amount").val(total_due);
+            $("#total_paid").html(total_due);
         } else {
             $("#received_amount").val(0);
+            $("#total_paid").html(0);
         }
     }
 
@@ -573,9 +584,75 @@
         // obj.
     }
 
+    function gotoPreview() {
+        console.log($("#patient_id").val())
+        if(!$("#patient_id").val()) {
+            toastr.error('Please select Civil Id', 'Error!', {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000, positionClass: 'toast-top-center', containerId: 'toast-top-center'});
+            $("#patient_id").focus();
+            return;
+        }
+        if(!$("#due_date").val()) {
+            toastr.error('Please select Due date', 'Error!', {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000, positionClass: 'toast-top-center', containerId: 'toast-top-center'});
+            // $("#due_date").focus();
+            return;
+        }
+        if(!$("#appointment_date").val()) {
+            toastr.error('Please select appointment date', 'Error!', {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000, positionClass: 'toast-top-center', containerId: 'toast-top-center'});
+            // $("#appointment_date").focus();
+            return;
+        }
+
+        if (Number($("#total_due").html())==0){
+            toastr.error('Please select at least 1 service.', 'Error!', {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000, positionClass: 'toast-top-center', containerId: 'toast-top-center'});
+             return;
+        }
+        
+        $("#invoiceForm").hide();
+        $("#previewForm").show();
+    }
+    function editInvoice() {
+        $("#invoiceForm").show();
+        $("#previewForm").hide();
+    }
+
+    function setTotalPaid() {
+        $("#total_paid").html($("#received_amount").val());
+        var total_due = Number($("#invoice_total").html()) - $("#received_amount").val();
+        $("#total_due").html(total_due);
+    }
+
+    function printInvoice() {
+        var headstr = "<html><head><title>Booking Details</title></head><body>";
+        var footstr1 = "</"; 
+        var footstr2 = "body>"; 
+        var footstr=footstr1 + footstr2;
+        var newstr = document.getElementById("printable_content").innerHTML;
+        var oldstr = document.body.innerHTML;
+        document.body.innerHTML = headstr+newstr+footstr;
+        window.print();
+        document.body.innerHTML = oldstr;
+        location.reload();
+// return false;
+        // $(".select2").select2();
+        // $("#patient_id").select2();
+        return false;
+    }
+
     $(function() {
-        $(".select2").select2();
+        // $(".select2").select2();
         $(".payment_received_section").hide();
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = today.getMonth() + 1;
+        if (month < 10) {
+            month = '0' + month;
+        }
+        var date = today.getDate();
+        var formattedDate = month + '/' + date + '/' + year;
+        // console.log(formattedDate);
+        $("#date_issue").val(formattedDate);
+        // $("#previewForm").hide();
+        // $("#date_issue")
     })
 </script>
 @endsection
