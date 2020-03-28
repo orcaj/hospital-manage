@@ -29,23 +29,23 @@
                                        <!--  <ul role="alert"><li>This email field is required</li></ul> -->
                                         
                                     </div>
-                                    <div class="col-sm-6 col-12" style="display: flex; align-items: baseline">
+                                    <div class="col-sm-5 col-12" style="display: flex; align-items: baseline">
                                         <button class="btn btn-primary" data-toggle="modal" data-target="#add-patient-modal" style="margin-top: 28px;">Add Patient</button>
                                         <!-- <input type="" name="" > -->
                                         
                                     </div>
+                                    <div class="issue-date col-md-4 col-12" style="display: flex;align-items: flex-end;">
+                                        <h6 class="invoice-text font-weight-bold">Date Issue</h6>
+                                        <input type="text" name="date" class="pick-a-date bg-white form-control" placeholder="Select Date" id="date_issue" disabled>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-12 col-md-12 d-flex justify-content-start align-items-lg-start align-items-sm-start align-items-start  align-items-center flex-wrap px-0 pt-xl-0 pt-1" style="margin-top: 20px">
-                                        <div class="issue-date d-flex align-items-center justify-content-start col-md-4 col-12">
-                                            <h6 class="invoice-text font-weight-bold">Date Issue</h6>
-                                            <input type="text" name="date" class="pick-a-date bg-white form-control" placeholder="Select Date" id="date_issue" disabled>
-                                        </div>
-                                        <div class="due-date d-flex align-items-center justify-content-start col-md-4 col-12">
+                                        <div class="due-date d-flex align-items-center justify-content-start col-md-6 col-12">
                                             <h6 class="invoice-text font-weight-bold">Date Due</h6>
                                             <input type="text" name="date" class="pick-a-date bg-white form-control" placeholder="Select Date" id="due_date">
                                         </div>
-                                        <div class="due-date d-flex align-items-center justify-content-start col-md-4 col-12">
+                                        <div class="due-date d-flex align-items-center justify-content-start col-md-6 col-12">
                                             <h6 class="invoice-text font-weight-bold">Appointment Date</h6>
                                             <input type="text" name="date" class="pick-a-date bg-white form-control" placeholder="Select Date" id="appointment_date">
                                         </div>
@@ -100,7 +100,7 @@
                                                             </div>
                                                             <div class="col-12 col-md-6 form-group item-description mb-0">
                                                                 <!-- <input type="text" class="form-control description-input" value="The most developer friendly & highly customisable HTML5 Admin"> -->
-                                                                <select class="form-control" style="width: 100%;" onchange="changeService(this)">
+                                                                <select class="form-control service_id" style="width: 100%;" onchange="changeService(this)">
                                                                 </select>
                                                             </div>
                                                             <div class="col-12 col-md-4 form-group discounts mb-0">
@@ -154,10 +154,10 @@
                                     <div class="row">
                                         <div class="col-12 col-md-6 col-lg-6 col-xl-5">
                                             <div class="regarding-payment form-group">
-                                                <input type="text" class="form-control" value="" placeholder="Add payment terms">
+                                                <input type="text" class="form-control" value="" placeholder="Add payment terms" id="payment_terms">
                                             </div>
                                             <div class="regarding-discount form-group">
-                                                <input type="text" class="form-control" value="" placeholder="Add client note">
+                                                <input type="text" class="form-control" value="" placeholder="Add client note" id="client_notes">
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-lg-6 col-xl-5 offset-xl-2">
@@ -184,7 +184,7 @@
                                                     <span class="cost-value">$ <span id="total_due">0.00</span></span>
                                                 </li>
                                             </ul>
-                                            <button class="btn btn-primary mt-1 btn-block" onclick="gotoPreview()">Preview</button>
+                                            <button class="btn btn-primary mt-1 btn-block" onclick="saveInvoice()">Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -197,14 +197,14 @@
                                 <button class="btn btn-block btn-primary mb-1"><i class="fa fa-share common-size"></i> Send
                                     Invoice</button>
                                 <button class="btn btn-block btn-primary mb-1">Download Invoice</button>
-                                <div class="inline-btns w-100 d-flex justify-content-between">
+                                <!-- <div class="inline-btns w-100 d-flex justify-content-between">
                                     <div class="btn-save w-50 mr-50">
                                         <button class="btn btn-light mb-1 btn-block">Preview</button>
                                     </div>
                                     <div class="btn-preview w-50 ml-50">
                                         <button class="btn btn-light mb-1 btn-block" onclick="saveInvoice()">Save</button>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="form-group mb-25">
                                     <div class="float-right">
                                         <input type="checkbox" name="switchery5" id="receivedPayment" class="switchery" onchange="changeReceivePayment()" />
@@ -224,7 +224,7 @@
                                 " style="margin-top:5px">
                                     <label class="font-medium-2">Payment Type</label>
                                     <div class="float-right">
-                                        <select class="form-control form-control-sm">
+                                        <select class="form-control form-control-sm" id="payment_type">
                                             <option value="knet">KNET</option>
                                             <option value="credit_card">Credit Card</option>
                                             <option value="cash">CASH</option>
@@ -237,7 +237,7 @@
                             <div class="col-12 mt-1">
                                 <div class="form-group mb-25">
                                     <div class="float-right">
-                                        <input type="checkbox"  name="switchery" id="payment_terms" class="switchery" checked />
+                                        <input type="checkbox"  name="switchery" id="show_payment_terms" class="switchery" checked />
                                     </div>
                                     <label for="switchery0" class="font-medium-2">Payment Terms</label>
                                 </div>
@@ -245,7 +245,7 @@
                             <div class="col-12">
                                 <div class="form-group mb-25">
                                     <div class="float-right">
-                                        <input type="checkbox" name="switchery" id="client_notes" class="switchery" checked />
+                                        <input type="checkbox" name="switchery" id="show_client_notes" class="switchery" checked />
                                     </div>
                                     <label for="switchery0" class="font-medium-2">Client Notes</label>
                                 </div>
@@ -563,13 +563,14 @@
 
     function changeIsFull(){
         var isFull = $("#is_full").is(":checked");
-        console.log(isFull);
+        // console.log(isFull);
         if (isFull) {
             // console.log(Number($("#total_due").html().toFixed(2));
             var total_due = $("#total_due").html();
             console.log(total_due);
             $("#received_amount").val(total_due);
             $("#total_paid").html(total_due);
+            $("#total_due").html(0);
         } else {
             $("#received_amount").val(0);
             $("#total_paid").html(0);
@@ -584,7 +585,7 @@
         // obj.
     }
 
-    function gotoPreview() {
+    function saveInvoice() {
         console.log($("#patient_id").val())
         if(!$("#patient_id").val()) {
             toastr.error('Please select Civil Id', 'Error!', {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000, positionClass: 'toast-top-center', containerId: 'toast-top-center'});
@@ -607,12 +608,48 @@
              return;
         }
         
-        $("#invoiceForm").hide();
-        $("#previewForm").show();
-    }
-    function editInvoice() {
-        $("#invoiceForm").show();
-        $("#previewForm").hide();
+        var obj = new Object();
+        obj.civil_id = $("#patient_id").val();
+        obj.due_date = $("#due_date").val();
+        obj.appointment_date = $("#appointment_date").val();
+        var service_ids = [];
+        var services = $(".service_id");
+        for(var i = 0; i < services.length; i ++ ) {
+            service_ids.push($(services[i]).val());
+        }
+        // services.forEach(ele => {
+            
+        // })
+        // forEach
+        console.log(service_ids);
+        obj.service_ids = service_ids.toString();
+        obj.sub_total = Number($("#subtotal").html());
+        obj.total_discount = Number($("#total_discount").html());
+        obj.invoice_total = Number($("#invoice_total").html());
+        obj.total_paid = Number($("#total_paid").html());
+        obj.total_due = Number($("#total_due").html());
+        obj.payment_terms = $("#payment_terms").val();
+        obj.client_notes = $("#client_notes").val();
+        obj.received_payment = $("#receivedPayment").is(":checked") == true ? 1 : 0;
+        obj.payment_type = $("#payment_type").val();
+        obj.show_client_notes = $("#show_client_notes").is(":checked") == true ? 1 : 0;
+        obj.show_payment_terms = $("#show_payment_terms").is(":checked") == true ? 1 : 0;
+        obj.is_sent = 0;
+        obj.invoice_id = `INV-${Number(new Date())}${generateInvoice(3)}`;
+        console.log(obj);
+        $.post("{{route('invoi.add_invoice')}}", {data: obj, _token:"{{csrf_token()}}"}, function(data) {
+            console.log(data);
+            var obj = JSON.parse(data);
+            console.log(obj);
+            if(obj.status =='success') {
+                toastr.options.onHidden = function() {
+                    window.location.href = "{{route('invoice.index')}}";
+                }
+                toastr.success('Invoice successfully added.', 'Success', {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 1000, positionClass: 'toast-top-center', containerId: 'toast-top-center'});
+            }
+            // 
+        });
+        // console.log($(".service").val())
     }
 
     function setTotalPaid() {
@@ -621,21 +658,12 @@
         $("#total_due").html(total_due);
     }
 
-    function printInvoice() {
-        var headstr = "<html><head><title>Booking Details</title></head><body>";
-        var footstr1 = "</"; 
-        var footstr2 = "body>"; 
-        var footstr=footstr1 + footstr2;
-        var newstr = document.getElementById("printable_content").innerHTML;
-        var oldstr = document.body.innerHTML;
-        document.body.innerHTML = headstr+newstr+footstr;
-        window.print();
-        document.body.innerHTML = oldstr;
-        location.reload();
-// return false;
-        // $(".select2").select2();
-        // $("#patient_id").select2();
-        return false;
+    function generateInvoice(count) {
+        let randomText = "";
+        let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        for (var i = 0; i < count; i++)
+          randomText += possible.charAt(Math.floor(Math.random() * possible.length));
+        return randomText;
     }
 
     $(function() {
@@ -651,8 +679,6 @@
         var formattedDate = month + '/' + date + '/' + year;
         // console.log(formattedDate);
         $("#date_issue").val(formattedDate);
-        // $("#previewForm").hide();
-        // $("#date_issue")
     })
 </script>
 @endsection
