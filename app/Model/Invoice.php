@@ -15,7 +15,7 @@ class Invoice extends Model
     }
 
     public function getPatient(){
-    	return $this->belongsTo('App\Model\Patient', 'civil_id', 'civil_id');
+    	return $this->belongsTo('App\Model\Patient', 'civil_id', 'id');
     }
 
 }

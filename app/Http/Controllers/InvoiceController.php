@@ -42,6 +42,7 @@ class InvoiceController extends Controller
         $services=Service::all();
         $star=$this->star;
         return view('back.invoice-add', compact('patients','services','star', 'departments'));
+
     }
 
     /**
@@ -52,8 +53,6 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        $invoice=new Invoice($request->all());
-        $invoice->save();
         return redirect()->route('invoice.index')->with('status','Successfully created!');
     }
 
@@ -110,7 +109,7 @@ class InvoiceController extends Controller
     public function destroy($id)
     {
         Invoice::destroy($id);
-        return redirect()->back()->with('status', 'Successfully deleted.');
+        return redirect()->back()->with(['action' => 'Delete', 'msg'=>"Invoice detail successfully deleted."]);
     }
     public function get_pat_date(Request $request){
         $civil_id=$request->civil_id;
@@ -135,5 +134,82 @@ class InvoiceController extends Controller
     public function view_add_invoice() {
         $star=$this->star;
         return view('back.invoice-add', compact('star'));
+    }
+
+    public function add_invoice(Request $request) {
+        $invoice = new Invoice();
+        $data = $request->data;
+        $invoice->civil_id = $data['civil_id'];
+        $invoice->invoice_id = $data['invoice_id'];
+        $invoice->due_date = $data['due_date'];
+        $invoice->appointment_date = $data['appointment_date'];
+        $invoice->service_ids = $data['service_ids'];
+        $invoice->sub_total = $data['sub_total'];
+        $invoice->total_discount = $data['total_discount'];
+        $invoice->invoice_total = $data['invoice_total'];
+        $invoice->total_paid = $data['total_paid'];
+        $invoice->total_due = $data['total_due'];
+        $invoice->payment_terms = $data['payment_terms'];
+        $invoice->client_notes = $data['client_notes'];
+        $invoice->received_payment = $data['received_payment'];
+        $invoice->payment_type = $data['payment_type'];
+        $invoice->show_client_notes = $data['show_client_notes'];
+        $invoice->show_payment_terms = $data['show_payment_terms'];
+        $invoice->is_sent = $data['is_sent'];
+        $save =  $invoice->save();
+        $result;
+        if($save) {
+            $result = array(
+                'status' => 'success',
+                'msg' => 'Invoice successfully added.'
+            );
+        } else {
+            $result = array(
+                'status' => 'error',
+                'msg' => 'Something went wrong while add invoice.'
+            );
+        }
+        return json_encode($result);
+    }
+
+    public function multi_delete(Request $request){
+        $del_ids=$request->sel_ids;
+        $ids=explode(',', $del_ids);
+        Invoice::destroy($ids);
+        return redirect()->back()->with(['action' => 'Delete', 'msg'=>"Invoice detail successfully deleted."]);
+    }
+
+    public function multi_status(Request $request){
+        $sel_ids=$request->sel_ids;
+        $ids=explode(',', $sel_ids);
+        $status=$request->status;
+        foreach ($ids as $key => $id) {
+            $patient=Invoice::Find($id);
+            $patient->status=$status;
+            $patient->save();
+        }
+        return redirect()->back()->with(['action' => $status, 'msg'=>"Invoice successfully".$status."."]);
+    }
+
+    public function send_invoice(Request $request) {
+        $invoice = Invoice::Find($request->id);
+        $invoice->is_sent = '1';
+        $save = $invoice->save();
+        if ($save) {
+            return json_encode(
+                array(
+                    'status'=> 'success',
+                    'msg'=> 'Invoice successfully sent'
+                )
+            );
+        } else {
+            return json_encode(
+                array(
+                    'status'=> 'error',
+                    'msg'=> 'Something went wrong while sending invoice.'
+                )
+            );
+        }
+        // return json_encode($invoice);
     }
 }
