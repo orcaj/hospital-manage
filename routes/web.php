@@ -56,6 +56,13 @@ Route::group(['middleware' => ['web','auth']], function(){
     Route::post('servi/multi_status', 'ServiceController@multi_status')->name('servi.multi_status');
     Route::post('servi/get_service_by_doctor_depart', 'ServiceController@get_service_by_doctor_depart')->name('servi.get_service_by_doctor_depart');
     Route::post('servi/get_service_detail_on_invoice', 'ServiceController@get_service_detail_on_invoice')->name('servi.get_service_detail_on_invoice');
+
+    Route::post('invoi/add_invoice', 'InvoiceController@add_invoice')->name('invoi.add_invoice');
+    Route::post('invoi/multi_delete', 'InvoiceController@multi_delete')->name('invoi.multi_delete');
+    Route::post('invoi/multi_status', 'InvoiceController@multi_status')->name('invoi.multi_status');
+    Route::post('invoi/send_invoice', 'InvoiceController@send_invoice')->name('invoi.send_invoice');
+    Route::post('invoi/view_invoice/{id}', 'InvoiceController@view_invoice')->name('invoi.view_invoice');
+
 	Route::group(['middleware' => ['super']], function(){
 
 	});
