@@ -99,7 +99,7 @@ $(document).ready(function () {
     })
 
 
-    $('.print-invoice').on('click', function () {
-        window.print();
-    })
+    // $('.print-invoice').on('click', function () {
+    //     window.print();
+    // })
 });
