@@ -63,6 +63,7 @@ Route::group(['middleware' => ['web','auth']], function(){
     Route::post('invoi/send_invoice', 'InvoiceController@send_invoice')->name('invoi.send_invoice');
     Route::post('invoi/view_invoice/{id}', 'InvoiceController@view_invoice')->name('invoi.view_invoice');
     Route::get('invoi/download_invoice/{type}', 'InvoiceController@download_invoice')->name('invoi.download_invoice');
+    Route::get('invoi/download_pdf', 'InvoiceController@download_pdf')->name('invoi.download_pdf');
 
 	Route::group(['middleware' => ['super']], function(){
 

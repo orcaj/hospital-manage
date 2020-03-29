@@ -11,7 +11,7 @@ use App\Model\Department;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\InvoicesExport;
-
+use PDF;
 
 class InvoiceController extends Controller
 {
@@ -221,5 +221,13 @@ class InvoiceController extends Controller
         // echo $data;
         // exit();
         return Excel::download(new InvoicesExport, 'invoices.'.$type);
+    }
+
+    public function download_pdf()
+    {
+        $data = ['title' => 'Welcome to HDTuto.com'];
+        $pdf = PDF::loadView('myPDF', $data);
+  
+        return $pdf->download('itsolutionstuff.pdf');
     }
 }
