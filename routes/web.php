@@ -62,6 +62,7 @@ Route::group(['middleware' => ['web','auth']], function(){
     Route::post('invoi/multi_status', 'InvoiceController@multi_status')->name('invoi.multi_status');
     Route::post('invoi/send_invoice', 'InvoiceController@send_invoice')->name('invoi.send_invoice');
     Route::post('invoi/view_invoice/{id}', 'InvoiceController@view_invoice')->name('invoi.view_invoice');
+    Route::get('invoi/download_invoice/{type}', 'InvoiceController@download_invoice')->name('invoi.download_invoice');
 
 	Route::group(['middleware' => ['super']], function(){
 

@@ -8,7 +8,9 @@ use App\Model\Patient;
 use App\Model\Service;
 use App\Model\Doctor;
 use App\Model\Department;
-
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\InvoicesExport;
 
 
 class InvoiceController extends Controller
@@ -211,5 +213,13 @@ class InvoiceController extends Controller
             );
         }
         // return json_encode($invoice);
+    }
+
+    public function download_invoice($type)
+    {
+        $data = Invoice::all()->toArray();
+        // echo $data;
+        // exit();
+        return Excel::download(new InvoicesExport, 'invoices.'.$type);
     }
 }

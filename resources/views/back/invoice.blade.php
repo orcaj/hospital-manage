@@ -40,7 +40,10 @@
                             <div class="card-content">
                               <div class="card-header space-bet">
                                 <h3 class="card-title" id="emailCompose">Invoice List</h3>
-                                <a href="{{route('invoice.create')}}" class="btn btn-primary btn-min-width mr-1 mb-1"><i class="feather icon-user-plus"></i>&nbspCreate</a>
+                                <div class="form-inline">
+                                    <a href="{{route('invoice.create')}}" class="btn btn-primary"><i class="feather icon-user-plus"></i>&nbspCreate</a>
+                                <a href="{{ route('invoi.download_invoice', 'xlsx') }}" class="btn btn-success" style="margin-left: 10px" >Download Excel</a>
+                                </div>
                             </div>
                                 <div class="card-body">
                                     <!-- datatable start -->
@@ -105,6 +108,9 @@
                                                         </a>
                                                         <a href="{{route('invoice.edit', $invoice->id )}}" class="primary edit mr-1">
                                                             <i class="feather icon-edit-1"></i>
+                                                        </a>
+                                                        <a href="{{route('invoice.edit', $invoice->id )}}" class="primary edit mr-1">
+                                                            <i class="fa fa-history"></i>
                                                         </a>
                                                         @if(auth()->user()->type != 'staff')
                                                         <a href="{{route('home')}}" onclick="event.preventDefault(); confirm_delete({{$invoice->id}})"
