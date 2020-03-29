@@ -43,8 +43,8 @@
                                 <div class="form-inline">
                                     <a href="{{route('invoice.create')}}" class="btn btn-primary"><i class="feather icon-user-plus"></i>&nbspCreate</a>
                                 <a href="{{ route('invoi.download_invoice', 'xlsx') }}" class="btn btn-success" style="margin-left: 10px" >Download Excel</a>
-                                <a href="{{ route('invoi.download_pdf') }}" class="btn btn-success" style="margin-left: 10px" >Download PDF</a>
-                                </div>
+                                <!-- <a href="{{ route('invoi.download_pdf') }}" class="btn btn-success" style="margin-left: 10px" >Download PDF</a>
+                                </div> -->
                             </div>
                                 <div class="card-body">
                                     <!-- datatable start -->
