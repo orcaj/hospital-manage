@@ -8,6 +8,8 @@ use App\Model\Patient;
 use App\Model\Service;
 use App\Model\Doctor;
 use App\Model\Department;
+use App\Model\InvoiceHistories;
+use App\Model\PaymentHistory;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\InvoicesExport;
@@ -159,6 +161,24 @@ class InvoiceController extends Controller
         $invoice->show_payment_terms = $data['show_payment_terms'];
         $invoice->is_sent = $data['is_sent'];
         $save =  $invoice->save();
+
+        //save invoice history 
+        $history = new InvoiceHistories();
+        $history->invoice_id = $invoice->invoice_id;
+        $history->action_type = 'created';
+        $history->user_name = auth()->user()->name;
+        $history->save();
+
+        //if there is paid amount
+        if ($data['total_paid'] != '0') {
+            $history = new PaymentHistory();
+            $history->invoice_id = $invoice->invoice_id;
+            $history->payment_method = $data['payment_type'];
+            $history->amount = $data['total_paid'];
+            $history->user_name = auth()->user()->name;
+            $history->status = 'success';
+            $history->save();
+        }
         $result;
         if($save) {
             $result = array(
@@ -186,9 +206,14 @@ class InvoiceController extends Controller
         $ids=explode(',', $sel_ids);
         $status=$request->status;
         foreach ($ids as $key => $id) {
-            $patient=Invoice::Find($id);
-            $patient->status=$status;
-            $patient->save();
+            $invoice=Invoice::Find($id);
+            $invoice->status=$status;
+            $invoice->save();
+            $history = new InvoiceHistories();
+            $history->invoice_id = $invoice->invoice_id;
+            $history->action_type = $status;
+            $history->user_name = auth()->user()->name;
+            $history->save();
         }
         return redirect()->back()->with(['action' => $status, 'msg'=>"Invoice successfully".$status."."]);
     }
@@ -197,11 +222,16 @@ class InvoiceController extends Controller
         $invoice = Invoice::Find($request->id);
         $invoice->is_sent = '1';
         $save = $invoice->save();
+        $history = new InvoiceHistories();
+        $history->invoice_id = $invoice->invoice_id;
+        $history->action_type = 'sent';
+        $history->user_name = auth()->user()->name;
+        $history->save();
         if ($save) {
             return json_encode(
                 array(
                     'status'=> 'success',
-                    'msg'=> 'Invoice successfully sent'
+                    'msg'=> 'Invoice successfully sent.'
                 )
             );
         } else {
@@ -229,5 +259,63 @@ class InvoiceController extends Controller
         $pdf = PDF::loadView('myPDF', $data);
   
         return $pdf->download('itsolutionstuff.pdf');
+    }
+
+    public function get_invoice_history(Request $request) {
+
+        $histories = InvoiceHistories::where('invoice_id', $request->invoice_id)->orderBy('created_at', 'desc')->get();
+        $response;
+        if($histories) {
+            $response = array(
+                'status' => 'success',
+                'message' => 'Invoice History successfully gotten.',
+                'data' => $histories
+            );
+        } else {
+            $response = array(
+                'status' => 'error',
+                'message' => 'Something went wrong while getting history',
+                'data' => []
+            );
+        }
+        return json_encode($response);
+    }
+
+    public function get_payment_history(Request $request) {
+
+        $histories = PaymentHistory::where('invoice_id', $request->invoice_id)->orderBy('created_at', 'desc')->get();
+        $response;
+        if($histories) {
+            $response = array(
+                'status' => 'success',
+                'message' => 'PaymentHistory History successfully gotten.',
+                'data' => $histories
+            );
+        } else {
+            $response = array(
+                'status' => 'error',
+                'message' => 'Something went wrong while getting history',
+                'data' => []
+            );
+        }
+        return json_encode($response);
+    }
+
+    public function view_invoice($id) {
+        $invoice=Invoice::Find($id);
+        $patient = Patient::Find($invoice->civil_id);
+        // $patients=Patient::where('status', 'published')->get();
+        $service_ids = explode (",", $invoice->service_ids);
+        // print_r($service_ids);
+        // exit();
+        $services = array();
+        foreach ($service_ids as $service_id) {
+            $services[] = Service::Find($service_id);
+        }
+        // print_r($services);
+        // exit();
+        // $services=Service::where('status', 'published')->get();
+        $star=$this->star;
+        return view('back.invoice-view', compact('invoice','invoice','services','star', 'patient', 'services'));
     }
 }

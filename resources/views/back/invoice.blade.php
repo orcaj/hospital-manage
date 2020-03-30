@@ -15,6 +15,12 @@
 
       }
       .pime-grid-filter{float:left;margin-left:10px}
+      .history_user {
+        color: blue;
+      }
+      .history_payment_method {
+        color: blue;
+      }
     </style>
     <!-- BEGIN: Content-->
     <div class="app-content content">
@@ -41,8 +47,8 @@
                               <div class="card-header space-bet">
                                 <h3 class="card-title" id="emailCompose">Invoice List</h3>
                                 <div class="form-inline">
-                                    <a href="{{route('invoice.create')}}" class="btn btn-primary"><i class="feather icon-user-plus"></i>&nbspCreate</a>
-                                <a href="{{ route('invoi.download_invoice', 'xlsx') }}" class="btn btn-success" style="margin-left: 10px" >Download Excel</a>
+                                    <a href="{{route('invoice.create')}}" class="btn btn-primary"><i class="feather icon-plus"></i>&nbspCreate</a>
+                                <a href="{{ route('invoi.download_invoice', 'xlsx') }}" class="btn btn-success" style="margin-left: 10px" ><i class="feather icon-download"></i>Download Excel</a>
                                 <!-- <a href="{{ route('invoi.download_pdf') }}" class="btn btn-success" style="margin-left: 10px" >Download PDF</a> -->
                                 </div>
                             </div>
@@ -100,18 +106,21 @@
                                                             <i class="feather icon-check-circle"></i>
                                                         </a>
                                                         @else
-                                                        <a href="#" class="primary edit mr-1" onclick="sendInvoice({{$invoice->id}})">
+                                                        <a href="#" class="primary edit mr-1" onclick="sendInvoice({{$invoice->id}}, this)">
                                                             <i class="feather icon-navigation"></i>
                                                         </a>
                                                         @endif
-                                                        <a href="{{route('invoice.edit', $invoice->id )}}" class="primary edit mr-1">
+                                                        <a href="{{route('invoice.view_invoice', $invoice->id )}}" class="primary edit mr-1">
                                                             <i class="feather icon-eye"></i>
                                                         </a>
                                                         <a href="{{route('invoice.edit', $invoice->id )}}" class="primary edit mr-1">
                                                             <i class="feather icon-edit-1"></i>
                                                         </a>
-                                                        <a href="{{route('invoice.edit', $invoice->id )}}" class="primary edit mr-1">
-                                                            <i class="fa fa-history"></i>
+                                                        <a href="#" onclick="openInvoiceHistoryModal('{{$invoice->invoice_id}}')"  class="primary edit mr-1">
+                                                          <i class="fa fa-history"></i>
+                                                        </a>
+                                                        <a href="#" onclick="openPaymentHistoryModal('{{$invoice->invoice_id}}')" class="primary edit mr-1">
+                                                            <i class="fa fa-money"></i>
                                                         </a>
                                                         @if(auth()->user()->type != 'staff')
                                                         <a href="{{route('home')}}" onclick="event.preventDefault(); confirm_delete({{$invoice->id}})"
@@ -138,6 +147,27 @@
             </div>
         </div>
     </div>
+
+<div class="modal fade text-left" id="invoice_history_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title" id="myModalLabel35">Invoice History</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+            <div class="modal-body">
+                <div class="widget-timeline">
+                  <ul id="history_content">
+                      No data to display.
+                  </ul>
+              </div>
+            </div>
+    </div>
+  </div>
+</div>
+
     <!-- END: Content-->
      <form id="multi-delete" action="{{route('invoi.multi_delete')}}" method="post">
         @csrf
@@ -283,7 +313,7 @@
         }
     }
 
-    function sendInvoice(id) {
+    function sendInvoice(id, obj) {
         event.preventDefault();
         Swal.fire({
           title: "Send Invoice",
@@ -300,11 +330,109 @@
           if (result.value) {
             $.post("{{route('invoi.send_invoice')}}", {id: id, _token:"{{csrf_token()}}"}, function(data) {
                 console.log(data)
+                var object = JSON.parse(data);
+                if (object.status=='success') {
+                  toastr.success(object.status, object.msg, {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
+                  $(obj).children().first().removeClass('icon-navigation').addClass('icon-check-circle');;
+                }
             })
-            toastr.success("sent", "Invoice sent", {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
           }
         });
     }
+
+    function openInvoiceHistoryModal(invoice_id) {
+      console.log(invoice_id);
+      $("#invoice_history_modal").modal();
+      $("#history_content").html('No data to display');
+      $.post("{{route('invoi.get_invoice_history')}}", {invoice_id: invoice_id, _token:"{{csrf_token()}}"}, function(data) {
+        var obj = JSON.parse(data);
+        if (obj.status === 'success') {
+          var content = '';
+          for (var i = 0 ; i < obj.data.length; i ++) {
+            var his = obj.data[i];
+            // console.log(his);
+            switch(his.action_type) {
+              case 'created':
+                var item = `<li class="timeline-items timeline-icon-success">
+                                <p class="timeline-time">` + his.created_at + `</p>
+                                <div class="timeline-title">` + his.action_type.toUpperCase() + `</div>
+                                <div class="timeline-subtitle">Invoice ` + his.action_type + " by " + his.user_name + `</div>
+                            </li>`;
+                content += item;
+                break;
+              case 'published':
+                var item = `<li class="timeline-items timeline-icon-info">
+                                <p class="timeline-time">` + his.created_at + `</p>
+                                <div class="timeline-title">` + his.action_type.toUpperCase() + `</div>
+                                <div class="timeline-subtitle">Invoice ` + his.action_type + " by " + his.user_name + `</div>
+                            </li>`;
+                content += item;            
+                break;
+              case 'unpublished':
+                var item = `<li class="timeline-items timeline-icon-danger">
+                                <p class="timeline-time">` + his.created_at + `</p>
+                                <div class="timeline-title">` + his.action_type.toUpperCase() + `</div>
+                                <div class="timeline-subtitle">Invoice ` + his.action_type + " by " + his.user_name + `</div>
+                            </li>`;
+                content += item;
+                break;
+              case 'sent':
+                var item = `<li class="timeline-items timeline-icon-info">
+                                <p class="timeline-time">` + his.created_at + `</p>
+                                <div class="timeline-title">` + his.action_type.toUpperCase() + `</div>
+                                <div class="timeline-subtitle">Invoice ` + his.action_type + " by " + his.user_name + `</div>
+                            </li>`;
+                content += item;
+                break;
+
+            }
+            // console.log(content);
+            $("#history_content").html(content);
+          }
+        }
+      })
+    }
+
+    function openPaymentHistoryModal(invoice_id) {
+      // console.log(invoice_id);
+      $("#invoice_history_modal").modal();
+      $("#history_content").html('No data to display');
+      $.post("{{route('invoi.get_payment_history')}}", {invoice_id: invoice_id, _token:"{{csrf_token()}}"}, function(data) {
+        var obj = JSON.parse(data);
+        // console.log(obj)
+        if (obj.status === 'success') {
+          var content = '';
+          for (var i = 0 ; i < obj.data.length; i ++) {
+            var his = obj.data[i];
+            console.log(his);
+            switch(his.status) {
+              case 'success':
+                var item = `<li class="timeline-items timeline-icon-success">
+                                <p class="timeline-time">` + his.created_at + `</p>
+                                <div class="timeline-title">Payment  Successed.</div>
+                                <div class="timeline-subtitle">Paid by <label class="history_user">` + his.user_name + `,&nbsp </label>
+                                  <label>Type: </label><label class="history_payment_method" style='padding-top: 8px;'>&nbsp` + his.payment_method.toUpperCase() + `, </label> &nbsp &nbsp
+                                  <label>Amount: </label><label>&nbsp$ <b style="color: black">` + his.amount + `</b></label>
+                                </div>
+                            </li>`;
+                content += item;
+                break;
+              case 'published':
+                var item = `<li class="timeline-items timeline-icon-info">
+                                <p class="timeline-time">` + his.created_at + `</p>
+                                <div class="timeline-title">` + his.action_type.toUpperCase() + `</div>
+                                <div class="timeline-subtitle">Invoice ` + his.action_type + " by " + his.user_name + `</div>
+                            </li>`;
+                content += item;            
+                break;
+            }
+            // console.log(content);
+            $("#history_content").html(content);
+          }
+        }
+      })
+    }
+
     $(function(){
         $("#selectAll").click(function() {
             console.log($(this).prop("checked"))

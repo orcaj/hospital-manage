@@ -37,7 +37,6 @@ Route::group(['middleware' => ['web','auth']], function(){
     Route::post('pat/get_patient_detail', 'PatientController@get_patient_detail')->name('pat.get_patient_detail');
     Route::post('pat/add_patient_on_invoice', 'PatientController@add_patient_on_invoice')->name('pat.add_patient_on_invoice');
 
-	Route::get('add-invoice', 'InvoiceController@view_add_invoice')->name('invoice.view_add_invoice');
 	Route::post('pat/confirm_create', 'PatientController@confirm_create')->name('pat.confirm_create');
 	Route::post('staf/confirm_create', 'StaffController@confirm_create')->name('staf.confirm_create');
 	Route::post('staf/multi_delete', 'StaffController@multi_delete')->name('staf.multi_delete');
@@ -57,6 +56,8 @@ Route::group(['middleware' => ['web','auth']], function(){
     Route::post('servi/get_service_by_doctor_depart', 'ServiceController@get_service_by_doctor_depart')->name('servi.get_service_by_doctor_depart');
     Route::post('servi/get_service_detail_on_invoice', 'ServiceController@get_service_detail_on_invoice')->name('servi.get_service_detail_on_invoice');
 
+    // Route::get('add-invoice', 'InvoiceController@view_add_invoice')->name('invoice.view_add_invoice');
+    Route::get('invoi/view_invoice/{id}', 'InvoiceController@view_invoice')->name('invoice.view_invoice');
     Route::post('invoi/add_invoice', 'InvoiceController@add_invoice')->name('invoi.add_invoice');
     Route::post('invoi/multi_delete', 'InvoiceController@multi_delete')->name('invoi.multi_delete');
     Route::post('invoi/multi_status', 'InvoiceController@multi_status')->name('invoi.multi_status');
@@ -64,6 +65,9 @@ Route::group(['middleware' => ['web','auth']], function(){
     Route::post('invoi/view_invoice/{id}', 'InvoiceController@view_invoice')->name('invoi.view_invoice');
     Route::get('invoi/download_invoice/{type}', 'InvoiceController@download_invoice')->name('invoi.download_invoice');
     Route::get('invoi/download_pdf', 'InvoiceController@download_pdf')->name('invoi.download_pdf');
+    Route::post('invoi/get_invoice_history', 'InvoiceController@get_invoice_history')->name('invoi.get_invoice_history');
+    Route::post('invoi/get_payment_history', 'InvoiceController@get_payment_history')->name('invoi.get_payment_history');
+    Route::post('invoi/add_invoice', 'InvoiceController@add_invoice')->name('invoi.add_invoice');
 
 	Route::group(['middleware' => ['super']], function(){
 

@@ -603,7 +603,7 @@
             return;
         }
 
-        if (Number($("#total_due").html())==0){
+        if (Number($("#subtotal").html())==0){
             toastr.error('Please select at least 1 service.', 'Error!', {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000, positionClass: 'toast-top-center', containerId: 'toast-top-center'});
              return;
         }

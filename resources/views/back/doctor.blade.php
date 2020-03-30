@@ -191,7 +191,7 @@
             var items=$(".check_item:checked");
             var msg = '';
             status=$("#status_sel").val();
-            if (status == 'Publish')
+            if (status == 'publish')
               msg = 'Are you sure you want to publish these records?';
             else msg = 'Are you sure you want to unpublish these records?';
             if(status != ""){
@@ -268,7 +268,6 @@
                 }
                 del_btn();
             });
-
         })
     </script>
 @endsection

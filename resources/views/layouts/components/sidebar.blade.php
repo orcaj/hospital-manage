@@ -12,35 +12,15 @@
                     </a>
                 </li>
 
-
-                <!-- <li class=" nav-item invoice">
+                <li class=" nav-item invoice">
                     <a href="{{route('invoice.index')}}">
-                        <i class="feather icon-file-text"></i>
-                        <span class="menu-title" data-i18n="Invoice">Invoice</span>
-                    </a>
-                </li> -->
-                <!-- <li class=" nav-item"><a href=""><i class="feather icon-file-text"></i><span class="menu-title" data-i18n="Invoice">Invoice</span></a>
-                    <ul class="menu-content">
-                        <li><a class="menu-item" href="invoice-list.html" data-i18n="Invoice List">Invoice List</a>
-                        </li>
-                        <li><a class="menu-item" href="invoice-view.html" data-i18n="Invoice View">Invoice View</a>
-                        </li>
-                        <li><a class="menu-item" href="invoice-edit.html" data-i18n="Invoice Edit">invoice Edit</a>
-                        </li>
-                        <li>
-                            <a class="menu-item" href="{{route('invoice.create')}}" data-i18n="Invoice Add">invoice Add</a>
-                        </li>
-                    </ul>
-                </li> -->
-                <li class=" nav-item patient">
-                    <a href="{{route('invoice.index')}}">
-                        <i class="feather icon-user-x"></i>
+                        <i class="feather icon-book"></i>
                         <span class="menu-title" data-i18n="Patients">Invoice</span>
                     </a>
                 </li>
                 <li class=" nav-item patient">
                     <a href="{{route('patients.index')}}">
-                        <i class="feather file-text"></i>
+                        <i class="feather icon-user-x"></i>
                         <span class="menu-title" data-i18n="Patients">Patients</span>
                     </a>
                 </li>
