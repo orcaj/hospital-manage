@@ -33,7 +33,7 @@ class InvoicesExport implements FromCollection,WithHeadings,WithMapping
             $invoice->invoice_id,
             $invoice->total_due,
             $invoice->created_at,
-            $invoice->civil_id,
+            $invoice->getPatient->name,
             $invoice->status
         ];
     }
