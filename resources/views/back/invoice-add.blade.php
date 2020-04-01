@@ -184,7 +184,7 @@
                                                     <span class="cost-value">$ <span id="total_due">0.00</span></span>
                                                 </li>
                                             </ul>
-                                            <button class="btn btn-primary mt-1 btn-block" onclick="saveInvoice()">Save</button>
+                                            <button class="btn btn-primary mt-1 btn-block" onclick="saveInvoice(0)">Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -194,9 +194,9 @@
                     <div class="col-xl-3 col-md-4 col-12">
                         <div class="action-buttons card">
                             <div class="card-body">
-                                <button class="btn btn-block btn-primary mb-1"><i class="fa fa-share common-size"></i> Send
+                                <button class="btn btn-block btn-primary mb-1" onclick="saveInvoice(1)"><i class="fa fa-share common-size"></i> Send
                                     Invoice</button>
-                                <button class="btn btn-block btn-primary mb-1">Download Invoice</button>
+                                <!-- <button class="btn btn-block btn-primary mb-1">Download Invoice</button> -->
                                 <!-- <div class="inline-btns w-100 d-flex justify-content-between">
                                     <div class="btn-save w-50 mr-50">
                                         <button class="btn btn-light mb-1 btn-block">Preview</button>
@@ -218,7 +218,7 @@
                                             <input type="checkbox" aria-label="Checkbox for following text input" id="is_full" onchange="changeIsFull()">&nbsp; In Full
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control" name="received_amount" id="received_amount" aria-label="Text input with checkbox" onblur="setTotalPaid()">
+                                    <input type="number" class="form-control" name="received_amount" id="received_amount" min="0" aria-label="Text input with checkbox" onblur="setTotalPaid()">
                                 </div>
                                 <div class="form-group mb-25 payment_received_section
                                 " style="margin-top:5px">
@@ -487,9 +487,6 @@
         if (isFull) {
             $("#received_amount").val(invoice_total);
             $("#total_paid").html(invoice_total);
-        } else {
-            $("#received_amount").val(0);
-            $("#total_paid").html(0);
         }
     }
 
@@ -502,7 +499,13 @@
         var deletedDiscount = Number(discountEle.html());
         var discountPrice = deletedPrice * (deletedDiscount/100);
         var totalDeleted = deletedPrice - discountPrice;
-        // console.log(priceEle, deletedPrice);
+
+        var changedSubTotal = Number(Number($("#subtotal").html()) - deletedPrice);
+        $("#subtotal").html(changedSubTotal);
+        $("#total_discount").html(Number(Number($("#total_discount").html()) - discountPrice));
+        $("#invoice_total").html(Number(Number($("#invoice_total").html()) - totalDeleted));
+        $("#total_due").html(Number(Number($("#invoice_total").html()) - $("#received_amount").val()));
+        console.log("changed sbu total", changedSubTotal);
         console.log(discountPrice, totalDeleted);
     }
     function changeReceivePayment() {
@@ -554,9 +557,6 @@
             if (isFull) {
                 $("#received_amount").val(invoice_total);
                 $("#total_paid").html(invoice_total);
-            } else {
-                $("#received_amount").val(0);
-                $("#total_paid").html(0);
             }
         }
     })
@@ -577,15 +577,7 @@
         }
     }
 
-    function saveInvoice() {
-        var obj = new Object();
-        obj.civil_id = $("#patient_id").val();
-        obj.bill_name = $("#patient_name").val();
-        obj.bill_phone = $("#patient_phone").val();
-        // obj.
-    }
-
-    function saveInvoice() {
+    function saveInvoice(is_sent) {
         console.log($("#patient_id").val())
         if(!$("#patient_id").val()) {
             toastr.error('Please select Civil Id', 'Error!', {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000, positionClass: 'toast-top-center', containerId: 'toast-top-center'});
@@ -607,6 +599,11 @@
             toastr.error('Please select at least 1 service.', 'Error!', {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000, positionClass: 'toast-top-center', containerId: 'toast-top-center'});
              return;
         }
+
+        if(Number($("#total_due").html()) < 0 ) {
+            toastr.error('You are going to pay for no service.', 'Error!', {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000, positionClass: 'toast-top-center', containerId: 'toast-top-center'});
+             return;
+        }
         
         var obj = new Object();
         obj.civil_id = $("#patient_id").val();
@@ -616,6 +613,13 @@
         var services = $(".service_id");
         for(var i = 0; i < services.length; i ++ ) {
             service_ids.push($(services[i]).val());
+        }
+        var discount_percents = [];
+        var discount_arr = $(".discount-value");
+        for ( var i = 0; i < discount_arr.length ; i ++) {
+            var ele = $(discount_arr[i]);
+            var discount = Number(ele.html());
+            discount_percents.push(discount);
         }
         // services.forEach(ele => {
             
@@ -634,7 +638,8 @@
         obj.payment_type = $("#payment_type").val();
         obj.show_client_notes = $("#show_client_notes").is(":checked") == true ? 1 : 0;
         obj.show_payment_terms = $("#show_payment_terms").is(":checked") == true ? 1 : 0;
-        obj.is_sent = 0;
+        obj.is_sent = is_sent;
+        obj.discount_percents = discount_percents.toString();
         obj.invoice_id = `INV-${Number(new Date())}${generateInvoice(3)}`;
         console.log(obj);
         $.post("{{route('invoi.add_invoice')}}", {data: obj, _token:"{{csrf_token()}}"}, function(data) {

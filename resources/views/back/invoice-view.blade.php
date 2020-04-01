@@ -155,8 +155,8 @@
                                 <button class="btn btn-primary btn-block mb-1" onclick="sendInvoice({{$invoice->id}})"> <i class="feather icon-check mr-25 common-size"></i> Send Invoice</button>
                                 @endif
                                 <a href="#" class="btn btn-info btn-block mb-1 print-invoice"> <i class="feather icon-printer mr-25 common-size"></i> Print</a>
-                                <a href="invoice-edit.html" class="btn btn-info btn-block mb-1"><i class="feather icon-edit-2 mr-25 common-size"></i> Edit Invoice</a>
-                                <a href="#" class="btn btn-success btn-block mb-1"><i class="feather icon-credit-card mr-25 common-size"></i> Add Payment</a>
+                                <a href="{{route('invoice.edit', $invoice->id )}}" class="btn btn-info btn-block mb-1"><i class="feather icon-edit-2 mr-25 common-size"></i> Edit Invoice</a>
+                                <!-- <a href="{{route('invoi.download_pdf', $invoice->id)}}" class="btn btn-primary btn-block mb-1" onclick="downloadPdf({{$invoice->id}})"> <i class="feather icon-download"></i> Download PDF</a> -->
                             </div>
                         </div>
                     </div>

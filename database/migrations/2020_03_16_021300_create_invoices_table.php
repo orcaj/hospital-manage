@@ -34,6 +34,7 @@ class CreateInvoicesTable extends Migration
             $table->string('civil_id', 190);
             $table->string('status', 190)->default('published');
             $table->date('status_date')->nullable();
+            $table->string('discount_percents', 200)->nullable();
             $table->timestamps();
         });
     }

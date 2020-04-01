@@ -80,10 +80,19 @@ class InvoiceController extends Controller
     public function edit($id)
     {
         $invoice=Invoice::Find($id);
-        $patients=Patient::all();
-        $services=Service::all();
+        $patient = Patient::Find($invoice->civil_id); //get patient for invoice
+        $patients=Patient::all();   //get all patients list for dropdown
+        $services=Service::all();   //get all services list for dropdown
+        $doctors = Doctor::all();   //get all doctors list for dropdown
+        $ids=explode(',', $invoice->service_ids);   //get saved service ids for invoice, 
+        $saved_services = array();  //convert to array
+        foreach ($ids as $id) {
+            $saved_services[] = Service::Find($id);
+        }
+        $saved_percents = explode(',', $invoice->discount_percents);
+        $departments = Department::all();   //get all department list for dropdown
         $star=$this->star;
-        return view('back.invoice-manage', compact('invoice','patients','services','star'));
+        return view('back.invoice-edit', compact('invoice','patients','services','star', 'departments', 'patient', 'saved_services', 'doctors', 'saved_percents'));
 
     }
 
@@ -160,6 +169,7 @@ class InvoiceController extends Controller
         $invoice->show_client_notes = $data['show_client_notes'];
         $invoice->show_payment_terms = $data['show_payment_terms'];
         $invoice->is_sent = $data['is_sent'];
+        $invoice->discount_percents = $data['discount_percents'];
         $save =  $invoice->save();
 
         //save invoice history 
@@ -189,6 +199,61 @@ class InvoiceController extends Controller
             $result = array(
                 'status' => 'error',
                 'msg' => 'Something went wrong while add invoice.'
+            );
+        }
+        return json_encode($result);
+    }
+
+    public function update_invoice(Request $request) {
+        $data = $request->data;
+        $invoice = Invoice::Find($data['id']);
+        $invoice->civil_id = $data['civil_id'];
+        $invoice->invoice_id = $data['invoice_id'];
+        $invoice->due_date = $data['due_date'];
+        $invoice->appointment_date = $data['appointment_date'];
+        $invoice->service_ids = $data['service_ids'];
+        $invoice->sub_total = $data['sub_total'];
+        $invoice->total_discount = $data['total_discount'];
+        $invoice->invoice_total = $data['invoice_total'];
+        $invoice->total_paid = $data['total_paid'];
+        $invoice->total_due = $data['total_due'];
+        $invoice->payment_terms = $data['payment_terms'];
+        $invoice->client_notes = $data['client_notes'];
+        $invoice->received_payment = $data['received_payment'];
+        $invoice->payment_type = $data['payment_type'];
+        $invoice->show_client_notes = $data['show_client_notes'];
+        $invoice->show_payment_terms = $data['show_payment_terms'];
+        $invoice->is_sent = $data['is_sent'];
+        $invoice->discount_percents = $data['discount_percents'];
+        $save =  $invoice->save();
+
+        //save invoice history
+        $history = new InvoiceHistories();
+        $history->invoice_id = $invoice->invoice_id;
+        $history->action_type = $data['action_type'];
+        $history->user_name = auth()->user()->name;
+        $history->save();
+
+        //if there is paid amount
+        if ($data['additional_amount'] > 0) {
+            $history = new PaymentHistory();
+            $history->invoice_id = $invoice->invoice_id;
+            $history->payment_method = $data['payment_type'];
+            $history->amount = $data['additional_amount'];
+            $history->user_name = auth()->user()->name;
+            $history->status = 'success';
+            $history->save();
+        }
+        $result;
+        if($save) {
+            $result = array(
+                'status' => 'success',
+                'msg' => 'Invoice successfully updated.'
+            );
+        } else {
+            $result = array(
+                'status' => 'error',
+                'msg' => 'Something went wrong while edit invoice.'
             );
         }
         return json_encode($result);
@@ -253,12 +318,25 @@ class InvoiceController extends Controller
         return Excel::download(new InvoicesExport, 'invoices.'.$type);
     }
 
-    public function download_pdf()
+    public function download_pdf($id)
     {
-        $data = ['title' => 'Welcome to HDTuto.com'];
-        $pdf = PDF::loadView('myPDF', $data);
-  
-        return $pdf->download('itsolutionstuff.pdf');
+        $invoice = Invoice::Find($id);
+        $patient = Patient::Find($invoice->civil_id);
+        // $patients=Patient::where('status', 'published')->get();
+        $service_ids = explode (",", $invoice->service_ids);
+        // print_r($service_ids);
+        // exit();
+        $services = array();
+        foreach ($service_ids as $service_id) {
+            $services[] = Service::Find($service_id);
+        }
+        $data = ['title' => 'Invoice', 'invoice' => $invoice, 'patient' => $patient, 'services' => $services];
+        
+        return view('myPDF', compact('invoice','invoice','services', 'patient', 'services'));
+
+        // $pdf = PDF::loadView('myPDF', $data);
+    
+        // return $pdf->download('itsolutionstuff.pdf');
     }
 
     public function get_invoice_history(Request $request) {

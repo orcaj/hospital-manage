@@ -49,7 +49,7 @@
                                 <div class="form-inline">
                                     <a href="{{route('invoice.create')}}" class="btn btn-primary"><i class="feather icon-plus"></i>&nbspCreate</a>
                                 <a href="{{ route('invoi.download_invoice', 'xlsx') }}" class="btn btn-success" style="margin-left: 10px" ><i class="feather icon-download"></i>Download Excel</a>
-                                <!-- <a href="{{ route('invoi.download_pdf') }}" class="btn btn-success" style="margin-left: 10px" >Download PDF</a> -->
+                               
                                 </div>
                             </div>
                                 <div class="card-body">
@@ -101,7 +101,7 @@
                                                         @endif
                                                     </td>
                                                     <td class="text-center">
-                                                        @if($invoice->is_sent=='1')
+                                                        @if($invoice->is_sent == 1)
                                                         <a href="#" class="primary edit mr-1" style="pointer-events: none;cursor: no-drop">
                                                             <i class="feather icon-check-circle"></i>
                                                         </a>
@@ -125,7 +125,7 @@
                                                         @if(auth()->user()->type != 'staff')
                                                         <a href="{{route('home')}}" onclick="event.preventDefault(); confirm_delete({{$invoice->id}})"
                                                          class="danger delete mr-1"><i class="feather icon-trash"></i></a>
-                                                        <form id="delete-form{{$invoice->id}}" action="{{route('invoice.destroy',  $invoice->id  )}}" method="post">
+                                                        <form id="delete-form{{$invoice->id}}" action="{{route('invoice.destroy', $invoice->id)}}" method="post">
                                                             @csrf
                                                             @method('delete')
                                                         @endif
@@ -377,6 +377,14 @@
                 content += item;
                 break;
               case 'sent':
+                var item = `<li class="timeline-items timeline-icon-info">
+                                <p class="timeline-time">` + his.created_at + `</p>
+                                <div class="timeline-title">` + his.action_type.toUpperCase() + `</div>
+                                <div class="timeline-subtitle">Invoice ` + his.action_type + " by " + his.user_name + `</div>
+                            </li>`;
+                content += item;
+                break;
+              default:
                 var item = `<li class="timeline-items timeline-icon-info">
                                 <p class="timeline-time">` + his.created_at + `</p>
                                 <div class="timeline-title">` + his.action_type.toUpperCase() + `</div>

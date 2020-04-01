@@ -64,10 +64,11 @@ Route::group(['middleware' => ['web','auth']], function(){
     Route::post('invoi/send_invoice', 'InvoiceController@send_invoice')->name('invoi.send_invoice');
     Route::post('invoi/view_invoice/{id}', 'InvoiceController@view_invoice')->name('invoi.view_invoice');
     Route::get('invoi/download_invoice/{type}', 'InvoiceController@download_invoice')->name('invoi.download_invoice');
-    Route::get('invoi/download_pdf', 'InvoiceController@download_pdf')->name('invoi.download_pdf');
+    Route::get('invoi/download_pdf/{id}', 'InvoiceController@download_pdf')->name('invoi.download_pdf');
     Route::post('invoi/get_invoice_history', 'InvoiceController@get_invoice_history')->name('invoi.get_invoice_history');
     Route::post('invoi/get_payment_history', 'InvoiceController@get_payment_history')->name('invoi.get_payment_history');
     Route::post('invoi/add_invoice', 'InvoiceController@add_invoice')->name('invoi.add_invoice');
+    Route::post('invoi/update_invoice', 'InvoiceController@update_invoice')->name('invoi.update_invoice');
 
 	Route::group(['middleware' => ['super']], function(){
 
