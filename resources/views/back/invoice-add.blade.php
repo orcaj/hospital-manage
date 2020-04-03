@@ -164,24 +164,24 @@
                                             <ul class="list-group cost-list">
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Subtotal </span>
-                                                    <span class="cost-value">$ <span id="subtotal">00.00</span></span>
+                                                    <span class="cost-value">KWD <span id="subtotal">00.00</span></span>
                                                 </li>
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Discount </span>
-                                                    <span class="cost-value">-$ <span id="total_discount">0.00</span></span>
+                                                    <span class="cost-value">-KWD <span id="total_discount">0.00</span></span>
                                                 </li>
                                                 <li class="dropdown-divider"></li>
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Invoice Total </span>
-                                                    <span class="cost-value">$ <span id="invoice_total">00.00</span></span>
+                                                    <span class="cost-value">KWD <span id="invoice_total">00.00</span></span>
                                                 </li>
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Total Paid </span>
-                                                    <span class="cost-value" >$ <sapn id="total_paid">00.00</sapn></span>
+                                                    <span class="cost-value" >KWD <sapn id="total_paid">00.00</sapn></span>
                                                 </li>
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Total Due (USD) </span>
-                                                    <span class="cost-value">$ <span id="total_due">0.00</span></span>
+                                                    <span class="cost-value">KWD <span id="total_due">0.00</span></span>
                                                 </li>
                                             </ul>
                                             <button class="btn btn-primary mt-1 btn-block" onclick="saveInvoice(0)">Save</button>
@@ -640,7 +640,7 @@
         obj.show_payment_terms = $("#show_payment_terms").is(":checked") == true ? 1 : 0;
         obj.is_sent = is_sent;
         obj.discount_percents = discount_percents.toString();
-        obj.invoice_id = `INV-${Number(new Date())}${generateInvoice(3)}`;
+        obj.invoice_id = `CMC-ON-${Number(new Date())}${generateInvoice(3)}`;
         console.log(obj);
         $.post("{{route('invoi.add_invoice')}}", {data: obj, _token:"{{csrf_token()}}"}, function(data) {
             console.log(data);

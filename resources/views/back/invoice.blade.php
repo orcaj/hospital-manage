@@ -21,6 +21,9 @@
       .history_payment_method {
         color: blue;
       }
+      .patient-detail-row {
+        margin-top: 4px;
+      }
     </style>
     <!-- BEGIN: Content-->
     <div class="app-content content">
@@ -82,7 +85,7 @@
                                                     <td>{{$invoice->invoice_id}}</td>
                                                     <td>$ {{$invoice->total_due}} </td>
                                                     <td> {{date('j F, Y', strtotime($invoice->created_at))}} </td>
-                                                    <td>{{$invoice->getPatient->name}}</td>
+                                                    <td><button class="btn btn-success btn-sm" onclick="showPatientDetail({{$invoice->civil_id}})">{{$invoice->getPatient->name}}</button></td>
                                                     <td>
                                                         @if($invoice->total_due == 0)
                                                             <span class="badge badge-success badge-pill">PAID</span>
@@ -163,6 +166,66 @@
                       No data to display.
                   </ul>
               </div>
+            </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade text-left" id="patient_detail_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title" id="myModalLabel35">Patient Detail</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+            <div class="modal-body">
+                <div class="row patient-detail-row">
+                  <div class="col-2"></div>
+                  <div class="col-5">
+                    Civil Id
+                  </div>
+                  <div class="col-4" id="pat_civil_id">
+                                   
+                  </div>
+                </div>
+                <div class="row patient-detail-row">
+                  <div class="col-2"></div>
+                  <div class="col-5">
+                    Name
+                  </div>
+                  <div class="col-4" id="pat_name">
+                                   
+                  </div>
+                </div>
+                <div class="row patient-detail-row">
+                  <div class="col-2"></div>
+                  <div class="col-5">
+                    Phone number
+                  </div>
+                  <div class="col-4" id="pat_phone">
+                                     
+                  </div>
+                </div>
+                <div class="row patient-detail-row">
+                  <div class="col-2"></div>
+                  <div class="col-5">
+                    Email
+                  </div>
+                  <div class="col-5" id="pat_email">
+                                  
+                  </div>
+                </div>
+                <div class="row patient-detail-row">
+                  <div class="col-2"></div>
+                  <div class="col-5">
+                    Address
+                  </div>
+                  <div class="col-5" id="pat_address">
+                                     
+                  </div>
+                </div>
             </div>
     </div>
   </div>
@@ -437,6 +500,22 @@
             // console.log(content);
             $("#history_content").html(content);
           }
+        }
+      })
+    }
+
+    function showPatientDetail(patient_id) {
+      // console.log(patient_id);
+      $("#patient_detail_modal").modal();
+      $.post("{{route('pat.get_patient_detail')}}", {id: patient_id, _token:"{{csrf_token()}}"}, function(data) {
+        console.log(data);
+        var obj = JSON.parse(data);
+        if (obj) {
+          $("#pat_civil_id").html(obj.civil_id);
+          $("#pat_name").html(obj.name);
+          $("#pat_phone").html(obj.phone);
+          $("#pat_email").html(obj.email);
+          $("#pat_address").html(obj.address);
         }
       })
     }

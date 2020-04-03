@@ -100,7 +100,7 @@
                                                 <td>{{$service->name}}</td>
                                                 <td>{{$service->getDoctor->name}}</td>
                                                 <td>{{$service->getDepartment->name}}</td>
-                                                <td class="font-weight-bold">${{$service->price}}</td>
+                                                <td class="font-weight-bold">KWD {{$service->price}}</td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -112,30 +112,35 @@
                                 <div class="invoice-total py-2">
                                     <div class="row">
                                         <div class="col-4 col-sm-6 mt-75">
-                                            <p>Thanks for your business.</p>
+                                            @if($invoice->show_payment_terms == 1)
+                                            <p id="payment_terms" style="padding-left: 15px">Payment terms: {{$invoice->payment_terms}}</p>
+                                            @endif
+                                            @if($invoice->show_client_notes == 1)
+                                            <p id="client_terms" style="padding-left: 15px">Client notes: {{$invoice->client_notes}}</p>
+                                            @endif
                                         </div>
                                         <div class="col-8 col-sm-6 d-flex justify-content-end mt-75">
                                             <ul class="list-group cost-list">
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Subtotal </span>
-                                                    <span class="cost-value">$ {{$invoice->sub_total}}</span>
+                                                    <span class="cost-value">KWD {{$invoice->sub_total}}</span>
                                                 </li>
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Discount </span>
-                                                    <span class="cost-value">-$ {{$invoice->total_discount}}</span>
+                                                    <span class="cost-value">-KWD {{$invoice->total_discount}}</span>
                                                 </li>
                                                 <li class="dropdown-divider"></li>
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Invoice Total </span>
-                                                    <span class="cost-value">$ {{$invoice->invoice_total}}</span>
+                                                    <span class="cost-value">KWD {{$invoice->invoice_total}}</span>
                                                 </li>
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Total Paid </span>
-                                                    <span class="cost-value">-$ {{$invoice->total_paid}}</span>
+                                                    <span class="cost-value">-KWD {{$invoice->total_paid}}</span>
                                                 </li>
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Total Due </span>
-                                                    <span class="cost-value">$ {{$invoice->total_due}}</span>
+                                                    <span class="cost-value">KWD {{$invoice->total_due}}</span>
                                                 </li>
                                             </ul>
                                         </div>

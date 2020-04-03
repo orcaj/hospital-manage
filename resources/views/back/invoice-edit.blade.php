@@ -26,12 +26,9 @@
                                         <h4 class="invoice-title text-primary">Civil Id</h4>
                                         <select class="form-control select2" id="patient_id" onchange="onPatientChange()">
                                             <option value="">Input Civil Id</option>
+                                            <option value="{{$patient->id}}" selected>{{$patient->civil_id}}</option>
                                             @foreach($patients as $patient)
-                                                @if($invoice->civil_id ==$patient->id)
-                                                <option value="{{$patient->id}}" selected>{{$patient->civil_id}}</option>
-                                                @else
                                                 <option value="{{$patient->id}}">{{$patient->civil_id}}</option>
-                                                @endif
                                             @endforeach
                                         </select>
                                        <!--  <ul role="alert"><li>This email field is required</li></ul> -->
@@ -86,6 +83,65 @@
                                 <div class="invoice-product-details">
                                     <form class="repeater-form">
                                         <div data-repeater-list="group-a">
+                                             <div data-repeater-item class="mb-1" style="display: none;">
+                                                <div class="repeater-controls d-flex">
+                                                    <div class="input-fields border border-light rounded p-1 d-flex" style="width: 100%;">
+                                                        <div class="row invoice-item-controls d-flex" style="width: 100%;">
+                                                            <div class="col-12 col-md-6 form-group item-name">
+                                                                <label>Department</label>
+                                                                <select class="form-control" onchange="changeDepart(this)">
+                                                                    <option value="">--Select department--</option>
+                                                                    @foreach($departments as $department)
+                                                                        <option value="{{$department->id}}">{{$department->name}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-12 col-md-6 form-group item-cost">
+                                                                <label>Doctor</label>
+                                                                <select class="form-control"  onchange="changeDoctor(this)">
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-12 col-md-6 form-group item-description mb-0">
+                                                                <!-- <input type="text" class="form-control description-input" value="The most developer friendly & highly customisable HTML5 Admin"> -->
+                                                                <select class="form-control service_id" style="width: 100%;" onchange="changeService(this)">
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-12 col-md-4 form-group discounts mb-0">
+                                                                <input type="text" class="form-control service_price" disabled>
+                                                            </div>
+                                                            <div class="col-12 col-md-2 form-group discounts mb-0">
+                                                                    <div class='discount-element'>
+                                                                        <span class="title-text">Discount:</span>
+                                                                        <span class="discount-value">0</span><span>%</span>
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                        <div class="delete-and-discount-config h-100 ml-50 d-flex flex-column justify-content-between">
+                                                    <span class="cursor-pointer d-flex justify-content-center align-items-center" onclick="removePanel(this)" >
+                                                                <i class="fa fa-times-circle-o font-size-increase" data-repeater-delete></i>
+                                                            </span>
+                                                            <div class="dropdown d-flex justify-content-center align-items-center">
+                                                                <span role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <i class="fa fa-cog font-size-increase m-0"></i>
+                                                                </span>
+                                                                <div class="dropdown-menu p-1 dropdown-sizing" aria-labelledby="dropdownMenuButton">
+                                                                    <div class="row invoice-taxes-controls">
+                                                                        <div class="col-12 form-group">
+                                                                            <label for="discount">Discount(%)</label>
+                                                                            <input type="number" class="form-control" id="applicable-discount" placeholder="0">
+                                                                        </div>
+                                                                        <hr>
+                                                                        <div class="col-12 buttons d-flex justify-content-between mt-1">
+                                                                            <button type="button" class="btn btn-primary discount-apply-btn">Apply</button>
+                                                                            <button type="button" class="btn btn-light cancel-btn">Cancel</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             @foreach($saved_services as $key => $cur_service)
                                             <div data-repeater-item class="mb-1">
                                                 <div class="repeater-controls d-flex">
@@ -164,6 +220,7 @@
                                                 </div>
                                             </div>
                                             @endforeach
+
                                         </div>
                                         <div class="form-group">
                                             <button data-repeater-create class="btn btn-primary mt-1" type="button">
@@ -189,24 +246,24 @@
                                             <ul class="list-group cost-list">
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Subtotal </span>
-                                                    <span class="cost-value">$ <span id="subtotal">{{$invoice->sub_total}}</span></span>
+                                                    <span class="cost-value">KWD <span id="subtotal">{{$invoice->sub_total}}</span></span>
                                                 </li>
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Discount </span>
-                                                    <span class="cost-value">-$ <span id="total_discount">{{$invoice->total_discount}}</span></span>
+                                                    <span class="cost-value">-KWD <span id="total_discount">{{$invoice->total_discount}}</span></span>
                                                 </li>
                                                 <li class="dropdown-divider"></li>
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Invoice Total </span>
-                                                    <span class="cost-value">$ <span id="invoice_total">{{$invoice->invoice_total}}</span></span>
+                                                    <span class="cost-value">KWD <span id="invoice_total">{{$invoice->invoice_total}}</span></span>
                                                 </li>
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Total Paid </span>
-                                                    <span class="cost-value" >$ <sapn id="total_paid">{{$invoice->total_paid}}</sapn></span>
+                                                    <span class="cost-value" >KWD <sapn id="total_paid">{{$invoice->total_paid}}</sapn></span>
                                                 </li>
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Total Due (USD) </span>
-                                                    <span class="cost-value">$ <span id="total_due">{{$invoice->total_due}}</span></span>
+                                                    <span class="cost-value">KWD <span id="total_due">{{$invoice->total_due}}</span></span>
                                                 </li>
                                             </ul>
                                             <button class="btn btn-primary mt-1 btn-block" onclick="saveInvoice({{$invoice->is_sent}})">Update</button>
@@ -219,7 +276,7 @@
                     <div class="col-xl-3 col-md-4 col-12">
                         <div class="action-buttons card">
                             <div class="card-body">
-                                <button class="btn btn-block btn-primary mb-1"><i class="fa fa-share common-size"></i>Update & Send
+                                <button class="btn btn-block btn-primary mb-1" onclick="saveInvoice(1)"><i class="fa fa-share common-size"></i>Update & Send
                                     Invoice</button>
                                 <!-- <button class="btn btn-block btn-primary mb-1">Download Invoice</button> -->
                                 <button class="btn btn-block btn-primary mb-1" onclick="addPaymentModal()">Add Payment</button>
@@ -289,6 +346,7 @@
                                     <div class="controls">
                                         <label>Amount</label>
                                         <input type="number" name="amount" class="form-control" placeholder="Input amount" value="" id="additional_amount" min="0">
+                                        <label>Current total due: KWD {{$invoice->total_due}}</label>
                                     </div>
                                 </div>
                             </div>
@@ -666,6 +724,12 @@ function addPaymentModal() {
 }
 function confirmAdditionalPay() {
    event.preventDefault();
+   var old_total_due = "<?php echo $invoice->total_due;?>";
+   old_total_due = Number(old_total_due);
+   if ($("#additional_amount").val() > old_total_due) {
+      toastr.error("Amount can not be bigger than total due.", "Error", {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500, positionClass: 'toast-top-center', containerId: 'toast-top-center'});
+      return;
+   }
    var current_paid = Number($("#total_paid").html());
    var new_amount = current_paid + Number($("#additional_amount").val());
    $("#total_paid").html(Number(new_amount));

@@ -125,6 +125,7 @@
                                                 	<div class="controls">
                                                         <label>Department</label>
                                                         <select class="form-control" name="department_id" required id="department" required onchange="departChange()" data-validation-required-message="Department is required">
+                                                            <option value="">--Select Department--</option>
                                                         	@foreach($departments as $department)
                                                             	<option value="{{$department->id}}">{{$department->name}}</option>
                                                         	@endforeach
