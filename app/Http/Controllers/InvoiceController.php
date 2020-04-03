@@ -29,7 +29,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices=Invoice::all();
+        $invoices=Invoice::orderBy('created_at', 'desc')->get();;
         $star=$this->star;
         return view('back.invoice', compact('invoices','star'));
     }
@@ -81,7 +81,7 @@ class InvoiceController extends Controller
     {
         $invoice=Invoice::Find($id);
         $patient = Patient::Find($invoice->civil_id); //get patient for invoice
-        $patients=Patient::all();   //get all patients list for dropdown
+        $patients=Patient::where('status', 'published');   //get all patients list for dropdown
         $services=Service::all();   //get all services list for dropdown
         $doctors = Doctor::all();   //get all doctors list for dropdown
         $ids=explode(',', $invoice->service_ids);   //get saved service ids for invoice, 

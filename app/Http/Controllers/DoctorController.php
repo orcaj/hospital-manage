@@ -145,7 +145,7 @@ class DoctorController extends Controller
     }
 
     public function get_doctor_by_department(Request $request) {
-        $doctors = Doctor::where('department_id', $request->id)->get();
+        $doctors = Doctor::where(['department_id' => $request->id, 'status' => 'published'])->get();
         return json_encode($doctors);
     }
 }

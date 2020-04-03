@@ -142,7 +142,7 @@ class ServiceController extends Controller
         $doctor_id = $request->doctorId;
         $depart_id = $request->departId;
         // echo $doctor_id.$depart_id;
-        $services = Service::where(['department_id' => $depart_id, 'doctor_id' => $doctor_id])->get();
+        $services = Service::where(['department_id' => $depart_id, 'doctor_id' => $doctor_id, 'status' => 'published'])->get();
         return json_encode($services);
     }
 
