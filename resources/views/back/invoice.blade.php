@@ -483,7 +483,7 @@
                                 <div class="timeline-title">Payment  Successed.</div>
                                 <div class="timeline-subtitle">Paid by <label class="history_user">` + his.user_name + `,&nbsp </label>
                                   <label>Type: </label><label class="history_payment_method" style='padding-top: 8px;'>&nbsp` + his.payment_method.toUpperCase() + `, </label> &nbsp &nbsp
-                                  <label>Amount: </label><label>&nbsp$ <b style="color: black">` + his.amount + `</b></label>
+                                  <label>Amount: </label><label>&nbspKWD <b style="color: black">` + his.amount + `</b></label>
                                 </div>
                             </li>`;
                 content += item;
