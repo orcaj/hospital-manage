@@ -80,6 +80,7 @@ class InvoiceController extends Controller
     public function edit($id)
     {
         $invoice=Invoice::Find($id);
+        // $cur_department = 
         $patient = Patient::Find($invoice->civil_id); //get patient for invoice
         $patients=Patient::where('status', 'published');   //get all patients list for dropdown
         $services=Service::all();   //get all services list for dropdown
