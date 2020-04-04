@@ -154,7 +154,7 @@
                                                                     @foreach($departments as $department)
                                                                         @if($department->id == $cur_service->department_id)
                                                                         <option value="{{$department->id}}" selected>{{$department->name}}</option>
-                                                                        @else
+                                                                        @elseif($department->status == 'published')
                                                                         <option value="{{$department->id}}">{{$department->name}}</option>
                                                                         @endif
                                                                     @endforeach
@@ -166,7 +166,7 @@
                                                                   @foreach($doctors as $doctor)
                                                                      @if($doctor->id == $cur_service->doctor_id)
                                                                      <option value="{{$doctor->id}}" selected>{{$doctor->name}}</option>
-                                                                     @else
+                                                                     @elseif($doctor->status == 'published' && $doctor->department_id == $cur_service->department_id)
                                                                      <option value="{{$doctor->id}}">{{$doctor->name}}</option>
                                                                      @endif
                                                                   @endforeach
@@ -177,7 +177,7 @@
                                                                   @foreach($services as $service)
                                                                      @if($service->id == $cur_service->id)
                                                                      <option value="{{$service->id}}" selected>{{$service->name}}</option>
-                                                                     @else
+                                                                     @elseif($service->status =='published' && $service->department_id == $cur_service->department_id)
                                                                      <option value="{{$service->id}}">{{$service->name}}</option>
                                                                      @endif
                                                                   @endforeach
@@ -661,6 +661,7 @@ function saveInvoice(is_sent) {
   // })
   // forEach
   console.log(service_ids);
+  service_ids = service_ids.slice(1, service_ids.length);
   obj.service_ids = service_ids.toString();
   obj.sub_total = Number($("#subtotal").html());
   obj.total_discount = Number($("#total_discount").html());
