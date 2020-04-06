@@ -16,6 +16,7 @@
                         <!-- Bootstrap card component -->
                         <div class="card">
                             <div class="card-body">
+                               
                                 <!-- logo and invoice title -->
                                 <div class="row">
                                     <div class="col-sm-3 col-12">
@@ -184,7 +185,7 @@
                                                     <span class="cost-value">KWD <span id="total_due">0.00</span></span>
                                                 </li>
                                             </ul>
-                                            <button class="btn btn-primary mt-1 btn-block" onclick="saveInvoice(0)">Save</button>
+                                            <button id="save_btn" type="submit" class="btn btn-primary mt-1 btn-block block-page" onclick="saveInvoice(0)"><i class="fa fa-circle-o-notch fa-spin fa-fw" id="spinner_icon" style="display: none;"></i> Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -255,6 +256,7 @@
                 </div>
             </div>
         </div>
+        
     </div>
 </div>
 
@@ -330,8 +332,10 @@
         </div>
     </div>
 </div>
+
 <script type="text/javascript" src="{{asset('app-assets/js/scripts/invoice-init1.js')}}"></script>
 <script type="text/javascript">
+
     function onPatientChange() {
         // console.log("chnagd");
         $.post("{{route('pat.get_patient_detail')}}", {id: $("#patient_id").val(), _token:"{{csrf_token()}}"}, function(data) {
@@ -578,7 +582,12 @@
     }
 
     function saveInvoice(is_sent) {
-        console.log($("#patient_id").val())
+        // console.log($("#patient_id").val())
+        if ($("#save_btn").hasClass("disabled")) {
+            console.log("Disabled....");
+            return;
+        }
+        // console.log("After....")
         if(!$("#patient_id").val()) {
             toastr.error('Please select Civil Id', 'Error!', {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000, positionClass: 'toast-top-center', containerId: 'toast-top-center'});
             $("#patient_id").focus();
@@ -604,7 +613,7 @@
             toastr.error('You are going to pay for no service.', 'Error!', {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 2000, positionClass: 'toast-top-center', containerId: 'toast-top-center'});
              return;
         }
-        
+        // $(".card").hide();
         var obj = new Object();
         obj.civil_id = $("#patient_id").val();
         obj.due_date = $("#due_date").val();
@@ -641,11 +650,12 @@
         obj.is_sent = is_sent;
         obj.discount_percents = discount_percents.toString();
         obj.invoice_id = `CMC-ON-${Number(new Date())}${generateInvoice(3)}`;
-        console.log(obj);
+        $('#save_btn').addClass("disabled");
+        $("#spinner_icon").show();
         $.post("{{route('invoi.add_invoice')}}", {data: obj, _token:"{{csrf_token()}}"}, function(data) {
             console.log(data);
             var obj = JSON.parse(data);
-            console.log(obj);
+            // console.log(obj);
             if(obj.status =='success') {
                 toastr.options.onHidden = function() {
                     window.location.href = "{{route('invoice.index')}}";
@@ -673,6 +683,17 @@
 
     $(function() {
         // $(".select2").select2();
+        // jQuery.ajaxSetup({
+        //   beforeSend: function() {
+        //      $('#save_btn').button('loading').delay();
+        //      $('#save_btn').addClass("disabled");
+        // // $("#spinner_icon").show();
+        //   },
+        //   complete: function(){
+        //      $("#save_btn").button('reset');
+        //   },
+        //   success: function() {}
+        // });
         $(".payment_received_section").hide();
         var today = new Date();
         var year = today.getFullYear();

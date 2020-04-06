@@ -111,7 +111,7 @@
                                 <!-- invoice total -->
                                 <div class="invoice-total py-2">
                                     <div class="row">
-                                        <div class="col-4 col-sm-6 mt-75">
+                                        <div class="col-12 col-sm-6 mt-75">
                                             @if($invoice->show_payment_terms == 1)
                                             <p id="payment_terms" style="padding-left: 15px">Payment terms: {{$invoice->payment_terms}}</p>
                                             @endif
@@ -119,7 +119,7 @@
                                             <p id="client_terms" style="padding-left: 15px">Client notes: {{$invoice->client_notes}}</p>
                                             @endif
                                         </div>
-                                        <div class="col-8 col-sm-6 d-flex justify-content-end mt-75">
+                                        <div class="col-12 col-sm-6 d-flex justify-content-end mt-75">
                                             <ul class="list-group cost-list">
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Subtotal </span>
@@ -154,11 +154,7 @@
                     <div class="col-xl-3 col-md-4 col-12 action-btns">
                         <div class="card">
                             <div class="card-body p-2">
-                                @if($invoice->is_sent == 1)
-                                <button class="btn btn-primary btn-block mb-1" disabled style="cursor: not-allowed;" onclick="sendInvoice({{$invoice->id}})"> <i class="feather icon-check mr-25 common-size"></i> Send Invoice</button>
-                                @else
                                 <button class="btn btn-primary btn-block mb-1" onclick="sendInvoice({{$invoice->id}})"> <i class="feather icon-check mr-25 common-size"></i> Send Invoice</button>
-                                @endif
                                 <a href="#" class="btn btn-info btn-block mb-1 print-invoice"> <i class="feather icon-printer mr-25 common-size"></i> Print</a>
                                 <a href="{{route('invoice.edit', $invoice->id )}}" class="btn btn-info btn-block mb-1"><i class="feather icon-edit-2 mr-25 common-size"></i> Edit Invoice</a>
                                 <!-- <a href="{{route('invoi.download_pdf', $invoice->id)}}" class="btn btn-primary btn-block mb-1" onclick="downloadPdf({{$invoice->id}})"> <i class="feather icon-download"></i> Download PDF</a> -->

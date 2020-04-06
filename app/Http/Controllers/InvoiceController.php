@@ -14,6 +14,8 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\InvoicesExport;
 use PDF;
+use Mail;
+use App\Mail\SendInvoice;
 
 class InvoiceController extends Controller
 {
@@ -151,10 +153,14 @@ class InvoiceController extends Controller
     }
 
     public function add_invoice(Request $request) {
+        $last = Invoice::latest()->first();
+        $invoice_id = 'CMC-ON-'.($last->id + 1 );
+        // echo $invoice_id;
+        // exit();
         $invoice = new Invoice();
         $data = $request->data;
         $invoice->civil_id = $data['civil_id'];
-        $invoice->invoice_id = $data['invoice_id'];
+        $invoice->invoice_id = $invoice_id;
         $invoice->due_date = $data['due_date'];
         $invoice->appointment_date = $data['appointment_date'];
         $invoice->service_ids = $data['service_ids'];
@@ -293,6 +299,12 @@ class InvoiceController extends Controller
         $history->action_type = 'sent';
         $history->user_name = auth()->user()->name;
         $history->save();
+
+        $to  = $invoice->getPatient->email;
+        $message = "Sampel email from hospital.";
+        $subject = "Sample Subject";
+        Mail::to($to)->send(new SendInvoice($subject, $message));
+
         if ($save) {
             return json_encode(
                 array(
