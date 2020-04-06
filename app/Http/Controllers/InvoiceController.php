@@ -303,6 +303,7 @@ class InvoiceController extends Controller
         $to  = $invoice->getPatient->email;
         $message = "Sampel email from hospital.";
         $subject = "Sample Subject";
+        // return
         Mail::to($to)->send(new SendInvoice($subject, $message));
 
         if ($save) {
