@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+    'host' => env('MAIL_HOST', 'smtp.googlemail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 587),
+    'port' => env('MAIL_PORT', 465),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'chenming.biz@gmail.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'sweden.super.star@gmail.com'),
         'name' => env('MAIL_FROM_NAME', 'Clinic'),
     ],
 
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('chenming.biz@gmail.com'),
+    'username' => env('sweden.super.star@gmail.com'),
 
-    'password' => env('SDF987$^%iuiwe'),
+    'password' => env('12345678aaa!@#'),
 
     /*
     |--------------------------------------------------------------------------
