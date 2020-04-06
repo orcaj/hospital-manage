@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'sweden.super.star@gmail.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'chenming.biz@gmail.com'),
         'name' => env('MAIL_FROM_NAME', 'Clinic'),
     ],
 
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('sweden.super.star@gmail.com'),
+    'username' => env('chenming.biz@gmail.com'),
 
-    'password' => env('12345678aaa!@#'),
+    'password' => env('SDF987$^%iuiwe'),
 
     /*
     |--------------------------------------------------------------------------
