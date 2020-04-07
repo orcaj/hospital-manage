@@ -410,4 +410,8 @@ class InvoiceController extends Controller
         $star=$this->star;
         return view('back.invoice-view', compact('invoice','invoice','services','star', 'patient', 'services'));
     }
+
+    public function test_view() {
+        return view('back.invoice_email');
+    }
 }

@@ -70,6 +70,7 @@ Route::group(['middleware' => ['web','auth']], function(){
     Route::post('invoi/add_invoice', 'InvoiceController@add_invoice')->name('invoi.add_invoice');
     Route::post('invoi/update_invoice', 'InvoiceController@update_invoice')->name('invoi.update_invoice');
 
+    Route::get('test', 'InvoiceController@test_view');
 	Route::group(['middleware' => ['super']], function(){
 
 	});

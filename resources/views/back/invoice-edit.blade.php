@@ -92,7 +92,9 @@
                                                                 <select class="form-control" onchange="changeDepart(this)">
                                                                     <option value="">--Select department--</option>
                                                                     @foreach($departments as $department)
+                                                                        @if($department->status =='published')
                                                                         <option value="{{$department->id}}">{{$department->name}}</option>
+                                                                        @endif
                                                                     @endforeach
                                                                 </select>
                                                             </div>
