@@ -28,6 +28,13 @@
           cursor: not-allowed !important;
           pointer-events: none;
       }
+      .modal-dialog {
+        overflow-y: initial !important;
+      }
+      .modal-body {
+        height: 400px;
+        overflow-y: auto;
+      }
     </style>
     <!-- BEGIN: Content-->
     <div class="app-content content">
@@ -151,7 +158,7 @@
     </div>
 
 <div class="modal fade text-left" id="invoice_history_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog"  role="document">
     <div class="modal-content">
         <div class="modal-header">
             <h3 class="modal-title" id="myModalLabel35">Invoice History</h3>

@@ -451,7 +451,7 @@
                                                                     &&
                                                                     $service->department_id
                                                                     ==
-                                                                    $cur_service->department_id)
+                                                                    $cur_service->department_id && $service->doctor_id == $cur_service->doctor_id)
                                                                     <option
                                                                         value="{{$service->id}}"
                                                                         >{{$service->name}}</option
