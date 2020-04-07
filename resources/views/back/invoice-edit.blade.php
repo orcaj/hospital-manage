@@ -681,7 +681,7 @@
                                                 >
                                                     <span
                                                         class="cost-title mr-2"
-                                                        >Total Due (USD)
+                                                        >Total Due
                                                     </span>
                                                     <span class="cost-value"
                                                         >KWD
