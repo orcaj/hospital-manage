@@ -196,6 +196,15 @@ class InvoiceController extends Controller
             $history->status = 'success';
             $history->save();
         }
+
+        if ($data['is_sent'] == 1) {
+            $added_invoice = $last = Invoice::latest()->first();;
+            $to  = $invoice->getPatient->email;
+            $message = "";
+            $subject = "Invoice Received";
+            // return
+            Mail::to($to)->send(new SendInvoice($subject, $message, $added_invoice->id));
+        }
         $result;
         if($save) {
             $result = array(
