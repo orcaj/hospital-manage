@@ -444,4 +444,8 @@ class InvoiceController extends Controller
         return view('back.invoice_email', compact('invoice','invoice','services', 'patient', 'services'));
         // return view('back.invoice_email');
     }
+
+    public function get_invoice_list_by_civilid_date(Request $request) {
+        echo $request->civil_id. "   ". $request->date;
+    }
 }
