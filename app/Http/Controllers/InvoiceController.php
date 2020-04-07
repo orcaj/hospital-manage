@@ -446,10 +446,12 @@ class InvoiceController extends Controller
     }
 
     public function get_invoice_list_by_civilid_date(Request $request) {
+        $patient = Patient::where('civil_id', $request->civil_id)->get()->first();
         if (!$request->date) {
-            echo "Date received.";
+            $data = Invoice::where('civil_id', $patient->id);
         } else {
-            echo $request->date;
+            $data = Invoice::where(array('civil_id' => $patient->id, 'appointment_date' => $request->date));
         }
+        return json_encode($data);
     }
 }
