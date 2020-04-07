@@ -82,12 +82,12 @@ class InvoiceController extends Controller
     public function edit($id)
     {
         $invoice=Invoice::Find($id);
-        // $cur_department = 
+        // $cur_department =
         $patient = Patient::Find($invoice->civil_id); //get patient for invoice
         $patients=Patient::where('status', 'published');   //get all patients list for dropdown
         $services=Service::all();   //get all services list for dropdown
         $doctors = Doctor::all();   //get all doctors list for dropdown
-        $ids=explode(',', $invoice->service_ids);   //get saved service ids for invoice, 
+        $ids=explode(',', $invoice->service_ids);   //get saved service ids for invoice,
         $saved_services = array();  //convert to array
         foreach ($ids as $id) {
             $saved_services[] = Service::Find($id);
@@ -179,7 +179,7 @@ class InvoiceController extends Controller
         $invoice->discount_percents = $data['discount_percents'];
         $save =  $invoice->save();
 
-        //save invoice history 
+        //save invoice history
         $history = new InvoiceHistories();
         $history->invoice_id = $invoice->invoice_id;
         $history->action_type = 'created';
@@ -251,7 +251,13 @@ class InvoiceController extends Controller
             $history->status = 'success';
             $history->save();
         }
-        $result;
+
+        if ($data['is_send'] == 1) {
+            $to  = $invoice->getPatient->email;
+            $message = "";
+            $subject = "Invoice Received";
+            Mail::to($to)->send(new SendInvoice($subject, $message, $invoice->id));
+        }
         if($save) {
             $result = array(
                 'status' => 'success',
@@ -300,22 +306,12 @@ class InvoiceController extends Controller
         $history->user_name = auth()->user()->name;
         $history->save();
 
-        $patient = Patient::Find($invoice->civil_id);
-        // $patients=Patient::where('status', 'published')->get();
-        $service_ids = explode (",", $invoice->service_ids);
-        // print_r($service_ids);
-        // exit();
-        $services = array();
-        foreach ($service_ids as $service_id) {
-            $services[] = Service::Find($service_id);
-        }
-
         $to  = $invoice->getPatient->email;
-        $message = "Sampel email from hospital.";
-        $subject = "Sample Subject";
+        $message = "";
+        $subject = "Invoice Received";
         // return
         Mail::to($to)->send(new SendInvoice($subject, $message, $request->id));
-        
+
         if ($save) {
             return json_encode(
                 array(
@@ -355,11 +351,11 @@ class InvoiceController extends Controller
             $services[] = Service::Find($service_id);
         }
         $data = ['title' => 'Invoice', 'invoice' => $invoice, 'patient' => $patient, 'services' => $services];
-        
+
         return view('myPDF', compact('invoice','invoice','services', 'patient', 'services'));
 
         // $pdf = PDF::loadView('myPDF', $data);
-    
+
         // return $pdf->download('itsolutionstuff.pdf');
     }
 

@@ -53,20 +53,6 @@
                                         <div class="info-title mb-1">
                                             <span>Bill From</span>
                                         </div>
-                                        <div class="company-address mb-1">
-                                            <span class="text-muted">{{$patient->address}}</span>
-                                        </div>
-                                        <div class="company-email  mb-1 mb-1">
-                                            <span class="text-muted">{{$patient->email}}</span>
-                                        </div>
-                                        <div class="company-phone  mb-1">
-                                            <span class="text-muted">{{$patient->phone}}</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-5 mt-1 to-info">
-                                        <div class="info-title mb-1">
-                                            <span>Bill To</span>
-                                        </div>
                                         <div class="company-name mb-1">
                                             <span class="text-muted">Pixinvent PVT.LTD</span>
                                         </div>
@@ -78,6 +64,20 @@
                                         </div>
                                         <div class="company-phone  mb-1">
                                             <span class="text-muted">601-678-8022</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-5 mt-1 to-info">
+                                        <div class="info-title mb-1">
+                                            <span>Bill To</span>
+                                        </div>
+                                        <div class="company-address mb-1">
+                                            <span class="text-muted">{{$patient->address}}</span>
+                                        </div>
+                                        <div class="company-email  mb-1 mb-1">
+                                            <span class="text-muted">{{$patient->email}}</span>
+                                        </div>
+                                        <div class="company-phone  mb-1">
+                                            <span class="text-muted">{{$patient->phone}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -154,7 +154,7 @@
                     <div class="col-xl-3 col-md-4 col-12 action-btns">
                         <div class="card">
                             <div class="card-body p-2">
-                                <button class="btn btn-primary btn-block mb-1" onclick="sendInvoice({{$invoice->id}})"> <i class="feather icon-check mr-25 common-size"></i> Send Invoice</button>
+                                <button class="btn btn-primary btn-block mb-1" id="send_btn" onclick="sendInvoice({{$invoice->id}})"><i class="fa fa-circle-o-notch fa-spin fa-fw" id="spinner_icon" style="display: none;"></i>Send Invoice</button>
                                 <a href="#" class="btn btn-info btn-block mb-1 print-invoice"> <i class="feather icon-printer mr-25 common-size"></i> Print</a>
                                 <a href="{{route('invoice.edit', $invoice->id )}}" class="btn btn-info btn-block mb-1"><i class="feather icon-edit-2 mr-25 common-size"></i> Edit Invoice</a>
                                 <!-- <a href="{{route('invoi.download_pdf', $invoice->id)}}" class="btn btn-primary btn-block mb-1" onclick="downloadPdf({{$invoice->id}})"> <i class="feather icon-download"></i> Download PDF</a> -->
@@ -170,6 +170,10 @@
 <script type="text/javascript">
     function sendInvoice(id) {
         event.preventDefault();
+        if ($("#send_btn").hasClass("disabled")) {
+            console.log("Disabled....");
+            return;
+        }
         Swal.fire({
           title: "Send Invoice",
           text: "Are you sure that you want to send this invoice?",
@@ -183,11 +187,15 @@
           buttonsStyling: false
         }).then(function(result) {
           if (result.value) {
+            $('#send_btn').addClass("disabled");
+            $("#spinner_icon").show();
             $.post("{{route('invoi.send_invoice')}}", {id: id, _token:"{{csrf_token()}}"}, function(data) {
                 console.log(data)
                 var object = JSON.parse(data);
                 if (object.status=='success') {
-                  toastr.success(object.status, object.msg, {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
+                    $('#send_btn').removeClass("disabled");
+                    $("#spinner_icon").hide();
+                    toastr.success(object.status, object.msg, {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
                   // $(obj).children().first().removeClass('icon-navigation').addClass('icon-check-circle');;
                 }
             })

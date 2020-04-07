@@ -24,6 +24,10 @@
       .patient-detail-row {
         margin-top: 4px;
       }
+      a.disabled {
+          cursor: not-allowed !important;
+          pointer-events: none;
+      }
     </style>
     <!-- BEGIN: Content-->
     <div class="app-content content">
@@ -36,7 +40,7 @@
         </div>
         @endif
         <!-- alert section end -->
-        
+
         <div class="content-overlay"></div>
         <div class="content-wrapper">
             <div class="content-header row">
@@ -52,14 +56,14 @@
                                 <div class="form-inline">
                                     <a href="{{route('invoice.create')}}" class="btn btn-primary"><i class="feather icon-plus"></i>&nbspCreate</a>
                                 <a href="{{ route('invoi.download_invoice', 'xlsx') }}" class="btn btn-success" style="margin-left: 10px" ><i class="feather icon-download"></i>Download Excel</a>
-                               
+
                                 </div>
                             </div>
                                 <div class="card-body">
                                     <!-- datatable start -->
                                     <div class="table-responsive">
                                         <table id="users-list-datatable" class="table center-table">
-                                            <thead> 
+                                            <thead>
                                                 <tr>
                                                     @if(auth()->user()->type !='staff')
                                                     <th class="text-center"><input type="checkbox" id="selectAll" data-size="sm" ></th>
@@ -104,15 +108,10 @@
                                                         @endif
                                                     </td>
                                                     <td class="text-center">
-                                                        @if($invoice->is_sent == 1)
-                                                        <a href="#" class="primary edit mr-1" style="pointer-events: none;cursor: no-drop">
-                                                            <i class="feather icon-check-circle"></i>
+                                                        <a href="#" id="send_link" class="primary edit mr-1" onclick="sendInvoice({{$invoice->id}}, this)">
+                                                            <i class="feather icon-navigation" id="before_icon"></i>
+                                                            <i class="fa fa-circle-o-notch fa-spin fa-fw spinner_icon" id="spinner_icon" style="display: none;"></i>
                                                         </a>
-                                                        @else
-                                                        <a href="#" class="primary edit mr-1" onclick="sendInvoice({{$invoice->id}}, this)">
-                                                            <i class="feather icon-navigation"></i>
-                                                        </a>
-                                                        @endif
                                                         <a href="{{route('invoice.view_invoice', $invoice->id )}}" class="primary edit mr-1">
                                                             <i class="feather icon-eye"></i>
                                                         </a>
@@ -136,7 +135,7 @@
                                                     </td>
                                                 </tr>
                                                 @endforeach
-                                                
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -187,7 +186,7 @@
                     Civil Id
                   </div>
                   <div class="col-4" id="pat_civil_id">
-                                   
+
                   </div>
                 </div>
                 <div class="row patient-detail-row">
@@ -196,7 +195,7 @@
                     Name
                   </div>
                   <div class="col-4" id="pat_name">
-                                   
+
                   </div>
                 </div>
                 <div class="row patient-detail-row">
@@ -205,7 +204,7 @@
                     Phone number
                   </div>
                   <div class="col-4" id="pat_phone">
-                                     
+
                   </div>
                 </div>
                 <div class="row patient-detail-row">
@@ -214,7 +213,7 @@
                     Email
                   </div>
                   <div class="col-5" id="pat_email">
-                                  
+
                   </div>
                 </div>
                 <div class="row patient-detail-row">
@@ -223,7 +222,7 @@
                     Address
                   </div>
                   <div class="col-5" id="pat_address">
-                                     
+
                   </div>
                 </div>
             </div>
@@ -378,6 +377,11 @@
 
     function sendInvoice(id, obj) {
         event.preventDefault();
+        console.log("12345")
+        if ($("#send_link").hasClass("disabled")) {
+            console.log("Disabled....");
+            return;
+        }
         Swal.fire({
           title: "Send Invoice",
           text: "Are you sure that you want to send this invoice?",
@@ -391,12 +395,18 @@
           buttonsStyling: false
         }).then(function(result) {
           if (result.value) {
+            $('#send_link').addClass("disabled");
+            $("#spinner_icon").show();
+            $("#before_icon").hide();
             $.post("{{route('invoi.send_invoice')}}", {id: id, _token:"{{csrf_token()}}"}, function(data) {
                 console.log(data)
                 var object = JSON.parse(data);
                 if (object.status=='success') {
-                  toastr.success(object.status, object.msg, {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
-                  $(obj).children().first().removeClass('icon-navigation').addClass('icon-check-circle');;
+                    $('#send_link').removeClass("disabled");
+                    $("#spinner_icon").hide();
+                    $("#before_icon").show();
+                    toastr.success(object.status, object.msg, {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
+                    $(obj).children().first().removeClass('icon-navigation').addClass('icon-check-circle');;
                 }
             })
           }
@@ -429,7 +439,7 @@
                                 <div class="timeline-title">` + his.action_type.toUpperCase() + `</div>
                                 <div class="timeline-subtitle">Invoice ` + his.action_type + " by " + his.user_name + `</div>
                             </li>`;
-                content += item;            
+                content += item;
                 break;
               case 'unpublished':
                 var item = `<li class="timeline-items timeline-icon-danger">
@@ -494,7 +504,7 @@
                                 <div class="timeline-title">` + his.action_type.toUpperCase() + `</div>
                                 <div class="timeline-subtitle">Invoice ` + his.action_type + " by " + his.user_name + `</div>
                             </li>`;
-                content += item;            
+                content += item;
                 break;
             }
             // console.log(content);

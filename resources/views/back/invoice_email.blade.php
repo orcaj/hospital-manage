@@ -68,6 +68,7 @@
                                             <span class="text-muted">{{$patient->phone}}</span>
                                         </div>
                                     </div>
+                                    <br>
                                     <div class="col-5 mt-1 to-info">
                                         <div class="info-title mb-1">
                                             <span>Bill To</span>
@@ -134,7 +135,6 @@
                                                     <span class="cost-title mr-2">Discount </span>
                                                     <span class="cost-value">-KWD {{$invoice->total_discount}}</span>
                                                 </li>
-                                                <li class="dropdown-divider"></li>
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
                                                     <span class="cost-title mr-2">Invoice Total </span>
                                                     <span class="cost-value">KWD {{$invoice->invoice_total}}</span>
@@ -159,6 +159,6 @@
         </section>
     </div>
 </div>
-	
+
 </body>
 </html>

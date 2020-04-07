@@ -21,7 +21,8 @@ class InvoicesExport implements FromCollection,WithHeadings,WithMapping
     public function headings(): array {
         return [
             'Invoice #',
-            'Date Issue',            'Date Due',
+            'Date Issue',            
+            'Date Due',
             'Appointment Date',
             'Civil Id',
             'Patient name',
@@ -57,7 +58,7 @@ class InvoicesExport implements FromCollection,WithHeadings,WithMapping
         $doctor_list = rtrim($doctor_list, ',');
         return [
             $invoice->invoice_id,
-            $invoice->created_date,
+            $invoice->created_at,
             $invoice->due_date,
             $invoice->appointment_date,
             $invoice->getPatient->civil_id,
