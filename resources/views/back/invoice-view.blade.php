@@ -208,6 +208,7 @@
         document.body.innerHTML = "<html><head><title></title></head><body>" + printContents + "</body>";
         window.print();
         document.body.innerHTML = originalContents;
+        window.location.reload(false); 
     })
 </script>
 @endsection
