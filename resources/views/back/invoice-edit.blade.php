@@ -1344,8 +1344,8 @@
                 var obj = JSON.parse(data);
                 console.log(obj);
                 if (obj.status == "success") {
-                    $('.update_btn').removeClass("disabled");
-                    $(".spinner_icon").hide();
+                    // $('.update_btn').removeClass("disabled");
+                    // $(".spinner_icon").hide();
                     toastr.options.onHidden = function () {
                         window.location.href = "{{route('invoice.index')}}";
                     };

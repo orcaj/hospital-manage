@@ -657,8 +657,6 @@
             var obj = JSON.parse(data);
             // console.log(obj);
             if(obj.status =='success') {
-                $('.save_btn').removeClass("disabled");
-                $(".spinner_icon").hide();
                 toastr.options.onHidden = function() {
                     window.location.href = "{{route('invoice.index')}}";
                 }
@@ -684,18 +682,6 @@
     }
 
     $(function() {
-        // $(".select2").select2();
-        // jQuery.ajaxSetup({
-        //   beforeSend: function() {
-        //      $('#save_btn').button('loading').delay();
-        //      $('#save_btn').addClass("disabled");
-        // // $("#spinner_icon").show();
-        //   },
-        //   complete: function(){
-        //      $("#save_btn").button('reset');
-        //   },
-        //   success: function() {}
-        // });
         $(".payment_received_section").hide();
         var today = new Date();
         var year = today.getFullYear();
