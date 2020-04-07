@@ -452,6 +452,6 @@ class InvoiceController extends Controller
         } else {
             $data = Invoice::where(array('civil_id' => $patient->id, 'appointment_date' => $request->date));
         }
-        return json_encode(array('data' => $data, 'patient' => $patient);
+        return json_encode(array('data' => $data, 'patient' => $patient));
     }
 }
