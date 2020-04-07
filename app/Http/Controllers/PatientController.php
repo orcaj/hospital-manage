@@ -171,7 +171,7 @@ class PatientController extends Controller
     }
 
     public function check_if_civilid_exist(Request $request) {
-        $data = Patient::where('civil_id', $request->data);
+        $data = Patient::where('civil_id', $request->data)->get();
         return json_encode($data);
     }
 }
