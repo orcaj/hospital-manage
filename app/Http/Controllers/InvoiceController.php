@@ -446,6 +446,10 @@ class InvoiceController extends Controller
     }
 
     public function get_invoice_list_by_civilid_date(Request $request) {
-        echo $request->civil_id. "   ". $request->date;
+        if (!$request->date) {
+            echo "Date received.";
+        } else {
+            echo $request->date;
+        }
     }
 }
