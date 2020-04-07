@@ -169,4 +169,9 @@ class PatientController extends Controller
         $data = Patient::all();
         return json_encode($data);
     }
+
+    public function check_if_civilid_exist(Request $request) {
+        $data = Patient::where('civil_id', $request->data);
+        return json_encode($data);
+    }
 }
