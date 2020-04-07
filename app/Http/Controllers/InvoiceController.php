@@ -300,12 +300,22 @@ class InvoiceController extends Controller
         $history->user_name = auth()->user()->name;
         $history->save();
 
+        $patient = Patient::Find($invoice->civil_id);
+        // $patients=Patient::where('status', 'published')->get();
+        $service_ids = explode (",", $invoice->service_ids);
+        // print_r($service_ids);
+        // exit();
+        $services = array();
+        foreach ($service_ids as $service_id) {
+            $services[] = Service::Find($service_id);
+        }
+
         $to  = $invoice->getPatient->email;
         $message = "Sampel email from hospital.";
         $subject = "Sample Subject";
         // return
-        Mail::to($to)->send(new SendInvoice($subject, $message));
-
+        Mail::to($to)->send(new SendInvoice($subject, $message, $request->id));
+        
         if ($save) {
             return json_encode(
                 array(
@@ -411,7 +421,22 @@ class InvoiceController extends Controller
         return view('back.invoice-view', compact('invoice','invoice','services','star', 'patient', 'services'));
     }
 
-    public function test_view() {
-        return view('back.invoice_email');
+    public function test_view($id) {
+        $invoice=Invoice::Find($id);
+        $patient = Patient::Find($invoice->civil_id);
+        // $patients=Patient::where('status', 'published')->get();
+        $service_ids = explode (",", $invoice->service_ids);
+        // print_r($service_ids);
+        // exit();
+        $services = array();
+        foreach ($service_ids as $service_id) {
+            $services[] = Service::Find($service_id);
+        }
+        // print_r($services);
+        // exit();
+        // $services=Service::where('status', 'published')->get();
+        // $star=$this->star;
+        return view('back.invoice_email', compact('invoice','invoice','services', 'patient', 'services'));
+        // return view('back.invoice_email');
     }
 }
