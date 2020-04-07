@@ -199,7 +199,7 @@ class InvoiceController extends Controller
 
         if ($data['is_sent'] == 1) {
             $added_invoice = $last = Invoice::latest()->first();;
-            $to  = $invoice->getPatient->email;
+            $to  = $added_invoice->getPatient->email;
             $message = "";
             $subject = "Invoice Received";
             // return
