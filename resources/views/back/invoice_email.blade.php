@@ -58,21 +58,6 @@
                                         <div class="info-title mb-1">
                                             <span>Bill From</span>
                                         </div>
-                                        <div class="company-address mb-1">
-                                            <span class="text-muted">{{$patient->address}}</span>
-                                        </div>
-                                        <div class="company-email  mb-1 mb-1">
-                                            <span class="text-muted">{{$patient->email}}</span>
-                                        </div>
-                                        <div class="company-phone  mb-1">
-                                            <span class="text-muted">{{$patient->phone}}</span>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="col-5 mt-1 to-info">
-                                        <div class="info-title mb-1">
-                                            <span>Bill To</span>
-                                        </div>
                                         <div class="company-name mb-1">
                                             <span class="text-muted">Pixinvent PVT.LTD</span>
                                         </div>
@@ -84,6 +69,21 @@
                                         </div>
                                         <div class="company-phone  mb-1">
                                             <span class="text-muted">601-678-8022</span>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="col-5 mt-1 to-info">
+                                        <div class="info-title mb-1">
+                                            <span>Bill To</span>
+                                        </div>
+                                        <div class="company-address mb-1">
+                                            <span class="text-muted">{{$patient->address}}</span>
+                                        </div>
+                                        <div class="company-email  mb-1 mb-1">
+                                            <span class="text-muted">{{$patient->email}}</span>
+                                        </div>
+                                        <div class="company-phone  mb-1">
+                                            <span class="text-muted">{{$patient->phone}}</span>
                                         </div>
                                     </div>
                                 </div>

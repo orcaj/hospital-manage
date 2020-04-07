@@ -406,7 +406,6 @@
                     $("#spinner_icon").hide();
                     $("#before_icon").show();
                     toastr.success(object.status, object.msg, {"showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 1500});
-                    $(obj).children().first().removeClass('icon-navigation').addClass('icon-check-circle');;
                 }
             })
           }
