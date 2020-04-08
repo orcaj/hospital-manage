@@ -465,11 +465,36 @@ class InvoiceController extends Controller
             $saved_services[] = Service::Find($id);
         }
         $saved_percents = explode(',', $invoice->discount_percents);
+
+        $mid = "mer200009";
+        $secret_key = "2449520";
+        $furl = "http://localhost/bookeey/error.php";
+        $surl = "http://www.clinic.click.com.kw/joomla/components/com_helloworld/views/helloworld/tmpl/success.php";
+        $crossCat = "GEN";
+        $amt = $invoice->total_due;
+        $date = date_create();
+        $txRefNo = date_timestamp_get($date);
+        $txTime = date_timestamp_get($date); 
+
+        $hstring = $mid . "|" .  $txRefNo . "|" .  $surl . "|" . $furl . "|" . 
+        $amt . "|" . $txTime . "|" . $crossCat . "|" . $secret_key;
+        $sig = hash('sha512', $hstring);
+        $url = "https://demo.bookeey.com/portal/mobileBookeeyPg?data={price:$amt,merchantId:$mid,secreatKey:$secret_key,surl:%27$surl%27,furl:%27$furl%27,tranid:$txRefNo,txntime:$txTime,hashMac:$sig,paymentOptions:knet}";
+        $payment_data = array(
+            "hashMac" => $sig,
+            "hstring" => $hstring,
+            "url" => $url,
+            "amt" => $amt,
+            "txRefNo" => $txRefNo,
+            "txTime" => $txTime
+        );
+
         $response = array(
             'invoice' => $invoice,
             'saved_services' => $saved_services,
             'patient' => $patient,
-            'saved_percents' => $saved_percents
+            'saved_percents' => $saved_percents,
+            'payment_data' => $payment_data
         );
         return json_encode($response);
     }
