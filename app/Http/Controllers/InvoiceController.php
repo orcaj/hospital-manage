@@ -448,10 +448,29 @@ class InvoiceController extends Controller
     public function get_invoice_list_by_civilid_date(Request $request) {
         $patient = Patient::where('civil_id', $request->civil_id)->get()->first();
         if (!$request->date) {
-            $data = Invoice::where('civil_id', $patient->id)->where('total_due', '>', 0)->get();
+            $data = Invoice::where(array('civil_id' => $patient->id, 'status' => 'published'))->where('total_due', '>', 0)->get();
         } else {
-            $data = Invoice::where(array('civil_id' => $patient->id, 'appointment_date' => $request->date, 'total_due >' => 0))->where('total_due', '>', 0)->get();
+            $data = Invoice::where(array('civil_id' => $patient->id, 'appointment_date' => $request->date, 'status' => 'published'))->where('total_due', '>', 0)->get();
         }
         return json_encode(array('data' => $data, 'patient' => $patient));
+    }
+
+    public function get_invoice_detail_for_payment(Request $request) {
+        $invoice=Invoice::Find($request->id);
+        // $cur_department =
+        $patient = Patient::Find($invoice->civil_id); //get patient for invoice
+        $ids=explode(',', $invoice->service_ids);   //get saved service ids for invoice,
+        $saved_services = array();  //convert to array
+        foreach ($ids as $id) {
+            $saved_services[] = Service::Find($id);
+        }
+        $saved_percents = explode(',', $invoice->discount_percents);
+        $response = array(
+            'invoice' => $invoice,
+            'saved_services' => $saved_services,
+            'patient' => $patient,
+            'saved_percents' => $saved_percents
+        )
+        return json_encode($response);
     }
 }
