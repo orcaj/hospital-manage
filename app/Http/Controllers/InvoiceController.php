@@ -470,7 +470,7 @@ class InvoiceController extends Controller
             'saved_services' => $saved_services,
             'patient' => $patient,
             'saved_percents' => $saved_percents
-        )
+        );
         return json_encode($response);
     }
 }
