@@ -486,7 +486,9 @@ class InvoiceController extends Controller
             "url" => $url,
             "amt" => $amt,
             "txRefNo" => $txRefNo,
-            "txTime" => $txTime
+            "txTime" => $txTime,
+            "surl" => $surl,
+            "furl" => $furl
         );
 
         $response = array(
