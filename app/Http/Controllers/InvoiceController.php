@@ -457,7 +457,7 @@ class InvoiceController extends Controller
     }
 
     public function add_transaction_history(Request $request) {
-        $transaction = new Transaction($request->data->all());
+        $transaction = new Transaction($request->data);
         $transaction->save();
 
         $data = $request->data;
