@@ -10,6 +10,7 @@ use App\Model\Doctor;
 use App\Model\Department;
 use App\Model\InvoiceHistories;
 use App\Model\PaymentHistory;
+use APp\Model\Transaction;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\InvoicesExport;
@@ -456,6 +457,21 @@ class InvoiceController extends Controller
     }
 
     public function add_transaction_history(Request $request) {
+        $transaction = new Transaction($request->data->all());
+        $transaction->save();
+
+        $data = $request->data;
+        $payment_history = new PaymentHistory();
+        $payment_history->invoice_id = $data['invoice_id'];
+        $payment_history->payment_method = 'kent';
+        $payment_history->amount = $data['amount'];
+        $payment_history->user_name = $request->name;
+        $payment_history->status = 'success';
+        $payment_history->save();
+
+        $invoice = Invoice::Find($data['invoice_id']);
+        $invoice->total_due = $invoice->total_due - $data['amount'];
+        $invoice->save();
         echo json_encode($request->data);
     }
 
