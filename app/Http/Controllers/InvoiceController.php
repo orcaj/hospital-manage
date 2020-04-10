@@ -91,8 +91,15 @@ class InvoiceController extends Controller
         $saved_services = array();  //convert to array
         foreach ($ids as $id) {
             $service = Service::Find($id);
-            $saved_services[] = $service;
-            $saved_services[]['doctor_name'] = $service->getPatient->name;
+            $saved_services[] = array(
+                'id' => $service->id,
+                'name' => $service->name,
+                'price' => $service->price,
+                'department' => $service->getDepartment->name,
+                'doctor' => $service->getDoctor->name,
+                'status' => $service->status
+            )
+            // $saved_services[]['doctor_name'] = $service->getPatient->name;
         }
         $saved_percents = explode(',', $invoice->discount_percents);
         $departments = Department::all();   //get all department list for dropdown
