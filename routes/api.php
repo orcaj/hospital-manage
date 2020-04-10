@@ -22,4 +22,3 @@ Route::post('/check_if_civilid_exist', 'PatientController@check_if_civilid_exist
 Route::post('/get_invoice_list_by_civilid_date', 'InvoiceController@get_invoice_list_by_civilid_date');
 Route::post('/get_invoice_detail_for_payment', 'InvoiceController@get_invoice_detail_for_payment');
 Route::post('/add_transaction_history', 'InvoiceController@add_transaction_history');
-add_transaction_history
