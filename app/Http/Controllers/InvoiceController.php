@@ -455,6 +455,10 @@ class InvoiceController extends Controller
         return json_encode(array('data' => $data, 'patient' => $patient));
     }
 
+    public function add_transaction_history(Request $request) {
+        echo json_encode($request->data);
+    }
+
     public function get_invoice_detail_for_payment(Request $request) {
         $invoice=Invoice::Find($request->id);
         // $cur_department =
@@ -508,4 +512,5 @@ class InvoiceController extends Controller
         );
         return json_encode($response);
     }
+
 }
