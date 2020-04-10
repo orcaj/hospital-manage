@@ -90,16 +90,7 @@ class InvoiceController extends Controller
         $ids=explode(',', $invoice->service_ids);   //get saved service ids for invoice,
         $saved_services = array();  //convert to array
         foreach ($ids as $id) {
-            $service = Service::Find($id);
-            $saved_services[] = array(
-                'id' => $service->id,
-                'name' => $service->name,
-                'price' => $service->price,
-                'department' => $service->getDepartment->name,
-                'doctor' => $service->getDoctor->name,
-                'status' => $service->status
-            );
-            // $saved_services[]['doctor_name'] = $service->getPatient->name;
+            $saved_services[] = Service::Find($id);
         }
         $saved_percents = explode(',', $invoice->discount_percents);
         $departments = Department::all();   //get all department list for dropdown
@@ -471,7 +462,15 @@ class InvoiceController extends Controller
         $ids=explode(',', $invoice->service_ids);   //get saved service ids for invoice,
         $saved_services = array();  //convert to array
         foreach ($ids as $id) {
-            $saved_services[] = Service::Find($id);
+            $service = Service::Find($id);
+            $saved_services[] = array(
+                'id' => $service->id,
+                'name' => $service->name,
+                'price' => $service->price,
+                'department' => $service->getDepartment->name,
+                'doctor' => $service->getDoctor->name,
+                'status' => $service->status
+            );
         }
         $saved_percents = explode(',', $invoice->discount_percents);
 
