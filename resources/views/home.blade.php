@@ -13,454 +13,199 @@
             <div class="content-header row">
             </div>
             <div class="content-body">
-
-
-                <!-- Minimal modern charts for power consumption, region statistics and sales etc. starts here -->
-                <div class="row minimal-modern-charts">
-
-
-
-                    <!-- recent payment-->
-                    <div class="col-xxl-6 col-xl-8 col-lg-8 col-md-12 col-12 latest-update-tracking">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-6 col-12">
                         <div class="card">
-                            <div class="card-header latest-update-heading d-flex justify-content-between">
-                                <h4 class="latest-update-heading-title text-bold-500">Latest Update</h4>
-                                
-                            </div>
-                            <div class="card-content latest-update-tracking-list pt-0 pb-1 px-2 position-relative">
-                                <ul class="list-group">
-                                    <li
-                                        class="list-group-item pt-0 px-0 latest-updated-item border-0 d-flex justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <span class="list-group-item-icon d-inline mr-1">
-                                                <i
-                                                    class="icon text-primary bg-light-primary icon-bag total-products-icon rounded-circle p-50"></i>
-                                            </span>
-                                            <div>
-                                                <p class="mb-25 latest-update-item-name text-bold-600">Total Products
-                                                </p>
-                                                <small class="font-small-3">1.2k Products</small>
-                                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media">
+                                        <div class="media-body text-left w-100">
+                                            <h3 class="primary">78%</h3>
+                                            <span>Total Amount</span>
                                         </div>
-                                        <span class="update-profit text-bold-600">$10.5k</span>
-                                    </li>
-                                    <li
-                                        class="list-group-item px-0 latest-updated-item border-0 d-flex justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <span class="list-group-item-icon d-inline mr-1">
-                                                <i
-                                                    class="icon icon-graph bg-light-info text-info total-sales-icon rounded-circle p-50"></i>
-                                            </span>
-                                            <div>
-                                                <p class="mb-25 latest-update-item-name text-bold-600">Total Sales</p>
-                                                <small class="font-small-3">39.2k Sales</small>
-                                            </div>
+                                        <div class="media-right media-middle">
+                                            <i class="fa fa-bar-chart primary font-large-2 float-right"></i>
                                         </div>
-                                        <span class="update-profit text-bold-600">26M</span>
-                                    </li>
-                                    <li
-                                        class="list-group-item px-0 latest-updated-item border-0 d-flex justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <span class="list-group-item-icon d-inline mr-1">
-                                                <i
-                                                    class="icon icon-bag bg-light-danger text-danger total-products-icon rounded-circle p-50"></i>
-                                            </span>
-                                            <div>
-                                                <p class="mb-25 latest-update-item-name text-bold-600">Total Products
-                                                </p>
-                                                <small class="font-small-3">1.2k Products</small>
-                                            </div>
-                                        </div>
-                                        <span class="update-profit text-bold-600">$10.5k</span>
-                                    </li>
-                                    <li
-                                        class="list-group-item px-0 latest-updated-item border-0 d-flex justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <div class="list-group-item-icon d-inline mr-1">
-                                                <i
-                                                    class="icon icon-credit-card bg-light-primary text-primary total-revenue-icon rounded-circle p-50"></i>
-                                            </div>
-                                            <div>
-                                                <p class="mb-25 latest-update-item-name text-bold-600">Total Revenue</p>
-                                                <small class="font-small-3">45.5k New Revenue</small>
-                                            </div>
-                                        </div>
-                                        <span class="update-profit text-bold-600">15.6M</span>
-                                    </li>
-                                    <li
-                                        class="list-group-item px-0 latest-updated-item border-0 d-flex justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <span class="list-group-item-icon d-inline mr-1">
-                                                <i
-                                                    class="icon icon-graph bg-light-info text-info total-sales-icon rounded-circle p-50"></i>
-                                            </span>
-                                            <div>
-                                                <p class="mb-25 latest-update-item-name text-bold-600">Total Sales</p>
-                                                <small class="font-small-3">39.2k Sales</small>
-                                            </div>
-                                        </div>
-                                        <span class="update-profit text-bold-600">26M</span>
-                                    </li>
-                                    <li
-                                        class="list-group-item px-0 latest-updated-item border-0 pb-0 d-flex justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <div class="list-group-item-icon d-inline mr-1">
-                                                <i
-                                                    class="icon icon-credit-card bg-light-danger text-danger total-revenue-icon rounded-circle p-50"></i>
-                                            </div>
-                                            <div>
-                                                <p class="mb-25 latest-update-item-name text-bold-600">Total Revenue</p>
-                                                <small class="font-small-3">45.5k New Revenue</small>
-                                            </div>
-                                        </div>
-                                        <span class="update-profit text-bold-600">15.6M</span>
-                                    </li>
-                                </ul>
+                                    </div>
+                                    <div class="progress progress-sm mt-1 mb-0">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- recent invoice -->
-                    <div class="col-xxl-6 col-xl-8 col-lg-8 col-md-12 col-12 latest-update-tracking">
+                    <div class="col-xl-3 col-lg-6 col-12">
                         <div class="card">
-                            <div class="card-header latest-update-heading d-flex justify-content-between">
-                                <h4 class="latest-update-heading-title text-bold-500">
-                                Recent Invoice</h4>
-                                
-                            </div>
-                            <div class="card-content latest-update-tracking-list pt-0 pb-1 px-2 position-relative">
-                                <ul class="list-group">
-                                    <li
-                                        class="list-group-item pt-0 px-0 latest-updated-item border-0 d-flex justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <span class="list-group-item-icon d-inline mr-1">
-                                                <i
-                                                    class="icon text-primary bg-light-primary icon-bag total-products-icon rounded-circle p-50"></i>
-                                            </span>
-                                            <div>
-                                                <p class="mb-25 latest-update-item-name text-bold-600">Total Products
-                                                </p>
-                                                <small class="font-small-3">1.2k Products</small>
-                                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media">
+                                        <div class="media-body text-left w-100">
+                                            <h3 class="danger">423</h3>
+                                            <span>Total Paid</span>
                                         </div>
-                                        <span class="update-profit text-bold-600">$10.5k</span>
-                                    </li>
-                                    <li
-                                        class="list-group-item px-0 latest-updated-item border-0 d-flex justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <span class="list-group-item-icon d-inline mr-1">
-                                                <i
-                                                    class="icon icon-graph bg-light-info text-info total-sales-icon rounded-circle p-50"></i>
-                                            </span>
-                                            <div>
-                                                <p class="mb-25 latest-update-item-name text-bold-600">Total Sales</p>
-                                                <small class="font-small-3">39.2k Sales</small>
-                                            </div>
+                                        <div class="media-right media-middle">
+                                            <i class="fa fa-money danger font-large-2 float-right"></i>
                                         </div>
-                                        <span class="update-profit text-bold-600">26M</span>
-                                    </li>
-                                    <li
-                                        class="list-group-item px-0 latest-updated-item border-0 d-flex justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <span class="list-group-item-icon d-inline mr-1">
-                                                <i
-                                                    class="icon icon-bag bg-light-danger text-danger total-products-icon rounded-circle p-50"></i>
-                                            </span>
-                                            <div>
-                                                <p class="mb-25 latest-update-item-name text-bold-600">Total Products
-                                                </p>
-                                                <small class="font-small-3">1.2k Products</small>
-                                            </div>
-                                        </div>
-                                        <span class="update-profit text-bold-600">$10.5k</span>
-                                    </li>
-                                    <li
-                                        class="list-group-item px-0 latest-updated-item border-0 d-flex justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <div class="list-group-item-icon d-inline mr-1">
-                                                <i
-                                                    class="icon icon-credit-card bg-light-primary text-primary total-revenue-icon rounded-circle p-50"></i>
-                                            </div>
-                                            <div>
-                                                <p class="mb-25 latest-update-item-name text-bold-600">Total Revenue</p>
-                                                <small class="font-small-3">45.5k New Revenue</small>
-                                            </div>
-                                        </div>
-                                        <span class="update-profit text-bold-600">15.6M</span>
-                                    </li>
-                                    <li
-                                        class="list-group-item px-0 latest-updated-item border-0 d-flex justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <span class="list-group-item-icon d-inline mr-1">
-                                                <i
-                                                    class="icon icon-graph bg-light-info text-info total-sales-icon rounded-circle p-50"></i>
-                                            </span>
-                                            <div>
-                                                <p class="mb-25 latest-update-item-name text-bold-600">Total Sales</p>
-                                                <small class="font-small-3">39.2k Sales</small>
-                                            </div>
-                                        </div>
-                                        <span class="update-profit text-bold-600">26M</span>
-                                    </li>
-                                    <li
-                                        class="list-group-item px-0 latest-updated-item border-0 pb-0 d-flex justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <div class="list-group-item-icon d-inline mr-1">
-                                                <i
-                                                    class="icon icon-credit-card bg-light-danger text-danger total-revenue-icon rounded-circle p-50"></i>
-                                            </div>
-                                            <div>
-                                                <p class="mb-25 latest-update-item-name text-bold-600">Total Revenue</p>
-                                                <small class="font-small-3">45.5k New Revenue</small>
-                                            </div>
-                                        </div>
-                                        <span class="update-profit text-bold-600">15.6M</span>
-                                    </li>
-                                </ul>
+                                    </div>
+                                    <div class="progress progress-sm mt-1 mb-0">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 40%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                                        <!-- active users card -->
-<!--                     <div class="col-xl-8 col-lg-12">
-                        <div class="card active-users">
-                            <div class="card-header border-0">
-                                <h4 class="card-title">Active Users</h4>
+                    <div class="col-xl-3 col-lg-6 col-12">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media">
+                                        <div class="media-body text-left w-100">
+                                            <h3 class="success">64.89 %</h3>
+                                            <span>Total Invoices</span>
+                                        </div>
+                                        <div class="media-right media-middle">
+                                            <i class="fa fa-envelope-square success font-large-2 float-right"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress progress-sm mt-1 mb-0">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 60%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-12">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media">
+                                        <div class="media-body text-left w-100">
+                                            <h3 class="warning">02.12</h3>
+                                            <span>Completed Invoices</span>
+                                        </div>
+                                        <div class="media-right media-middle">
+                                            <i class="fa fa-check warning font-large-2 float-right"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress progress-sm mt-1 mb-0">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 35%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row match-height">
+                    <div class="col-xl-8 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Recent Orders</h4>
                                 <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
                                         <li><a data-action="reload"><i class="feather icon-rotate-cw"></i></a></li>
+                                        <li><a data-action="expand"><i class="feather icon-maximize"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="card-content">
-                                <div id="audience-list-scroll" class="table-responsive position-relative">
-                                    <table class="table">
+                                <div class="card-body">
+                                    <p>Total paid invoices 240, unpaid 150. <span class="float-right"><a href="project-summary.html" target="_blank">Invoice Summary <i class="feather icon-arrow-right"></i></a></span></p>
+                                </div>
+                                <div class="table-responsive">
+                                    <table id="recent-orders" class="table table-hover mb-0 ps-container ps-theme-default">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Available Data</th>
-                                                <th>Downloads</th>
+                                                <th>SKU</th>
+                                                <th>Invoice#</th>
+                                                <th>Customer Name</th>
                                                 <th>Status</th>
-                                                <th>More</th>
+                                                <th>Amount</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td class="text-truncate">
-                                                    <div class="avatar avatar-md mr-1">
-                                                        <img class="rounded-circle" src="{{asset('app-assets/images/portrait/small/avatar-s-11.png')}}" alt="Generic placeholder image">
-                                                    </div>
-                                                    <span class="text-truncate">Shwell Flintof</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span>shwellFlint@gmail.com</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span>450MB</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div class="progress my-75">
-                                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow="20" aria-valuemin="20" aria-valuemax="100" style="width:55%">55%</div>
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span class="badge badge-success">Active</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div class="dropdown">
-                                                        <span class="feather icon-more-vertical dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        </span>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" href="#">Subscription</a>
-                                                            <a class="dropdown-item" href="#">Extras</a>
-                                                            <a class="dropdown-item" href="#">Newslatter</a>
-                                                        </div>
-                                                    </div>
-                                                    </span>
-                                                </td>
+                                                <td class="text-truncate">PO-10521</td>
+                                                <td class="text-truncate"><a href="#">INV-001001</a></td>
+                                                <td class="text-truncate">Elizabeth W.</td>
+                                                <td class="text-truncate"><span class="badge badge-success">Paid</span></td>
+                                                <td class="text-truncate">$ 1200.00</td>
                                             </tr>
                                             <tr>
-                                                <td class="text-truncate">
-                                                    <div class="avatar avatar-md mr-1">
-                                                        <img class="rounded-circle" src="{{asset('app-assets/images/portrait/small/avatar-s-14.png')}}" alt="Generic placeholder image">
-                                                    </div>
-                                                    <span class="text-truncate">Ogasawara Katsumi</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span>ogaats@hmail.com</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span>457 MB</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div class="progress my-75">
-                                                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" aria-valuenow="20" aria-valuemin="20" aria-valuemax="100" style="width:55%">55%</div>
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span class="badge badge-warning">Reported</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div class="dropdown">
-                                                        <span class="feather icon-more-vertical dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        </span>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" href="#">Subscription</a>
-                                                            <a class="dropdown-item" href="#">Extras</a>
-                                                            <a class="dropdown-item" href="#">Newslatter</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
+                                                <td class="text-truncate">PO-532521</td>
+                                                <td class="text-truncate"><a href="#">INV-01112</a></td>
+                                                <td class="text-truncate">Doris R.</td>
+                                                <td class="text-truncate"><span class="badge badge-warning">Overdue</span></td>
+                                                <td class="text-truncate">$ 5685.00</td>
                                             </tr>
                                             <tr>
-                                                <td class="text-truncate">
-                                                    <div class="avatar avatar-md mr-1">
-                                                        <img class="rounded-circle" src="{{asset('app-assets/images/portrait/small/avatar-s-15.png ')}}" alt="Generic placeholder image">
-                                                    </div>
-                                                    <span class="text-truncate">Stepan Assonov</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span>stepan23@hmail.com</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span>231 MB</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div class="progress my-75">
-                                                        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow="20" aria-valuemin="20" aria-valuemax="100" style="width:65%">65%</div>
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span class="badge badge-danger">Block</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div class="dropdown">
-                                                        <span class="feather icon-more-vertical dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        </span>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" href="#">Subscription</a>
-                                                            <a class="dropdown-item" href="#">Extras</a>
-                                                            <a class="dropdown-item" href="#">Newslatter</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
+                                                <td class="text-truncate">PO-05521</td>
+                                                <td class="text-truncate"><a href="#">INV-001012</a></td>
+                                                <td class="text-truncate">Andrew D.</td>
+                                                <td class="text-truncate"><span class="badge badge-success">Paid</span></td>
+                                                <td class="text-truncate">$ 152.00</td>
                                             </tr>
                                             <tr>
-                                                <td class="text-truncate">
-                                                    <div class="avatar avatar-md mr-1">
-                                                        <img class="rounded-circle" src="{{asset('app-assets/images/portrait/small/avatar-s-4.png ')}}" alt="Generic placeholder image">
-                                                    </div>
-                                                    <span class="text-truncate">Mbe Tshinguta</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span>tshinguta@hmail.com</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span>723 MB</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div class="progress my-75">
-                                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow="20" aria-valuemin="20" aria-valuemax="100" style="width:78%">78%</div>
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span class="badge badge-success">Active</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div class="dropdown">
-                                                        <span class="feather icon-more-vertical dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        </span>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" href="#">Subscription</a>
-                                                            <a class="dropdown-item" href="#">Extras</a>
-                                                            <a class="dropdown-item" href="#">Newslatter</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
+                                                <td class="text-truncate">PO-15521</td>
+                                                <td class="text-truncate"><a href="#">INV-001401</a></td>
+                                                <td class="text-truncate">Megan S.</td>
+                                                <td class="text-truncate"><span class="badge badge-success">Paid</span></td>
+                                                <td class="text-truncate">$ 1450.00</td>
                                             </tr>
                                             <tr>
-                                                <td class="text-truncate">
-                                                    <div class="avatar avatar-md mr-1">
-                                                        <img class="rounded-circle" src="{{asset('app-assets/images/portrait/small/avatar-s-11.png ')}}" alt="Generic placeholder image">
-                                                    </div>
-                                                    <span class="text-truncate">Marco Alves</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span>maralv@dmail.com</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span>120 MB</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div class="progress my-75">
-                                                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" aria-valuenow="20" aria-valuemin="20" aria-valuemax="100" style="width:51%">51%</div>
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span class="badge badge-warning">Reported</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div class="dropdown">
-                                                        <span class="feather icon-more-vertical dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        </span>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" href="#">Subscription</a>
-                                                            <a class="dropdown-item" href="#">Extras</a>
-                                                            <a class="dropdown-item" href="#">Newslatter</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-truncate">
-                                                    <div class="avatar avatar-md mr-1">
-                                                        <img class="rounded-circle" src="{{asset('app-assets/images/portrait/small/avatar-s-19.png ')}}" alt="Generic placeholder image">
-                                                    </div>
-                                                    <span class="text-truncate">Lucas Pacheco</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span>pacheco@hmail.com</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span>532 MB</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div class="progress my-75">
-                                                        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow="20" aria-valuemin="20" aria-valuemax="100" style="width:47%">47%</div>
-                                                    </div>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <span class="badge badge-danger">Blocked</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <div class="dropdown">
-                                                        <span class="feather icon-more-vertical dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        </span>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" href="#">Subscription</a>
-                                                            <a class="dropdown-item" href="#">Extras</a>
-                                                            <a class="dropdown-item" href="#">Newslatter</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
+                                                <td class="text-truncate">PO-32521</td>
+                                                <td class="text-truncate"><a href="#">INV-008101</a></td>
+                                                <td class="text-truncate">Walter R.</td>
+                                                <td class="text-truncate"><span class="badge badge-warning">Overdue</span></td>
+                                                <td class="text-truncate">$ 685.00</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-                    </div> -->
-
-
+                    </div>
+                    <div class="col-xl-4 col-lg-12">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="card-body sales-growth-chart">
+                                    <div id="monthly-sales" class="height-250"></div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="chart-title mb-1 text-center">
+                                    <h6>Total monthly Sales.</h6>
+                                </div>
+                                <div class="chart-stats text-center">
+                                    <a href="#" class="btn btn-sm btn-primary mr-1">Statistics <i class="feather icon-bar-chart"></i></a> <span class="text-muted">for the last year.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- Minimal modern charts for power consumption, region statistics and sales etc. starts here -->
-
             </div>
         </div>
     </div>
     <!-- END: Content-->
-
-    
+    <script type="text/javascript">
+        $(window).on("load", function(){
+            Morris.Bar({
+                element: 'monthly-sales',
+                data: [{month: 'Jan', sales: 1835 }, {month: 'Feb', sales: 2356 }, {month: 'Mar', sales: 1459 }, {month: 'Apr', sales: 1289 }, {month: 'May', sales: 1647 }, {month: 'Jun', sales: 2156 }, {month: 'Jul', sales: 1835 }, {month: 'Aug', sales: 2356 }, {month: 'Sep', sales: 1459 }, {month: 'Oct', sales: 1289 }, {month: 'Nov', sales: 1647 }, {month: 'Dec', sales: 2156 }],
+                xkey: 'month',
+                ykeys: ['sales'],
+                labels: ['Sales'],
+                barGap: 4,
+                barSizeRatio: 0.3,
+                gridTextColor: '#bfbfbf',
+                gridLineColor: '#E4E7ED',
+                numLines: 5,
+                gridtextSize: 14,
+                resize: true,
+                barColors: ['#00B5B8'],
+                hideHover: 'auto',
+            });  
+        });
+    </script>
+        
 @endsection

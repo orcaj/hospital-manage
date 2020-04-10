@@ -19,7 +19,7 @@
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/vendors.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
-
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/weather-icons/climacons.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/plugins/forms/validation/form-validation.css')}}">
     <!-- END: Vendor CSS-->
 
@@ -49,6 +49,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/pickers/pickadate/pickadate.css')}}">
     
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/forms/selects/select2.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/charts/morris.css')}}">
+
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/pages/vertical-timeline.css')}}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -141,8 +143,9 @@
     <script src="{{asset('app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
     <!-- <script src="../../../app-assets/js/scripts/forms/checkbox-radio.js"></script> -->
     <script src="{{asset('app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
-
-
+    <script src="{{asset('app-assets/vendors/js/charts/raphael-min.js')}}"></script>
+    <script src="{{asset('app-assets/vendors/js/charts/morris.min.js')}}"></script>
+    <script src="{{asset('app-assets/vendors/js/extensions/unslider-min.js')}}"></script>
 
 </body>
 <!-- END: Body-->
