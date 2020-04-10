@@ -10,7 +10,7 @@ use App\Model\Doctor;
 use App\Model\Department;
 use App\Model\InvoiceHistories;
 use App\Model\PaymentHistory;
-use APp\Model\Transaction;
+use App\Model\Transaction;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\InvoicesExport;
