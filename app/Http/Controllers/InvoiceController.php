@@ -476,8 +476,8 @@ class InvoiceController extends Controller
 
         $mid = "mer200009";
         $secret_key = "2449520";
-        $furl = "http://localhost/bookeey/error.php";
-        $surl = "http://www.clinic.click.com.kw/joomla/components/com_helloworld/views/helloworld/tmpl/success.php";
+        $furl = "http://www.clinic.click.com.kw/joomla/index.php/test-link1";
+        $surl = "http://www.clinic.click.com.kw/joomla/index.php/test-link1";
         $crossCat = "GEN";
         $amt = $invoice->total_due;
         $date = date_create();
