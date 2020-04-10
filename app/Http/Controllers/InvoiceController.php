@@ -98,7 +98,7 @@ class InvoiceController extends Controller
                 'department' => $service->getDepartment->name,
                 'doctor' => $service->getDoctor->name,
                 'status' => $service->status
-            )
+            );
             // $saved_services[]['doctor_name'] = $service->getPatient->name;
         }
         $saved_percents = explode(',', $invoice->discount_percents);
