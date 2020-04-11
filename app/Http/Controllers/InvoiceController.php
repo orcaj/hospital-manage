@@ -518,13 +518,14 @@ class InvoiceController extends Controller
                     'status' => 'error',
                     'msg' => 'payment failure'
                 );
+                echo json_encode($result);
             }
         } else {
             $result = array(
                 'status' => 'error',
                 'msg' => 'Transaction detail already exist'
             );
-            return json_encode($result);
+            echo json_encode($result);
         }
     }
 
