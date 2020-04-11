@@ -501,10 +501,10 @@
                 var item = `<li class="timeline-items timeline-icon-success">
                                 <p class="timeline-time">` + his.created_at + `</p>
                                 <div class="timeline-title">Payment  Successed.</div>
-                                <div class="timeline-subtitle form-inline">Paid by <label class="history_user">&nbsp &nbsp` + his.user_name + `,&nbsp </label>
+                                <div class="timeline-subtitle" style="display: inline-block;">Paid by <label class="history_user">&nbsp &nbsp` + his.user_name + `,&nbsp </label>
                                   <label>Type: </label><label class="history_payment_method">&nbsp &nbsp` + his.payment_method.toUpperCase() + `, </label> &nbsp &nbsp
                                   <label>Amount: </label><label>&nbspKWD <b style="color: black">` + his.amount + `</b></label>
-                                  <label>Transaction Id: </label><label>&nbsp <b style="color:black">&nbsp &nbsp` + (his.transaction_id == 'null' ? "" : his.transaction_id) + `</b></label>
+                                  <label>Transaction Id: </label><label>&nbsp <b style="color:black">&nbsp &nbsp` + (his.transaction_id == null ? "" : his.transaction_id) + `</b></label>
                                 </div>
                             </li>`;
                 content += item;
@@ -513,10 +513,10 @@
                 var item = `<li class="timeline-items timeline-icon-success">
                                 <p class="timeline-time">` + his.created_at + `</p>
                                 <div class="timeline-title">Payment  Successed.</div>
-                                <div class="timeline-subtitle form-inline">Paid by <label class="history_user">&nbsp&nbsp` + his.user_name + `,&nbsp </label>
+                                <div class="timeline-subtitle" style="display: inline-block;">Paid by <label class="history_user">&nbsp&nbsp` + his.user_name + `,&nbsp </label>
                                   <label>Type: </label><label class="history_payment_method">&nbsp&nbsp` + his.payment_method.toUpperCase() + `, </label> &nbsp &nbsp
                                   <label>Amount: </label><label>&nbspKWD <b style="color: black">&nbsp&nbsp` + his.amount + `</b></label>
-                                  <label>Transaction Id: </label><label>&nbsp <b style="color:black">` + his.transaction_id + `</b></label>
+                                  <label>Transaction Id: </label><label>&nbsp <b style="color:black">` + (his.transaction_id == null ? "" : his.transaction_id) + `</b></label>
                                 </div>
                             </li>`;
                 content += item;
