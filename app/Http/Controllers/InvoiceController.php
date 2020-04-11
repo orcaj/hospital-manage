@@ -392,9 +392,7 @@ class InvoiceController extends Controller
     public function get_payment_history(Request $request) {
 
         $histories = PaymentHistory::where('invoice_id', $request->invoice_id)->orderBy('created_at', 'desc')->get();
-        print_r($request->invoice_id);
-        echo json_encode($histories);
-        exit();
+        // exit();
         $response;
         if($histories) {
             $response = array(
@@ -466,14 +464,6 @@ class InvoiceController extends Controller
             $transaction->save();
 
             $data = $request->data;
-            $payment_history = new PaymentHistory();
-            $payment_history->invoice_id = $data['invoice_id'];
-            $payment_history->payment_method = 'kent';
-            $payment_history->amount = $data['amount'];
-            $payment_history->user_name = $request->name;
-            $payment_history->status = 'success';
-            $payment_history->save();
-
             if ($data['tranStatus'] == 2) {
                 //save invoice history
                 $history = new InvoiceHistories();
@@ -484,7 +474,7 @@ class InvoiceController extends Controller
 
                 //save payment history
                 $history = new PaymentHistory();
-                $history->invoice_id = $data['invoice_id'];
+                $history->invoice_id = $request->invoice_id;
                 $history->payment_method = $data['paymentOptions'];
                 $history->amount = $data['amount'];
                 $history->user_name = $request->name;
@@ -510,7 +500,7 @@ class InvoiceController extends Controller
 
                 //save payment history
                 $history = new PaymentHistory();
-                $history->invoice_id = $data['invoice_id'];
+                $history->invoice_id = $request->invoice_id;
                 $history->payment_method = $data['paymentOptions'];
                 $history->amount = $data['amount'];
                 $history->user_name = $request->name;
