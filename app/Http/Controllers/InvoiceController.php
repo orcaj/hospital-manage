@@ -472,6 +472,23 @@ class InvoiceController extends Controller
             $payment_history->save();
 
             if ($data['tranStatus'] == 2) {
+                //save invoice history
+                $history = new InvoiceHistories();
+                $history->invoice_id = $request->invoice_id;
+                $history->action_type = 'payment success';
+                $history->user_name = $request->name;
+                $history->save();
+
+                //save payment history
+                $history = new PaymentHistory();
+                $history->invoice_id = $data['invoice_id'];
+                $history->payment_method = $data['payment_type'];
+                $history->amount = $data['amount'];
+                $history->user_name = $request->name;
+                $history->status = 'success';
+                $history->save();
+
+                //decrease invoice amount
                 $invoice = Invoice::Find($data['invoice_id']);
                 $invoice->total_due = $invoice->total_due - $data['amount'];
                 $invoice->save();
@@ -481,9 +498,24 @@ class InvoiceController extends Controller
                 );
                 echo json_encode($result);
             } else {
-                 $result = array(
+                $history = new InvoiceHistories();
+                $history->invoice_id = $request->invoice_id;
+                $history->action_type = 'payment failure';
+                $history->user_name = $request->name;
+                $history->save();
+
+                //save payment history
+                $history = new PaymentHistory();
+                $history->invoice_id = $data['invoice_id'];
+                $history->payment_method = $data['payment_type'];
+                $history->amount = $data['amount'];
+                $history->user_name = $request->name;
+                $history->status = 'failure';
+                $history->save();
+
+                $result = array(
                     'status' => 'error',
-                    'msg' => 'payment failur'
+                    'msg' => 'payment failure'
                 );
             }
         } else {
