@@ -504,15 +504,20 @@
                                 <div class="timeline-subtitle">Paid by <label class="history_user">` + his.user_name + `,&nbsp </label>
                                   <label>Type: </label><label class="history_payment_method" style='padding-top: 8px;'>&nbsp` + his.payment_method.toUpperCase() + `, </label> &nbsp &nbsp
                                   <label>Amount: </label><label>&nbspKWD <b style="color: black">` + his.amount + `</b></label>
+                                  <label>Transaction Id: </label><label>&nbsp <b style="color:black">` + his.transaction_id + `</b></label>
                                 </div>
                             </li>`;
                 content += item;
                 break;
-              case 'published':
-                var item = `<li class="timeline-items timeline-icon-info">
+              case 'failure':
+                var item = `<li class="timeline-items timeline-icon-success">
                                 <p class="timeline-time">` + his.created_at + `</p>
-                                <div class="timeline-title">` + his.action_type.toUpperCase() + `</div>
-                                <div class="timeline-subtitle">Invoice ` + his.action_type + " by " + his.user_name + `</div>
+                                <div class="timeline-title">Payment  Successed.</div>
+                                <div class="timeline-subtitle">Paid by <label class="history_user">` + his.user_name + `,&nbsp </label>
+                                  <label>Type: </label><label class="history_payment_method" style='padding-top: 8px;'>&nbsp` + his.payment_method.toUpperCase() + `, </label> &nbsp &nbsp
+                                  <label>Amount: </label><label>&nbspKWD <b style="color: black">` + his.amount + `</b></label>
+                                  <label>Transaction Id: </label><label>&nbsp <b style="color:black">` + his.transaction_id + `</b></label>
+                                </div>
                             </li>`;
                 content += item;
                 break;
