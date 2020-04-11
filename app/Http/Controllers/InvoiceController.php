@@ -458,8 +458,6 @@ class InvoiceController extends Controller
 
     public function add_transaction_history(Request $request) {
         $exist = Transaction::where('txnRefNo', $request->data['txnRefNo'])->get();
-        // echo json_encode($exist);
-        // exit();
         if (!$exist) {
             $transaction = new Transaction($request->data);
             $transaction->save();
@@ -473,12 +471,27 @@ class InvoiceController extends Controller
             $payment_history->status = 'success';
             $payment_history->save();
 
-            $invoice = Invoice::Find($data['invoice_id']);
-            $invoice->total_due = $invoice->total_due - $data['amount'];
-            $invoice->save();
-            echo json_encode($request->data);
+            if ($data['tranStatus'] == 2) {
+                $invoice = Invoice::Find($data['invoice_id']);
+                $invoice->total_due = $invoice->total_due - $data['amount'];
+                $invoice->save();
+                $result = array(
+                    'status' => 'success',
+                    'msg' => 'payment success'
+                );
+                echo json_encode($result);
+            } else {
+                 $result = array(
+                    'status' => 'error',
+                    'msg' => 'payment failur'
+                );
+            }
         } else {
-            echo "Already exist";
+            $result = array(
+                'status' => 'error',
+                'msg' => 'Transaction detail already exist'
+            );
+            return json_encode($result);
         }
     }
 
