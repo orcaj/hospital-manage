@@ -482,10 +482,11 @@ class InvoiceController extends Controller
                 //save payment history
                 $history = new PaymentHistory();
                 $history->invoice_id = $data['invoice_id'];
-                $history->payment_method = $data['payment_type'];
+                $history->payment_method = $data['paymentOptions'];
                 $history->amount = $data['amount'];
                 $history->user_name = $request->name;
                 $history->status = 'success';
+                $history->transaction_id = $data['txnRefNo'];
                 $history->save();
 
                 //decrease invoice amount
@@ -507,7 +508,7 @@ class InvoiceController extends Controller
                 //save payment history
                 $history = new PaymentHistory();
                 $history->invoice_id = $data['invoice_id'];
-                $history->payment_method = $data['payment_type'];
+                $history->payment_method = $data['paymentOptions'];
                 $history->amount = $data['amount'];
                 $history->user_name = $request->name;
                 $history->status = 'failure';
