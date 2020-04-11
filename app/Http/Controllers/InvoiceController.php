@@ -457,7 +457,7 @@ class InvoiceController extends Controller
     }
 
     public function add_transaction_history(Request $request) {
-        $exist = Transaction::where('txnRefNo', $request->data['txnRefNo'])->get();
+        $exist = Transaction::where('txnRefNo', $request->data['txnRefNo'])->get()->count();
         print_r($exist);
         exit();
         if (!$exist) {
