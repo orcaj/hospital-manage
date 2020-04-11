@@ -457,22 +457,27 @@ class InvoiceController extends Controller
     }
 
     public function add_transaction_history(Request $request) {
-        $transaction = new Transaction($request->data);
-        $transaction->save();
+        $exist = Transaction::where('txnRefNo', $request->data->txnRefNo)->get();
+        if (!$exit) {
+            $transaction = new Transaction($request->data);
+            $transaction->save();
 
-        $data = $request->data;
-        $payment_history = new PaymentHistory();
-        $payment_history->invoice_id = $data['invoice_id'];
-        $payment_history->payment_method = 'kent';
-        $payment_history->amount = $data['amount'];
-        $payment_history->user_name = $request->name;
-        $payment_history->status = 'success';
-        $payment_history->save();
+            $data = $request->data;
+            $payment_history = new PaymentHistory();
+            $payment_history->invoice_id = $data['invoice_id'];
+            $payment_history->payment_method = 'kent';
+            $payment_history->amount = $data['amount'];
+            $payment_history->user_name = $request->name;
+            $payment_history->status = 'success';
+            $payment_history->save();
 
-        $invoice = Invoice::Find($data['invoice_id']);
-        $invoice->total_due = $invoice->total_due - $data['amount'];
-        $invoice->save();
-        echo json_encode($request->data);
+            $invoice = Invoice::Find($data['invoice_id']);
+            $invoice->total_due = $invoice->total_due - $data['amount'];
+            $invoice->save();
+            echo json_encode($request->data);
+        } else {
+            echo "Already exist";
+        }
     }
 
     public function get_invoice_detail_for_payment(Request $request) {
