@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-
+    <!-- <meta http-equiv="refresh" content="3" /> -->
     <style type="text/css">
       .space-bet{
         display: flex;
