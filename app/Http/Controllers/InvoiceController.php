@@ -392,6 +392,8 @@ class InvoiceController extends Controller
     public function get_payment_history(Request $request) {
 
         $histories = PaymentHistory::where('invoice_id', $request->invoice_id)->orderBy('created_at', 'desc')->get();
+        echo json_encode($histories);
+        exit();
         $response;
         if($histories) {
             $response = array(
