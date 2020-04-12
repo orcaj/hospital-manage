@@ -510,7 +510,7 @@
                 content += item;
                 break;
               case 'failure':
-                var item = `<li class="timeline-items timeline-icon-success">
+                var item = `<li class="timeline-items timeline-icon-error">
                                 <p class="timeline-time">` + his.created_at + `</p>
                                 <div class="timeline-title">Payment  Failure.</div>
                                 <div class="timeline-subtitle" style="display: inline-block;">Paid by <label class="history_user">&nbsp&nbsp` + his.user_name + `,&nbsp </label>
