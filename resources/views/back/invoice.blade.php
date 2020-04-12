@@ -474,7 +474,7 @@
                 var item = `<li class="timeline-items timeline-icon-error">
                                 <p class="timeline-time">` + his.created_at + `</p>
                                 <div class="timeline-title">` + his.action_type.toUpperCase() + `</div>
-                                <div class="timeline-subtitle">Payment for invoice by ` + his.user_name + `Failed</div>
+                                <div class="timeline-subtitle">Payment for invoice by ` + his.user_name + `&nbspFailed</div>
                             </li>`;
                 content += item;
                 break;
