@@ -841,6 +841,7 @@
                                         placeholder="Input amount"
                                         value=""
                                         id="additional_amount"
+                                        step="0.01"
                                         min="0"
                                     />
                                     <label
