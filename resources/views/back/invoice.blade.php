@@ -36,7 +36,7 @@
         overflow-y: auto;
       }
       .timeline-icon-error:before {
-        background-color: #b8003b;
+        background-color: #b8003b !important;
       }
     </style>
     <!-- BEGIN: Content-->
