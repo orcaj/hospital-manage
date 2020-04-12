@@ -35,6 +35,9 @@
         height: 400px;
         overflow-y: auto;
       }
+      .timeline-icon-error:before {
+        background-color: #b8003b;
+      }
     </style>
     <!-- BEGIN: Content-->
     <div class="app-content content">
