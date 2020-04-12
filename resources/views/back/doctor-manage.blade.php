@@ -38,7 +38,11 @@
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>Doctor Name</label>
-                                                        <input type="text" class="form-control" placeholder="Username" name="name" value="{{$doctor->name}}" required data-validation-required-message="This Doctor Name field is required" data-validation-pattern-message="Must be characters" pattern="[a-zA-Z ]+">
+                                                        <input type="text" class="form-control" placeholder="Username" name="name" value="{{$doctor->name}}" required data-validation-required-message="This Doctor Name field is required" data-validation-pattern-message="Must be characters" pattern="[a-zA-Z-_. \
+                                        \u0620-\u063F\u0641-\u064A\u066E-\u066F\u0671-\u06D3\u06D5\
+                                        \u06E5-\u06E6\u06EE-\u06EF\u06FA-\u06FC\u06FF\u0750-\u077F\
+                                        \u08A0\u08A2-\u08AC\uFB50-\uFBB1\uFBD3-\uFD3D\uFD50-\uFD8F\
+                                        \uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC]{1,30}">
                                                     </div>
                                                 </div>
 
@@ -108,7 +112,11 @@
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>Doctor Name</label>
-                                                        <input type="text" class="form-control" placeholder="Doctor name" name="name" value="" required id="doctor" data-validation-required-message="This Doctor Name field is required" pattern="[a-zA-Z ]+">
+                                                        <input type="text" class="form-control" placeholder="Doctor name" name="name" value="" required id="doctor" data-validation-required-message="This Doctor Name field is required" data-validation-pattern-message="Must be characters" pattern="[a-zA-Z-_. \
+                                        \u0620-\u063F\u0641-\u064A\u066E-\u066F\u0671-\u06D3\u06D5\
+                                        \u06E5-\u06E6\u06EE-\u06EF\u06FA-\u06FC\u06FF\u0750-\u077F\
+                                        \u08A0\u08A2-\u08AC\uFB50-\uFBB1\uFBD3-\uFD3D\uFD50-\uFD8F\
+                                        \uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC]{1,30}">
                                                     </div>
                                                 </div>
 
