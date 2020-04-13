@@ -871,7 +871,7 @@
 </div>
 <script
     type="text/javascript"
-    src="{{ asset('app-assets/js/scripts/invoice-init1.js') }}"
+    src="{{ asset('app-assets/js/scripts/invoice-init2.js') }}"
 ></script>
 <script type="text/javascript">
     function onPatientChange() {

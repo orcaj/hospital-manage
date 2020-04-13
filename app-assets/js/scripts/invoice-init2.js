@@ -3,7 +3,7 @@ $(document).ready(function () {
     // initializing a Date Picker
     if ($('.pick-a-date').length) {
         $('.pick-a-date').pickadate({
-            format: 'mm/dd/yyyy'
+            format: 'dd/mm/yyyy'
         });
     }
 

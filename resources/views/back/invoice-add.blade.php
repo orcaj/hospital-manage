@@ -333,7 +333,7 @@
     </div>
 </div>
 
-<script type="text/javascript" src="{{asset('app-assets/js/scripts/invoice-init1.js')}}"></script>
+<script type="text/javascript" src="{{asset('app-assets/js/scripts/invoice-init2.js')}}"></script>
 <script type="text/javascript">
 
     function onPatientChange() {
@@ -690,7 +690,7 @@
             month = '0' + month;
         }
         var date = today.getDate();
-        var formattedDate = month + '/' + date + '/' + year;
+        var formattedDate = date + '/' + month + '/' + year;
         // console.log(formattedDate);
         $("#date_issue").val(formattedDate);
     })
