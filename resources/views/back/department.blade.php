@@ -32,7 +32,7 @@
                               <div class="card-header space-bet">
                                 <h3 class="card-title" id="emailCompose">Department List</h3>
                                 @if(auth()->user()->type !='staff')
-                                <a href="{{route('department.create')}}" class="btn btn-primary btn-min-width mr-1 mb-1"><i class="feather icon-user-plus"></i>&nbspCreate</a>
+                                <a href="{{route('department.create')}}" class="btn btn-primary btn-min-width mr-1 mb-1"><i class="feather icon-plus"></i>&nbspCreate</a>
                                 @endif
                             </div>
                                 <div class="card-body">

@@ -36,7 +36,7 @@
                                 <a
                                     href="{{ route('services.create') }}"
                                     class="btn btn-primary btn-min-width mr-1 mb-1"
-                                    ><i class="feather icon-user-plus"></i
+                                    ><i class="feather icon-plus"></i
                                     >&nbspCreate</a
                                 >
                                 @endif

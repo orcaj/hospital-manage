@@ -31,7 +31,7 @@
                             <div class="card-content">
                               <div class="card-header space-bet">
                                 <h3 class="card-title" id="emailCompose">Patients List</h3>
-                                <a href="{{route('patients.create')}}" class="btn btn-primary btn-min-width mr-1 mb-1"><i class="feather icon-user-plus"></i>&nbspCreate</a>
+                                <a href="{{route('patients.create')}}" class="btn btn-primary btn-min-width mr-1 mb-1"><i class="feather icon-plus"></i>&nbspCreate</a>
                             </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
