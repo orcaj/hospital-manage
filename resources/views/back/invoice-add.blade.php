@@ -181,7 +181,7 @@
                                                     <span class="cost-value" >KWD <sapn id="total_paid">00.00</sapn></span>
                                                 </li>
                                                 <li class="list-group-item each-cost border-0 p-50 d-flex justify-content-between">
-                                                    <span class="cost-title mr-2">Total Due (USD) </span>
+                                                    <span class="cost-title mr-2">Total Due(KWD) </span>
                                                     <span class="cost-value">KWD <span id="total_due">0.00</span></span>
                                                 </li>
                                             </ul>

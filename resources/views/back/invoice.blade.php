@@ -101,7 +101,7 @@
                                                     <td>{{$invoice->invoice_id}}</td>
                                                     <td style="display: none">{{$invoice->getPatient->civil_id}}</td>
                                                     <td style="display: none">{{$invoice->getPatient->phone}}</td>
-                                                    <td>$ {{$invoice->total_due}} </td>
+                                                    <td>KWD {{$invoice->total_due}} </td>
                                                     <td> {{date('j F, Y', strtotime($invoice->created_at))}} </td>
                                                     <td><button class="btn btn-success btn-sm" onclick="showPatientDetail({{$invoice->civil_id}})">{{$invoice->getPatient->name}}</button></td>
                                                     <td>
