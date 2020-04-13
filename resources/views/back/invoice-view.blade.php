@@ -25,9 +25,13 @@
                                                     <span class="font-weight-bold no-wrap">Issue Date: </span>
                                                     <span>{{date('d/m/Y', strtotime($invoice->created_at))}}</span>
                                                 </div>
-                                                <div class="due-date">
-                                                    <span class="font-weight-bold no-wrap">DueDate: </span>
+                                                <div class="due-date pr-2">
+                                                    <span class="font-weight-bold no-wrap">Due Date: </span>
                                                     <span>{{$invoice->due_date}}</span>
+                                                </div>
+                                                <div class="due-date ">
+                                                    <span class="font-weight-bold no-wrap">Appointment Date: </span>
+                                                    <span>{{$invoice->appointment_date}}</span>
                                                 </div>
                                             </div>
                                         </div>
