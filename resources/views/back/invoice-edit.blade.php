@@ -1411,16 +1411,6 @@
     $(function () {
         // $(".select2").select2();
         $(".payment_received_section").hide();
-        var today = new Date();
-        var year = today.getFullYear();
-        var month = today.getMonth() + 1;
-        if (month < 10) {
-            month = "0" + month;
-        }
-        var date = today.getDate();
-        var formattedDate = month + "/" + date + "/" + year;
-        // console.log(formattedDate);
-        $("#date_issue").val(formattedDate);
     });
 </script>
 @endsection
