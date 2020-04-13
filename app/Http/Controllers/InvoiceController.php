@@ -482,9 +482,10 @@ class InvoiceController extends Controller
                 $history->transaction_id = $data['txnRefNo'];
                 $history->save();
 
-                //decrease invoice amount
+                //decrease total due amount and increase paid amount
                 $invoice = Invoice::Find($data['invoice_id']);
                 $invoice->total_due = $invoice->total_due - $data['amount'];
+                $invoice->total_paid = $invoice->total_paid + $data['amount'];
                 $invoice->save();
                 $result = array(
                     'status' => 'success',
