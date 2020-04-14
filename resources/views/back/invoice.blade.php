@@ -168,7 +168,7 @@
   <div class="modal-dialog his-modal-dialog"  role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h3 class="modal-title" id="myModalLabel35">Invoice History</h3>
+            <h3 class="modal-title" id="modalTitle">Invoice History</h3>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -427,8 +427,8 @@
     }
 
     function openInvoiceHistoryModal(invoice_id) {
-      console.log(invoice_id);
       $("#invoice_history_modal").modal();
+      $("#modalTitle").html("Invoice History");
       $("#history_content").html('No data to display');
       $.post("{{route('invoi.get_invoice_history')}}", {invoice_id: invoice_id, _token:"{{csrf_token()}}"}, function(data) {
         var obj = JSON.parse(data);
@@ -498,6 +498,7 @@
     function openPaymentHistoryModal(invoice_id) {
       // console.log(invoice_id);
       $("#invoice_history_modal").modal();
+      $("#modalTitle").html("Payment History");
       $("#history_content").html('No data to display');
       $.post("{{route('invoi.get_payment_history')}}", {invoice_id: invoice_id, _token:"{{csrf_token()}}"}, function(data) {
         var obj = JSON.parse(data);
@@ -506,12 +507,11 @@
           var content = '';
           for (var i = 0 ; i < obj.data.length; i ++) {
             var his = obj.data[i];
-            console.log(his);
             switch(his.status) {
               case 'success':
                 var item = `<li class="timeline-items timeline-icon-success">
                                 <p class="timeline-time">` + his.created_at + `</p>
-                                <div class="timeline-title">Payment  Successed.</div>
+                                <div class="timeline-title">Payment  Succeed.</div>
                                 <div class="timeline-subtitle" style="display: inline-block;">Paid by <label class="history_user">&nbsp &nbsp` + his.user_name + `,&nbsp </label>
                                   <label>Type: </label><label class="history_payment_method">&nbsp &nbsp` + his.payment_method.toUpperCase() + `, </label> &nbsp &nbsp
                                   <label>Amount: </label><label>&nbspKWD <b style="color: black">` + his.amount + `</b></label>
