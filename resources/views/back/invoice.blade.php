@@ -42,10 +42,10 @@
     <!-- BEGIN: Content-->
     <div class="app-content content">
 
-    	<!-- alert section -->
+      <!-- alert section -->
 
-    	@if(session('status'))
-    	<div class="alert alert-success alert-dismissible mb-2" role="alert">
+      @if(session('status'))
+      <div class="alert alert-success alert-dismissible mb-2" role="alert">
             {{session('status')}}
         </div>
         @endif
@@ -512,22 +512,48 @@
                 var item = `<li class="timeline-items timeline-icon-success">
                                 <p class="timeline-time">` + his.created_at + `</p>
                                 <div class="timeline-title">Payment  Succeed.</div>
-                                <div class="timeline-subtitle" style="display: inline-block;">Paid by <label class="history_user">&nbsp &nbsp` + his.user_name + `,&nbsp </label>
-                                  <label>Type: </label><label class="history_payment_method">&nbsp &nbsp` + his.payment_method.toUpperCase() + `, </label> &nbsp &nbsp
-                                  <label>Amount: </label><label>&nbspKWD <b style="color: black">` + his.amount + `</b></label>
-                                  <label>Transaction Id: </label><label>&nbsp <b style="color:black">&nbsp &nbsp` + (his.transaction_id == null ? "" : his.transaction_id) + `</b></label>
+                                <div class="timeline-subtitle">
+                                  <div class="row" style="width: 100%">
+                                    <div class="col-6">
+                                      <label>Paid by: </label><label class="history_user" style="margin-left: 10px">` + his.user_name + `</label>
+                                    </div>
+                                    <div class="col-6">
+                                      <label>Type: </label><label class="history_payment_method" style="margin-left: 10px">` + his.payment_method.toUpperCase() + `</label>
+                                    </div>
+                                  </div>
+                                  <div class="row" style="width: 100%">
+                                    <div class="col-6" style="padding-left: 15px">
+                                      <label>Amount: </label><label style="margin-left: 10px">` + his.amount + `</label>
+                                    </div>
+                                    <div class="col-6">
+                                      <label>Transaction Id: </label><label style="margin-left: 10px">` + (his.transaction_id == null ? "" : his.transaction_id) + `</label>
+                                    </div>
+                                  </div>
                                 </div>
                             </li>`;
                 content += item;
                 break;
               case 'failure':
-                var item = `<li class="timeline-items timeline-icon-error">
+                var item = `<li class="timeline-items timeline-icon-danger">
                                 <p class="timeline-time">` + his.created_at + `</p>
                                 <div class="timeline-title">Payment  Failure.</div>
-                                <div class="timeline-subtitle" style="display: inline-block;">Paid by <label class="history_user">&nbsp&nbsp` + his.user_name + `,&nbsp </label>
-                                  <label>Type: </label><label class="history_payment_method">&nbsp&nbsp` + his.payment_method.toUpperCase() + `, </label> &nbsp &nbsp
-                                  <label>Amount: </label><label>&nbspKWD <b style="color: black">&nbsp&nbsp` + his.amount + `</b></label>
-                                  <label>Transaction Id: </label><label>&nbsp <b style="color:black">` + (his.transaction_id == null ? "" : his.transaction_id) + `</b></label>
+                                <div class="timeline-subtitle">
+                                  <div class="row" style="width: 100%">
+                                    <div class="col-6">
+                                      <label>Paid by: </label><label class="history_user" style="margin-left: 10px">` + his.user_name + `</label>
+                                    </div>
+                                    <div class="col-6">
+                                      <label>Type: </label><label class="history_payment_method" style="margin-left: 10px">` + his.payment_method.toUpperCase() + `</label>
+                                    </div>
+                                  </div>
+                                  <div class="row" style="width: 100%">
+                                    <div class="col-6" style="padding-left: 15px">
+                                      <label>Amount: </label><label style="margin-left: 10px">` + his.amount + `</label>
+                                    </div>
+                                    <div class="col-6">
+                                      <label>Transaction Id: </label><label style="margin-left: 10px">` + (his.transaction_id == null ? "" : his.transaction_id) + `</label>
+                                    </div>
+                                  </div>
                                 </div>
                             </li>`;
                 content += item;
