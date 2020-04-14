@@ -117,10 +117,12 @@
                                     <div class="row">
                                         <div class="col-12 col-sm-6 mt-75">
                                             @if($invoice->show_payment_terms == 1)
-                                            <p id="payment_terms" style="padding-left: 15px">Payment terms: {{$invoice->payment_terms}}</p>
+                                            <p id="payment_terms" style="padding-left: 15px">Payment terms:</p>
+                                            <p>{{$invoice->payment_terms}}</p>
                                             @endif
                                             @if($invoice->show_client_notes == 1)
-                                            <p id="client_terms" style="padding-left: 15px">Client notes: {{$invoice->client_notes}}</p>
+                                            <p id="client_terms" style="padding-left: 15px">Client notes:</p>
+                                            <p>{{$invoice->client_notes}}</p>
                                             @endif
                                         </div>
                                         <div class="col-12 col-sm-6 d-flex justify-content-end mt-75">
