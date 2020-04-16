@@ -577,4 +577,15 @@ class InvoiceController extends Controller
         return json_encode($response);
     }
 
+    public function sendEmailFromJoomla(Request $request) {
+        $subject = "Invoice Received.";
+        $message = "";
+        Mail::to($to)->send(new SendInvoice($subject, $message, $request->id));
+        $response = array(
+            'status' => 'success',
+            'msg' => "Invoice successfully gotten."
+        );
+        return json_encode($response);
+    }
+
 }
