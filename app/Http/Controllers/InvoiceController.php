@@ -580,7 +580,7 @@ class InvoiceController extends Controller
     public function sendEmailFromJoomla(Request $request) {
         $subject = "Invoice Received.";
         $message = "";
-        Mail::to($to)->send(new SendInvoice($subject, $message, $request->id));
+        Mail::to($request->to)->send(new SendInvoice($subject, $message, $request->id));
         $response = array(
             'status' => 'success',
             'msg' => "Invoice successfully gotten."
